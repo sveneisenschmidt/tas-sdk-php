@@ -1,0 +1,44 @@
+stages:
+  Build:
+    Composer Install:
+      docker:
+        composer:
+          image: composer/composer
+          volumes:
+            - .:/app
+      commands:
+        - composer install --no-scripts --ignore-platform-reqs
+
+  Tests:
+    Unit Tests:
+      docker:
+        php:
+          image: php
+          volumes:
+            - .:/app
+      commands:
+        - cd /app
+        - vendor/bin/phpunit --no-coverage
+
+    Unit Tests (PHP 5.6):
+      docker:
+        php:
+          image: php:5.6
+          volumes:
+            - .:/app
+      commands:
+        - cd /app
+        - vendor/bin/phpunit --no-coverage
+
+  Code Style:
+    Code Style:
+      docker:
+        php:
+          image: php
+          volumes:
+            - .:/app
+      commands:
+        - cd /app
+        - php -v
+        - curl http://get.sensiolabs.org/php-cs-fixer.phar -o ~/php-cs-fixer.phar
+        - php ~/php-cs-fixer.phar fix --dry-run --diff
