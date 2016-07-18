@@ -19,8 +19,6 @@
 
     <php>
         <ini name="date.timezone" value="utc"/>
-        <const name="WEB_SERVER_HOST" value="localhost"/>
-        <const name="WEB_SERVER_PORT" value="1234"/>
     </php>
 
     <logging>

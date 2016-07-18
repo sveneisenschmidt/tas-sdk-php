@@ -18,28 +18,55 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$command = sprintf(
-    'php -S %s:%d %s >/dev/null 2>&1 & echo $!',
-    WEB_SERVER_HOST,
-    WEB_SERVER_PORT,
-    __DIR__ . '/server.php'
-);
-echo $command . PHP_EOL;
+$_bootstrap_function = function () {
 
-$output = [];
-exec($command, $output);
-$pid = (int) $output[0];
+    if (getenv('WEB_SERVER_HOST')) {
+        // there is an external test server we can run the HttpHandler tests against.
+        define('WEB_SERVER_HOST', getenv('WEB_SERVER_HOST'));
+        define('WEB_SERVER_PORT', getenv('WEB_SERVER_PORT') ?: '80');
 
-printf(
-    '%s - web server started in %s:%d PID %d' . PHP_EOL,
-    date('r'),
-    WEB_SERVER_HOST,
-    WEB_SERVER_PORT,
-    $pid
-);
+        return;
+    }
 
-register_shutdown_function(function () use ($pid) {
-    printf('%s - killing web server with PID %d', date('r'), $pid);
-    echo PHP_EOL;
-    exec('kill ' . $pid);
-});
+    if (defined('HHVM_VERSION')) {
+        // do not run PHP server in HHVM.
+        return;
+    }
+
+    if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+        // do not run PHP server on Windows.
+        return;
+    }
+
+    define('WEB_SERVER_HOST', 'localhost');
+    define('WEB_SERVER_PORT', '1234');
+
+    $command = sprintf(
+        'php -S %s:%d %s >/dev/null 2>&1 & echo $!',
+        WEB_SERVER_HOST,
+        WEB_SERVER_PORT,
+        __DIR__ . '/server.php'
+    );
+    echo $command . PHP_EOL;
+
+    $output    = [];
+    exec($command, $output);
+    $pid = (int) $output[0];
+
+    printf(
+        '%s - web server started in %s:%d PID %d' . PHP_EOL,
+        date('r'),
+        WEB_SERVER_HOST,
+        WEB_SERVER_PORT,
+        $pid
+    );
+
+    register_shutdown_function(function () use ($pid) {
+        printf('%s - killing web server with PID %d', date('r'), $pid);
+        echo PHP_EOL;
+        exec('kill ' . $pid);
+    });
+
+};
+
+$_bootstrap_function();

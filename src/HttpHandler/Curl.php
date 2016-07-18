@@ -46,7 +46,7 @@ class Curl implements HttpHandler
         $content = curl_exec($ch);
 
         if ($content === false) {
-            throw new \RuntimeException(curl_error($ch));
+            throw new HttpException(curl_error($ch), curl_errno($ch));
         }
 
         $response = new Response(

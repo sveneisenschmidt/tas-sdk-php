@@ -48,9 +48,9 @@ final class RequestSigner
             $timestamp = time();
         }
 
-        $this->accessId  = $accessId;
-        $this->key       = $key;
-        $this->timestamp = $timestamp;
+        $this->accessId  = (string) $accessId;
+        $this->key       = (string) $key;
+        $this->timestamp = (int) $timestamp;
     }
 
     /**

@@ -20,6 +20,13 @@ namespace Trivago\Tas\HttpHandler;
 
 class CurlTest extends \PHPUnit_Framework_TestCase
 {
+    protected function setUp()
+    {
+        if (!defined('WEB_SERVER_HOST')) {
+            $this->markTestSkipped('No test server running.');
+        }
+    }
+
     public function test_curl()
     {
         $uri = sprintf('http://%s:%d/test?send_cookie=true', WEB_SERVER_HOST, WEB_SERVER_PORT);
@@ -54,14 +61,14 @@ class CurlTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage Failed to connect to localhost port 9999: Connection refused
+     * @expectedException \Trivago\Tas\HttpHandler\HttpException
+     * @expectedExceptionCode 7
      */
     public function test_server_does_not_exist()
     {
         $uri = sprintf('http://%s:%d/test?send_cookie=true', WEB_SERVER_HOST, 9999);
 
         $curl     = new Curl();
-        $response = $curl->sendRequest(new HttpRequest($uri, 'GET', []));
+        $curl->sendRequest(new HttpRequest($uri, 'GET', []));
     }
 }
