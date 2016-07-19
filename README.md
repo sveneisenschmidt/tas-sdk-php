@@ -5,7 +5,7 @@
 
 ## Documentation
 
-tbd
+Please see /docs folder.
 
 ## Execute tests
 
