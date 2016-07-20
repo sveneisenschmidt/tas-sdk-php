@@ -1,6 +1,6 @@
 {
     "name": "trivago/tas-sdk-php",
-    "description": "trivago Affiliate Suite SDK for PHP allows easy access the trivago Affiliate Suite API",
+    "description": "trivago Affiliate Suite SDK for webservice communication",
     "require": {
         "ext-curl": "*",
         "php": "^5.6|^7.0"
