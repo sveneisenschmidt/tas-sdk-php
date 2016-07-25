@@ -29,6 +29,11 @@ class HotelDeals implements \Countable, \Iterator
     private $deals = [];
 
     /**
+     * @var array
+     */
+    private $searchParams = null;
+
+    /**
      * @var bool
      */
     private $pollingFinished;
@@ -40,11 +45,13 @@ class HotelDeals implements \Countable, \Iterator
      */
     public static function fromResponse(Response $response)
     {
+        $responseData                = $response->getContentAsArray();
         $hotelDeals                  = new static();
         $hotelDeals->pollingFinished = $response->getHttpCode() === 200;
         $hotelDeals->deals           = array_map(function (array $deal) {
             return Deal::fromArray($deal);
-        }, $response->getContentAsArray()['deals']);
+        }, $responseData['deals']);
+        $hotelDeals->searchParams    = $responseData['search_params'];
 
         return $hotelDeals;
     }
@@ -66,6 +73,14 @@ class HotelDeals implements \Countable, \Iterator
     public function toArray()
     {
         return $this->deals;
+    }
+
+    /**
+     * @return array
+     */
+    public function getSearchParams()
+    {
+        return $this->searchParams;
     }
 
     /**

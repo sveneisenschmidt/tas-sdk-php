@@ -67,13 +67,13 @@ The request must be an instance of :code:`Trivago\Tas\Request\HotelCollectionReq
 +--------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
 | ORDER        | string    | null    | no         | Possible sorting options are: relevance, price, category, distance, overall_liking, basename   |
 +--------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
-| CATEGORY     | array     | null    | no         | Hotel categories/rating [0-5].                                                                 |
+| CATEGORY     | array     | null    | no         | Hotel categories/star rating [0-5].                                                            |
 +--------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
 | ROOM_TYPE    | int       | null    | no         | Type/size of the room. Possible options: 1 = single-room, 7 = double-room.                     |
 +--------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
 | HOTEL_NAME   | string    | null    | no         | The hotel name. This will search for a hotel with the given name in the area defined by `path`.|
 +--------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
-| RATING_CLASS | array     | null    | no         | Hotel rating class [1-5].                                                                      |
+| RATING_CLASS | array     | null    | no         | Hotel rating based on customers' ratings and reviews [1-5].                                    |
 +--------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
 
 Response
