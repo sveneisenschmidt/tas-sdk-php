@@ -22,16 +22,18 @@ Searching for prices takes some time. Therefore the returned result might not be
     use Trivago\Tas\Request\HotelCollectionRequest;
 
     $request = new HotelCollectionRequest([
-        HotelCollectionRequest::PATH        => 1234,
-        HotelCollectionRequest::ITEM        => 5678,
-        HotelCollectionRequest::START_DATE  => new DateTime('+1 day'),
-        HotelCollectionRequest::END_DATE    => new DateTime('+2 days'),
-        HotelCollectionRequest::ROOM_TYPE   => 7,
-        HotelCollectionRequest::CURRENCY    => 'EUR',
-        HotelCollectionRequest::CATEGORY    => [3,4],
-        HotelCollectionRequest::LIMIT       => 10,
-        HotelCollectionRequest::OFFSET      => 0,
-        HotelCollectionRequest::ORDER       => Order::PRICE,
+        HotelCollectionRequest::PATH         => 38714,
+        HotelCollectionRequest::ITEM         => 5678,
+        HotelCollectionRequest::START_DATE   => new DateTime('+1 day'),
+        HotelCollectionRequest::END_DATE     => new DateTime('+2 days'),
+        HotelCollectionRequest::ROOM_TYPE    => 7,
+        HotelCollectionRequest::CURRENCY     => 'EUR',
+        HotelCollectionRequest::CATEGORY     => [3,4,5],
+        HotelCollectionRequest::LIMIT        => 10,
+        HotelCollectionRequest::OFFSET       => 0,
+        HotelCollectionRequest::ORDER        => 'price',
+        HotelCollectionRequest::RATING_CLASS => [3,4,5],
+        HotelCollectionRequest::HOTEL_NAME   => 'Hyatt',
     ]);
     $hotels = $tas->getHotelCollection($request);
 
@@ -44,29 +46,33 @@ Request
 
 The request must be an instance of :code:`Trivago\Tas\Request\HotelCollectionRequest`.
 
-+------------+-----------+---------+------------+----------------------------------------------------------------------------------------------+
-| Parameter  | Type      | Default | Required?  | Description                                                                                  |
-+============+===========+=========+============+==============================================================================================+
-| PATH       | int       | null    | if no item | The path ID.                                                                                 |
-+------------+-----------+---------+------------+----------------------------------------------------------------------------------------------+
-| ITEM       | int       | null    | if no path | The item ID.                                                                                 |
-+------------+-----------+---------+------------+----------------------------------------------------------------------------------------------+
-| START_DATE | DateTime  | Date    | no         | The check in date. Must be a date today or in the future.                                    |
-+------------+-----------+---------+------------+----------------------------------------------------------------------------------------------+
-| END_DATE   | DateTime  | Date    | no         | The check out date. Must be a date after the check in date.                                  |
-+------------+-----------+---------+------------+----------------------------------------------------------------------------------------------+
-| CURRENCY   | string    | null    | no         | The ISO-4217 currency code.                                                                  |
-+------------+-----------+---------+------------+----------------------------------------------------------------------------------------------+
-| LIMIT      | int       | null    | no         | The limit must be a value greater equals 0.                                                  |
-+------------+-----------+---------+------------+----------------------------------------------------------------------------------------------+
-| OFFSET     | int       | null    | no         | The offset is a multiple of limit.                                                           |
-+------------+-----------+---------+------------+----------------------------------------------------------------------------------------------+
-| ORDER      | string    | null    | no         | Possible sorting options are: relevance, price, category, distance, overall_liking, basename |
-+------------+-----------+---------+------------+----------------------------------------------------------------------------------------------+
-| CATEGORY   | array     | null    | no         | Hotel categories/rating [0-5].                                                               |
-+------------+-----------+---------+------------+----------------------------------------------------------------------------------------------+
-| ROOM_TYPE  | int       | null    | no         | Type/size of the room. Possible options: 1 = single-room, 7 = double-room.                   |
-+------------+-----------+---------+------------+----------------------------------------------------------------------------------------------+
++--------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
+| Parameter    | Type      | Default | Required?  | Description                                                                                    |
++==============+===========+=========+============+================================================================================================+
+| PATH         | int       | null    | if no item | The path ID.                                                                                   |
++--------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
+| ITEM         | int       | null    | if no path | The item ID.                                                                                   |
++--------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
+| START_DATE   | DateTime  | Date    | no         | The check in date. Must be a date today or in the future.                                      |
++--------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
+| END_DATE     | DateTime  | Date    | no         | The check out date. Must be a date after the check in date.                                    |
++--------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
+| CURRENCY     | string    | null    | no         | The ISO-4217 currency code.                                                                    |
++--------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
+| LIMIT        | int       | null    | no         | The limit must be a value greater equals 0.                                                    |
++--------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
+| OFFSET       | int       | null    | no         | The offset is a multiple of limit.                                                             |
++--------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
+| ORDER        | string    | null    | no         | Possible sorting options are: relevance, price, category, distance, overall_liking, basename   |
++--------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
+| CATEGORY     | array     | null    | no         | Hotel categories/rating [0-5].                                                                 |
++--------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
+| ROOM_TYPE    | int       | null    | no         | Type/size of the room. Possible options: 1 = single-room, 7 = double-room.                     |
++--------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
+| HOTEL_NAME   | string    | null    | no         | The hotel name. This will search for a hotel with the given name in the area defined by `path`.|
++--------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
+| RATING_CLASS | array     | null    | no         | Hotel rating class [1-5].                                                                      |
++--------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
 
 Response
 --------
