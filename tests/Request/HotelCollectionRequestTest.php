@@ -52,18 +52,18 @@ class HotelCollectionRequestTest extends \PHPUnit_Framework_TestCase
         $endDate   = new \DateTime('2015-08-09');
 
         $request = new HotelCollectionRequest([
-            HotelCollectionRequest::PATH       => 1234,
-            HotelCollectionRequest::ITEM       => 5678,
-            HotelCollectionRequest::START_DATE => $startDate,
-            HotelCollectionRequest::END_DATE   => $endDate,
-            HotelCollectionRequest::ROOM_TYPE  => RoomType::DOUBLE_ROOM,
-            HotelCollectionRequest::CURRENCY   => 'EUR',
-            HotelCollectionRequest::CATEGORY   => [3, 4],
-            HotelCollectionRequest::LIMIT      => 10,
-            HotelCollectionRequest::OFFSET     => 10,
-            HotelCollectionRequest::ORDER      => Order::PRICE,
+            HotelCollectionRequest::PATH         => 1234,
+            HotelCollectionRequest::ITEM         => 5678,
+            HotelCollectionRequest::START_DATE   => $startDate,
+            HotelCollectionRequest::END_DATE     => $endDate,
+            HotelCollectionRequest::ROOM_TYPE    => RoomType::DOUBLE_ROOM,
+            HotelCollectionRequest::CURRENCY     => 'EUR',
+            HotelCollectionRequest::CATEGORY     => [3, 4],
+            HotelCollectionRequest::LIMIT        => 10,
+            HotelCollectionRequest::OFFSET       => 10,
+            HotelCollectionRequest::ORDER        => Order::PRICE,
             HotelCollectionRequest::RATING_CLASS => [3,4,5],
-            HotelCollectionRequest::HOTEL_NAME => 'Hyatt',
+            HotelCollectionRequest::HOTEL_NAME   => 'Hyatt',
         ]);
 
         $queryParameters = $request->getQueryParameters();
