@@ -19,6 +19,7 @@ Searching for prices takes some time. Therefore the returned result might not be
 .. code-block:: php
 
     use Trivago\Tas\Request\Common\Order;
+    use Trivago\Tas\Request\Common\RoomType;
     use Trivago\Tas\Request\HotelCollectionRequest;
 
     $request = new HotelCollectionRequest([
@@ -26,15 +27,16 @@ Searching for prices takes some time. Therefore the returned result might not be
         HotelCollectionRequest::ITEM         => 5678,
         HotelCollectionRequest::START_DATE   => new DateTime('+1 day'),
         HotelCollectionRequest::END_DATE     => new DateTime('+2 days'),
-        HotelCollectionRequest::ROOM_TYPE    => 7,
+        HotelCollectionRequest::ROOM_TYPE    => RoomType::DOUBLE_ROOM,
         HotelCollectionRequest::CURRENCY     => 'EUR',
         HotelCollectionRequest::CATEGORY     => [3,4,5],
         HotelCollectionRequest::LIMIT        => 10,
         HotelCollectionRequest::OFFSET       => 0,
-        HotelCollectionRequest::ORDER        => 'price',
+        HotelCollectionRequest::ORDER        => Order::PRICE,
         HotelCollectionRequest::RATING_CLASS => [3,4,5],
         HotelCollectionRequest::HOTEL_NAME   => 'Hyatt',
     ]);
+
     $hotels = $tas->getHotelCollection($request);
 
     while (!$hotels->pollingFinished()) {
@@ -92,17 +94,19 @@ With the :code:`getHotelDeals` method you can retrieve prices for a single hotel
 
 .. code-block:: php
 
+    use Trivago\Tas\Request\Common\RoomType;
     use Trivago\Tas\Request\HotelDealsRequest;
 
     $request = new HotelDealsRequest([
-        HotelDealsRequest::ITEM         => 5555,
-        HotelDealsRequest::START_DATE   => new DateTime('+1 day'),
-        HotelDealsRequest::END_DATE     => new DateTime('+2 days'),
-        HotelDealsRequest::CURRENCY     => 'EUR',
-        HotelDealsRequest::LIMIT        => 25,
-        HotelDealsRequest::OFFSET       => 0,
-        HotelDealsRequest::ROOM_TYPE    => 1
+        HotelDealsRequest::ITEM       => 5555,
+        HotelDealsRequest::START_DATE => new DateTime('+1 day'),
+        HotelDealsRequest::END_DATE   => new DateTime('+2 days'),
+        HotelDealsRequest::CURRENCY   => 'EUR',
+        HotelDealsRequest::LIMIT      => 25,
+        HotelDealsRequest::OFFSET     => 0,
+        HotelDealsRequest::ROOM_TYPE  => RoomType::SINGLE_ROOM
     ]);
+
     $deals = $tas->getHotelDeals($request);
 
     while (!$deals->pollingFinished()) {
@@ -152,7 +156,7 @@ The :code:`getHotelDetails()` methods returns information about a specific hotel
 
     use Trivago\Tas\Request\HotelDetailsRequest;
 
-    $request = new HotelDetailsRequest(51383);
+    $request      = new HotelDetailsRequest(51383);
     $hotelDetails = $tas->getHotelDetails($request);
 
 Request
@@ -187,7 +191,7 @@ This method will search for locations by a given query.
 
     use Trivago\Tas\Request\LocationsRequest;
 
-    $request = new LocationsRequest('düsseldorf');
+    $request   = new LocationsRequest('düsseldorf');
     $locations = $tas->getLocations($request);
 
     foreach ($locations as $location) {
