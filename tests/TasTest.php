@@ -70,7 +70,7 @@ class TasTest extends \PHPUnit_Framework_TestCase
         ]));
 
         $this->assertInstanceOf(HotelCollection::class, $hotels);
-        $this->assertCount(25, $hotels); // assert that data was written to the HotelCollection object.
+        $this->assertCount(19, $hotels); // assert that data was written to the HotelCollection object.
     }
 
     public function test_get_hotel_details()

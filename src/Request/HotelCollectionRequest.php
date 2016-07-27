@@ -22,17 +22,20 @@ use DateTime;
 
 class HotelCollectionRequest extends Request
 {
-    const PATH       = 'path';
-    const ITEM       = 'item';
-    const START_DATE = 'start_date';
-    const END_DATE   = 'end_date';
-    const ROOM_TYPE  = 'room_type';
-    const CURRENCY   = 'currency';
-    const CATEGORY   = 'category';
-    const LIMIT      = 'limit';
-    const OFFSET     = 'offset';
-    const ORDER      = 'order';
-    const MAX_PRICE  = 'max_price';
+    const PATH         = 'path';
+    const ITEM         = 'item';
+    const START_DATE   = 'start_date';
+    const END_DATE     = 'end_date';
+    const ROOM_TYPE    = 'room_type';
+    const CURRENCY     = 'currency';
+    const CATEGORY     = 'category';
+    const LIMIT        = 'limit';
+    const OFFSET       = 'offset';
+    const ORDER        = 'order';
+    const RATING_CLASS = 'rating_class';
+    const HOTEL_NAME   = 'hotel_name';
+    const MAX_PRICE    = 'max_price';
+
     /**
      * @var int|null
      */
@@ -95,18 +98,31 @@ class HotelCollectionRequest extends Request
     private $roomType;
 
     /**
+     * @var array|null
+     */
+    private $ratingClass;
+
+    /**
+     * @var string|null
+     */
+    private $hotelName;
+
+    /**
      * @var array
      */
     private $optionalParameterMap = [
-        'item'      => 'item',
-        'path'      => 'path',
-        'currency'  => 'currency',
-        'limit'     => 'limit',
-        'offset'    => 'offset',
-        'order'     => 'order',
-        'category'  => 'category',
-        'roomType'  => 'room_type',
-        'maxPrice' => 'max_price',
+
+        'item'        => 'item',
+        'path'        => 'path',
+        'currency'    => 'currency',
+        'limit'       => 'limit',
+        'offset'      => 'offset',
+        'order'       => 'order',
+        'category'    => 'category',
+        'roomType'    => 'room_type',
+        'ratingClass' => 'rating_class',
+        'hotelName'   => 'hotel_name',
+        'maxPrice'    => 'max_price',
     ];
 
     /**
@@ -117,30 +133,34 @@ class HotelCollectionRequest extends Request
     public function __construct($options = [])
     {
         $options = array_merge([
-            static::PATH       => null,
-            static::ITEM       => null,
-            static::START_DATE => new DateTime('+1 day'),
-            static::END_DATE   => new DateTime('+2 days'),
-            static::ROOM_TYPE  => null,
-            static::CURRENCY   => null,
-            static::CATEGORY   => null,
-            static::LIMIT      => null,
-            static::OFFSET     => null,
-            static::ORDER      => null,
-            static::MAX_PRICE  => null,
+            static::PATH         => null,
+            static::ITEM         => null,
+            static::START_DATE   => new DateTime('+1 day'),
+            static::END_DATE     => new DateTime('+2 days'),
+            static::ROOM_TYPE    => null,
+            static::CURRENCY     => null,
+            static::CATEGORY     => null,
+            static::LIMIT        => null,
+            static::OFFSET       => null,
+            static::ORDER        => null,
+            static::RATING_CLASS => null,
+            static::HOTEL_NAME   => null,
+            static::MAX_PRICE    => null,
         ], $options);
 
-        $this->path      = $options[static::PATH];
-        $this->item      = $options[static::ITEM];
-        $this->startDate = $options[static::START_DATE];
-        $this->endDate   = $options[static::END_DATE];
-        $this->roomType  = $options[static::ROOM_TYPE];
-        $this->currency  = $options[static::CURRENCY];
-        $this->category  = $options[static::CATEGORY];
-        $this->limit     = $options[static::LIMIT];
-        $this->offset    = $options[static::OFFSET];
-        $this->order     = $options[static::ORDER];
-        $this->maxPrice  = $options[static::MAX_PRICE];
+        $this->path        = $options[static::PATH];
+        $this->item        = $options[static::ITEM];
+        $this->startDate   = $options[static::START_DATE];
+        $this->endDate     = $options[static::END_DATE];
+        $this->roomType    = $options[static::ROOM_TYPE];
+        $this->currency    = $options[static::CURRENCY];
+        $this->category    = $options[static::CATEGORY];
+        $this->limit       = $options[static::LIMIT];
+        $this->offset      = $options[static::OFFSET];
+        $this->order       = $options[static::ORDER];
+        $this->ratingClass = $options[static::RATING_CLASS];
+        $this->hotelName   = $options[static::HOTEL_NAME];
+        $this->maxPrice    = $options[static::MAX_PRICE];
 
         if (empty($this->item) && empty($this->path)) {
             throw new InvalidRequestException('Item ID and path ID are empty. At least one of these is required.');
