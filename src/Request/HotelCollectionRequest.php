@@ -32,6 +32,7 @@ class HotelCollectionRequest extends Request
     const LIMIT      = 'limit';
     const OFFSET     = 'offset';
     const ORDER      = 'order';
+    const MAX_PRICE  = 'max_price';
     /**
      * @var int|null
      */
@@ -70,6 +71,11 @@ class HotelCollectionRequest extends Request
     private $offset;
 
     /**
+     * @var int|null
+     */
+    private $maxPrice;
+
+    /**
      * @see \Trivago\Tas\Request\Common\Order
      *
      * @var null|string
@@ -92,14 +98,15 @@ class HotelCollectionRequest extends Request
      * @var array
      */
     private $optionalParameterMap = [
-        'item'     => 'item',
-        'path'     => 'path',
-        'currency' => 'currency',
-        'limit'    => 'limit',
-        'offset'   => 'offset',
-        'order'    => 'order',
-        'category' => 'category',
-        'roomType' => 'room_type',
+        'item'      => 'item',
+        'path'      => 'path',
+        'currency'  => 'currency',
+        'limit'     => 'limit',
+        'offset'    => 'offset',
+        'order'     => 'order',
+        'category'  => 'category',
+        'roomType'  => 'room_type',
+        'maxPrice' => 'max_price',
     ];
 
     /**
@@ -120,6 +127,7 @@ class HotelCollectionRequest extends Request
             static::LIMIT      => null,
             static::OFFSET     => null,
             static::ORDER      => null,
+            static::MAX_PRICE  => null,
         ], $options);
 
         $this->path      = $options[static::PATH];
@@ -132,6 +140,7 @@ class HotelCollectionRequest extends Request
         $this->limit     = $options[static::LIMIT];
         $this->offset    = $options[static::OFFSET];
         $this->order     = $options[static::ORDER];
+        $this->maxPrice  = $options[static::MAX_PRICE];
 
         if (empty($this->item) && empty($this->path)) {
             throw new InvalidRequestException('Item ID and path ID are empty. At least one of these is required.');

@@ -32,6 +32,7 @@ Searching for prices takes some time. Therefore the returned result might not be
         HotelCollectionRequest::LIMIT       => 10,
         HotelCollectionRequest::OFFSET      => 0,
         HotelCollectionRequest::ORDER       => Order::PRICE,
+        HotelCollectionRequest::MAX_PRICE   => 225,
     ]);
     $hotels = $tas->getHotelCollection($request);
 
@@ -66,6 +67,8 @@ The request must be an instance of :code:`Trivago\Tas\Request\HotelCollectionReq
 | CATEGORY   | array     | null    | no         | Hotel categories/rating [0-5].                                                               |
 +------------+-----------+---------+------------+----------------------------------------------------------------------------------------------+
 | ROOM_TYPE  | int       | null    | no         | Type/size of the room. Possible options: 1 = single-room, 7 = double-room.                   |
++------------+-----------+---------+------------+----------------------------------------------------------------------------------------------+
+| MAX_PRICE  | int       | null    | no         | Omits hotels from the collection which are above the max price.                              |
 +------------+-----------+---------+------------+----------------------------------------------------------------------------------------------+
 
 Response
