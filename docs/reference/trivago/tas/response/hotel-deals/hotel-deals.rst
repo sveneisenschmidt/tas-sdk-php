@@ -14,6 +14,16 @@ count()
 Returns the number of deals.
 
 
+getSearchParams()
+=================
+
+.. code-block:: php
+
+    public function array getSearchParams()
+
+Returns the search parameters applied to the collection search.
+
+
 pollingFinished()
 =================
 

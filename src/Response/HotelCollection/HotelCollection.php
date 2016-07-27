@@ -30,6 +30,11 @@ class HotelCollection implements \Countable, \Iterator
     private $hotel = [];
 
     /**
+     * @var array
+     */
+    private $searchParams = [];
+
+    /**
      * @var bool
      */
     private $pollingFinished = false;
@@ -64,6 +69,7 @@ class HotelCollection implements \Countable, \Iterator
         $responseData                     = $response->getContentAsArray();
         $hotelCollection                  = new static();
         $hotelCollection->pollingFinished = $response->getHttpCode() === 200;
+        $hotelCollection->searchParams    = $responseData['search_params'];
 
         if (isset($responseData['_links']['next'])) {
             preg_match('/offset=([0-9]+)/', $responseData['_links']['next']['href'], $matches);
@@ -105,6 +111,14 @@ class HotelCollection implements \Countable, \Iterator
     public function pollingFinished()
     {
         return $this->pollingFinished;
+    }
+
+    /**
+    * @return array
+    */
+    public function getSearchParams()
+    {
+        return $this->searchParams;
     }
 
     /**
