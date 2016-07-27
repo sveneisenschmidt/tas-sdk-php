@@ -35,7 +35,7 @@ Searching for prices takes some time. Therefore the returned result might not be
         HotelCollectionRequest::ORDER        => Order::PRICE,
         HotelCollectionRequest::RATING_CLASS => [3,4,5],
         HotelCollectionRequest::HOTEL_NAME   => 'Hyatt',
-        HotelCollectionRequest::MAX_PRICE   => 225,
+        HotelCollectionRequest::MAX_PRICE    => 225,
  ]);
 
     $hotels = $tas->getHotelCollection($request);

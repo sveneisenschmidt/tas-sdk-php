@@ -111,7 +111,6 @@ class HotelCollectionRequest extends Request
      * @var array
      */
     private $optionalParameterMap = [
-
         'item'        => 'item',
         'path'        => 'path',
         'currency'    => 'currency',
