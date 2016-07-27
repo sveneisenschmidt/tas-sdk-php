@@ -32,7 +32,7 @@ class HotelCollection implements \Countable, \Iterator
     /**
      * @var array
      */
-    private $searchParams = null;
+    private $searchParams = [];
 
     /**
      * @var bool
