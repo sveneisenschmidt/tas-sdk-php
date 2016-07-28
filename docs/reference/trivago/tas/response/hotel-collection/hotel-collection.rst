@@ -29,7 +29,7 @@ getResultInfo()
 
 .. code-block:: php
 
-    public function array getResultInfo()
+    public function ResultInfo getResultInfo()
 
 Returns information about the resulting HotelCollection.
 
