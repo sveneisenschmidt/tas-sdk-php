@@ -35,9 +35,9 @@ class HotelCollection implements \Countable, \Iterator
     private $searchParams = [];
 
     /**
-     * @var array
+     * @var ResultInfo
      */
-    private $resultInfo = [];
+    private $resultInfo;
 
     /**
      * @var bool
@@ -75,7 +75,7 @@ class HotelCollection implements \Countable, \Iterator
         $hotelCollection                  = new static();
         $hotelCollection->pollingFinished = $response->getHttpCode() === 200;
         $hotelCollection->searchParams    = $responseData['search_params'];
-        $hotelCollection->resultInfo      = $responseData['result_info'];
+        $hotelCollection->resultInfo      = new ResultInfo($responseData['result_info']);
 
         if (isset($responseData['_links']['next'])) {
             preg_match('/offset=([0-9]+)/', $responseData['_links']['next']['href'], $matches);

@@ -53,10 +53,9 @@ class HotelCollectionTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('max_price', $paramsArray);
 
         $resultInfo = $hotels->getResultInfo();
-        $this->assertCount(1, $resultInfo);
-        $this->assertInternalType('array', $resultInfo);
-        $this->assertArrayHasKey('price', $resultInfo);
-        $this->assertInternalType('array', $resultInfo['price']);
+        $this->assertSame(31, $resultInfo->getMinPrice());
+        $this->assertSame(187, $resultInfo->getMaxPrice());
+        $this->assertSame('GBP', $resultInfo->getCurrency());
 
         foreach ($hotels as $hotel) {
             $this->assertInstanceOf(Hotel::class, $hotel);
