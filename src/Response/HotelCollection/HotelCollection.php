@@ -75,7 +75,7 @@ class HotelCollection implements \Countable, \Iterator
         $hotelCollection                  = new static();
         $hotelCollection->pollingFinished = $response->getHttpCode() === 200;
         $hotelCollection->searchParams    = $responseData['search_params'];
-        $hotelCollection->resultInfo      = new ResultInfo($responseData['result_info']);
+        $hotelCollection->resultInfo      = ResultInfo::fromArray($responseData['result_info']);
 
         if (isset($responseData['_links']['next'])) {
             preg_match('/offset=([0-9]+)/', $responseData['_links']['next']['href'], $matches);
@@ -128,7 +128,7 @@ class HotelCollection implements \Countable, \Iterator
     }
 
     /**
-     * @return array
+     * @return ResultInfo
      */
     public function getResultInfo()
     {

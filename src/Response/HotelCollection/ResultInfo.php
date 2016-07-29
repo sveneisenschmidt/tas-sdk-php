@@ -35,12 +35,21 @@ class ResultInfo
      */
     private $currency;
 
-    public function __construct(array $data)
+    /**
+     * @param array $data
+     *
+     * @return ResultInfo
+     */
+    public static function fromArray(array $data)
     {
-        $price = $data['price'];
-        $this->minPrice = $price['min'];
-        $this->maxPrice = $price['max'];
-        $this->currency = $price['currency'];
+        $resultInfo = new static();
+
+        $price                = $data['price'];
+        $resultInfo->minPrice = $price['min'];
+        $resultInfo->maxPrice = $price['max'];
+        $resultInfo->currency = $price['currency'];
+
+        return $resultInfo;
     }
 
     /**
