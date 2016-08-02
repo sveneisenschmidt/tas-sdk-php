@@ -34,6 +34,8 @@ class HotelCollectionRequest extends Request
     const ORDER        = 'order';
     const RATING_CLASS = 'rating_class';
     const HOTEL_NAME   = 'hotel_name';
+    const MAX_PRICE    = 'max_price';
+
     /**
      * @var int|null
      */
@@ -70,6 +72,11 @@ class HotelCollectionRequest extends Request
      * @var int|null
      */
     private $offset;
+
+    /**
+     * @var int|null
+     */
+    private $maxPrice;
 
     /**
      * @see \Trivago\Tas\Request\Common\Order
@@ -114,6 +121,7 @@ class HotelCollectionRequest extends Request
         'roomType'    => 'room_type',
         'ratingClass' => 'rating_class',
         'hotelName'   => 'hotel_name',
+        'maxPrice'    => 'max_price',
     ];
 
     /**
@@ -136,6 +144,7 @@ class HotelCollectionRequest extends Request
             static::ORDER        => null,
             static::RATING_CLASS => null,
             static::HOTEL_NAME   => null,
+            static::MAX_PRICE    => null,
         ], $options);
 
         $this->path        = $options[static::PATH];
@@ -150,6 +159,7 @@ class HotelCollectionRequest extends Request
         $this->order       = $options[static::ORDER];
         $this->ratingClass = $options[static::RATING_CLASS];
         $this->hotelName   = $options[static::HOTEL_NAME];
+        $this->maxPrice    = $options[static::MAX_PRICE];
 
         if (empty($this->item) && empty($this->path)) {
             throw new InvalidRequestException('Item ID and path ID are empty. At least one of these is required.');

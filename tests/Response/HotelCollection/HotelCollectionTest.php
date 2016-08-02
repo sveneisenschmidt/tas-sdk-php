@@ -30,14 +30,14 @@ class HotelCollectionTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->assertInstanceOf(HotelCollection::class, $hotels);
-        $this->assertCount(24, $hotels);
+        $this->assertCount(19, $hotels);
         $this->assertTrue($hotels->pollingFinished());
         $this->assertTrue($hotels->hasNextPage());
         $this->assertFalse($hotels->hasPrevPage());
         $this->assertSame(25, $hotels->getNextPageOffset());
 
         $paramsArray = $hotels->getSearchParams();
-        $this->assertCount(9, $paramsArray);
+        $this->assertCount(10, $paramsArray);
         $this->assertInternalType('array', $paramsArray);
         $this->assertArrayHasKey('path',$paramsArray);
         $this->assertArrayHasKey('start_date',$paramsArray);
@@ -50,6 +50,12 @@ class HotelCollectionTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('order',$paramsArray);
         $this->assertArrayHasKey('rating_class',$paramsArray);
         $this->assertInternalType('array', $paramsArray['rating_class']);
+        $this->assertArrayHasKey('max_price', $paramsArray);
+
+        $resultInfo = $hotels->getResultInfo();
+        $this->assertSame(31, $resultInfo->getMinPrice());
+        $this->assertSame(187, $resultInfo->getMaxPrice());
+        $this->assertSame('GBP', $resultInfo->getCurrency());
 
         foreach ($hotels as $hotel) {
             $this->assertInstanceOf(Hotel::class, $hotel);
@@ -57,8 +63,8 @@ class HotelCollectionTest extends \PHPUnit_Framework_TestCase
 
         $hotelsArray = $hotels->toArray();
         $this->assertInternalType('array', $hotelsArray);
-        $this->assertCount(24, $hotelsArray);
-        $this->assertSame(range(0, 23), array_keys($hotelsArray));
+        $this->assertCount(19, $hotelsArray);
+        $this->assertSame(range(0,18), array_keys($hotelsArray));
 
         $hotel = $hotelsArray[0];
         $this->assertSame(8964, $hotel->getId());

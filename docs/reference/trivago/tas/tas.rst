@@ -35,7 +35,8 @@ Searching for prices takes some time. Therefore the returned result might not be
         HotelCollectionRequest::ORDER        => Order::PRICE,
         HotelCollectionRequest::RATING_CLASS => [3,4,5],
         HotelCollectionRequest::HOTEL_NAME   => 'Hyatt',
-    ]);
+        HotelCollectionRequest::MAX_PRICE    => 225,
+ ]);
 
     $hotels = $tas->getHotelCollection($request);
 
@@ -75,6 +76,9 @@ The request must be an instance of :code:`Trivago\Tas\Request\HotelCollectionReq
 +--------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
 | RATING_CLASS | array     | null    | no         | Hotel rating based on customers' ratings and reviews [1-5].                                    |
 +--------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
+| MAX_PRICE    | int       | null    | no         | Omits hotels from the collection which are above the max price.                                |
++--------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
+
 
 Response
 --------
