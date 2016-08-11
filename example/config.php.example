@@ -26,7 +26,7 @@ use Trivago\Tas\Config;
 require_once __DIR__ . '/../autoload.php';
 
 return new Config([
-    Config::BASE_URL                 => 'https://api.trivago.com/webservice/tas-sandbox',
+    Config::BASE_URL                 => 'https://api-cloud.trivago.com/webservice/tas-sandbox',
     Config::ACCESS_ID                => 'Enter your Access-Id here',
     Config::SECRET_KEY               => 'Enter your Secret-Key here',
     Config::GET_TRACKING_ID_CALLBACK => function () {
