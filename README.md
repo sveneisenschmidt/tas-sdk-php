@@ -3,6 +3,14 @@
 [![License](https://img.shields.io/badge/license-apache%202.0-lightgrey.svg)](https://github.com/trivago/tas-sdk-php/blob/master/LICENSE)
 [![Build Status](https://travis-ci.org/trivago/tas-sdk-php.svg?branch=master)](https://travis-ci.org/trivago/tas-sdk-php)
 
+## Installation
+
+Require the sdk with composer:
+
+```
+composer require trivago/tas-sdk-php
+```
+
 ## Quick Start
 
 For a quick start please try out the example, which can be found in the /example folder and see the readme there.
