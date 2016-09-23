@@ -69,7 +69,7 @@ class HotelDetails
     private $homepage;
 
     /**
-     * @var int
+     * @var float
      */
     private $ratingValue;
 
@@ -117,7 +117,7 @@ class HotelDetails
         $hotelDetails->category       = (int)$data['category'];
         $hotelDetails->superior       = (bool)$data['superior'];
         $hotelDetails->homepage       = $data['homepage'];
-        $hotelDetails->ratingValue    = (int)$data['rating_value'];
+        $hotelDetails->ratingValue    = (float)$data['rating_value'];
         $hotelDetails->ratingCount    = (int)$data['rating_count'];
         $hotelDetails->description    = $data['description'];
         $hotelDetails->path           = Path::fromArray($data['path']);
