@@ -22,16 +22,19 @@ use Trivago\Tas\Request\HotelCollectionRequest;
 use Trivago\Tas\Request\HotelDealsRequest;
 use Trivago\Tas\Request\HotelDetailsRequest;
 use Trivago\Tas\Request\LocationsRequest;
+use Trivago\Tas\Request\TagsRequest;
 use Trivago\Tas\Response\HotelCollection\HotelCollection;
 use Trivago\Tas\Response\HotelDeals\HotelDeals;
 use Trivago\Tas\Response\HotelDetails\HotelDetails;
 use Trivago\Tas\Response\Locations\Locations;
 use Trivago\Tas\Response\ProblemException;
+use Trivago\Tas\Response\Tags\TagGroups;
 
 /**
- * @method Locations getLocations(LocationsRequest $request)
- * @method HotelDeals getHotelDeals(HotelDealsRequest $request)
- * @method HotelDetails getHotelDetails(HotelDetailsRequest $request)
+ * @method Locations       getLocations(LocationsRequest $request)
+ * @method TagGroups       getTags(TagsRequest $request)
+ * @method HotelDeals      getHotelDeals(HotelDealsRequest $request)
+ * @method HotelDetails    getHotelDetails(HotelDetailsRequest $request)
  * @method HotelCollection getHotelCollection(HotelCollectionRequest $request)
  */
 class Tas
@@ -45,15 +48,19 @@ class Tas
      * @var array
      */
     private static $responseMap = [
-        'getLocations' => [
+        'getLocations'       => [
             'response' => Locations::class,
             'request'  => LocationsRequest::class,
         ],
-        'getHotelDeals' => [
+        'getTags'            => [
+            'response' => TagGroups::class,
+            'request'  => TagsRequest::class,
+        ],
+        'getHotelDeals'      => [
             'response' => HotelDeals::class,
             'request'  => HotelDealsRequest::class,
         ],
-        'getHotelDetails' => [
+        'getHotelDetails'    => [
             'response' => HotelDetails::class,
             'request'  => HotelDetailsRequest::class,
         ],

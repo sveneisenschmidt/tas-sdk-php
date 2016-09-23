@@ -94,26 +94,31 @@ class HotelDetails
     private $mainImage;
 
     /**
-     * @var array|Image[]
+     * @var Image[]
      */
     private $galleryImages = [];
+
+    private function __construct()
+    {
+        // intentionally left empty. use named constructor to create new instances.
+    }
 
     public static function fromResponse(Response $response)
     {
         $data = $response->getContentAsArray();
 
         $hotelDetails                 = new static();
-        $hotelDetails->itemId         = $data['item_id'];
+        $hotelDetails->itemId         = (int)$data['item_id'];
         $hotelDetails->name           = $data['name'];
         $hotelDetails->address        = $data['address'];
         $hotelDetails->zip            = $data['zip'];
         $hotelDetails->city           = $data['city'];
         $hotelDetails->geoCoordinates = GeoCoordinates::fromArray($data['geo_coordinates']);
-        $hotelDetails->category       = $data['category'];
-        $hotelDetails->superior       = $data['superior'];
+        $hotelDetails->category       = (int)$data['category'];
+        $hotelDetails->superior       = (bool)$data['superior'];
         $hotelDetails->homepage       = $data['homepage'];
-        $hotelDetails->ratingValue    = $data['rating_value'];
-        $hotelDetails->ratingCount    = $data['rating_count'];
+        $hotelDetails->ratingValue    = (int)$data['rating_value'];
+        $hotelDetails->ratingCount    = (int)$data['rating_count'];
         $hotelDetails->description    = $data['description'];
         $hotelDetails->path           = Path::fromArray($data['path']);
         $hotelDetails->mainImage      = Image::fromArray($data['main_image']);

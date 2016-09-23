@@ -43,7 +43,7 @@ class Path
     public function __construct($id, $name, GeoCoordinates $geoCoordinates)
     {
         $this->geoCoordinates = $geoCoordinates;
-        $this->id             = $id;
+        $this->id             = (int)$id;
         $this->name           = $name;
     }
 

@@ -70,13 +70,13 @@ class Hotel
 
     public function __construct($id, $name, $category, $superior, $city, $ratingValue, $ratingCount, Image $mainImage, array $deals)
     {
-        $this->id          = $id;
+        $this->id          = (int)$id;
         $this->name        = $name;
-        $this->category    = $category;
-        $this->superior    = $superior;
+        $this->category    = (int)$category;
+        $this->superior    = (bool)$superior;
         $this->city        = $city;
-        $this->ratingValue = $ratingValue;
-        $this->ratingCount = $ratingCount;
+        $this->ratingValue = (float)$ratingValue;
+        $this->ratingCount = (float)$ratingCount;
         $this->mainImage   = $mainImage;
         $this->deals       = $deals;
     }

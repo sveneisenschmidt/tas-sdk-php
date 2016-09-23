@@ -220,3 +220,42 @@ Response
 The method returns an object of type :code:`Trivago\Tas\Response\Locations\Locations`. You can use :code:`foreach` to iterate over the result.
 
 A :code:`Trivago\Tas\Response\Locations\Location` instance can be a hotel, an attraction or a path.
+
+
+getTags()
+==============
+
+.. code-block:: php
+
+    public function TagGroups getTags(TagsRequest $request)
+
+
+This method will return all available tags.
+
+.. code-block:: php
+
+    use Trivago\Tas\Request\LocationsRequest;
+
+    $request   = new TagsRequest();
+    $tagGroups = $tas->getTags($request);
+
+    foreach ($tagGroups as $tagGroup) {
+        foreach ($tagGroup as $tag) {
+            // ...
+        }
+    }
+
+Request
+-------
+
+The request must be an instance of :code:`Trivago\Tas\Request\TagRequest`. It has no parameters.
+
++------------+-----------+---------+------------+-----------------------------------------------------------+
+| Parameter  | Type      | Default | Required?  | Description                                               |
++============+===========+=========+============+===========================================================+
+
+
+Response
+--------
+
+The method returns an object of type :code:`Trivago\Tas\Response\Tags\TagGroups`. You can use :code:`foreach` to iterate over the result.

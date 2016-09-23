@@ -64,6 +64,11 @@ class HotelCollection implements \Countable, \Iterator
      */
     private $prevPageOffset = null;
 
+    private function __construct()
+    {
+        // intentionally left empty. use named constructor to create new instances.
+    }
+
     /**
      * @param Response $response
      *
