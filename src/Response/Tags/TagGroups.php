@@ -22,7 +22,6 @@ use Trivago\Tas\Response\Response;
 
 class TagGroups implements \Iterator, \Countable
 {
-
     /**
      * @var TagGroup[]
      */
@@ -33,6 +32,13 @@ class TagGroups implements \Iterator, \Countable
         // intentionally left empty. use named constructor to create new instances.
     }
 
+    /**
+     * Returns a filled TagGroups object using a TagsRequest response
+     *
+     * @param Response $response
+     *
+     * @return static
+     */
     public static function fromResponse(Response $response)
     {
         $data = $response->getContentAsArray();
