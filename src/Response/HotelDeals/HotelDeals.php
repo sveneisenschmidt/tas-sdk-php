@@ -38,6 +38,11 @@ class HotelDeals implements \Countable, \Iterator
      */
     private $pollingFinished;
 
+    private function __construct()
+    {
+        // intentionally left empty. use named constructor to create new instances.
+    }
+
     /**
      * @param Response $response
      *

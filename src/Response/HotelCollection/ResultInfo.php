@@ -35,6 +35,11 @@ class ResultInfo
      */
     private $currency;
 
+    private function __construct()
+    {
+        // intentionally left empty. use named constructor to create new instances.
+    }
+
     /**
      * @param array $data
      *
@@ -45,8 +50,8 @@ class ResultInfo
         $resultInfo = new static();
 
         $price                = $data['price'];
-        $resultInfo->minPrice = $price['min'];
-        $resultInfo->maxPrice = $price['max'];
+        $resultInfo->minPrice = (int)$price['min'];
+        $resultInfo->maxPrice = (int)$price['max'];
         $resultInfo->currency = $price['currency'];
 
         return $resultInfo;

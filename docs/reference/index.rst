@@ -22,4 +22,7 @@ On this page you will find the trivago Affiliate Suite SDK for PHP reference.
     trivago/tas/response/hotel-details/path
     trivago/tas/response/locations/location
     trivago/tas/response/locations/locations
+    trivago/tas/response/tags/tag-groups
+    trivago/tas/response/tags/tag-group
+    trivago/tas/response/tags/tag
 

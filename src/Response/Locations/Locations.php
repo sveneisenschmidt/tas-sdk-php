@@ -23,7 +23,7 @@ use Trivago\Tas\Response\Response;
 class Locations implements \Iterator, \Countable
 {
     /**
-     * @var array|Location[]
+     * @var Location[]
      */
     private $locations = [];
 
@@ -37,7 +37,7 @@ class Locations implements \Iterator, \Countable
      */
     private $queryCorrected = false;
 
-    private function __constructor()
+    private function __construct()
     {
         // intentionally left empty. use named constructor to create new instances.
     }

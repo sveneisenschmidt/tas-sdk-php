@@ -73,7 +73,7 @@ class HotelCollectionTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(false, $hotel->isSuperior());
         $this->assertSame('Ajman', $hotel->getCity());
         $this->assertSame(84.1, $hotel->getRatingValue());
-        $this->assertSame(1816, $hotel->getRatingCount());
+        $this->assertSame(1816.0, $hotel->getRatingCount());
         $this->assertSame(true, $hotel->hasDeals());
 
         $image = $hotel->getMainImage();

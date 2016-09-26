@@ -51,19 +51,19 @@ class Location
     private $type;
 
     /**
-     * @param int    $count
-     * @param int    $itemId
-     * @param string $name
-     * @param int    $pathId
-     * @param string $pathName
-     * @param string $type
+     * @param int      $count
+     * @param int|null $itemId
+     * @param string   $name
+     * @param int      $pathId
+     * @param string   $pathName
+     * @param string   $type
      */
     public function __construct($count, $itemId, $name, $pathId, $pathName, $type)
     {
-        $this->count    = $count;
+        $this->count    = (int)$count;
         $this->itemId   = $itemId;
         $this->name     = $name;
-        $this->pathId   = $pathId;
+        $this->pathId   = (int)$pathId;
         $this->pathName = $pathName;
         $this->type     = $type;
     }
