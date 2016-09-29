@@ -48,17 +48,16 @@ Afterwards include the autoloader provided in the SDK at the top of your script.
 Configuration and setup
 =======================
 
-.. note:: This step assumes that you already received your `Access ID` and your `Secret Key`.
+.. note:: This step assumes that you already received your `API Key`.
 
 Before you can send requests to our API you have to pass the app configuration to the client.
 
-The first step of configuration is adding your Access ID and Secret Key to the config. This is a mandatory step.
+The first step of configuration is adding your API Key to the config. This is a mandatory step.
 
 .. code-block:: php
 
     $tas = new \Trivago\Tas\Tas(new Trivago\Tas\Config([
-        Trivago\Tas\Config::ACCESS_ID  => 'YOUR ACCESS ID',
-        Trivago\Tas\Config::SECRET_KEY => 'YOUR SECRET KEY',
+        Trivago\Tas\Config::API_KEY => 'YOUR API KEY',
     ]));
 
 For tracking the user’s searches the API is issuing a so called 'trivago Tracking ID'. This Tracking ID is unique per
@@ -68,8 +67,7 @@ callback functions are required.
 .. code-block:: php
 
     $tas = new \Trivago\Tas\Tas(new Trivago\Tas\Config([
-        Trivago\Tas\Config::ACCESS_ID                  => 'YOUR ACCESS ID',
-        Trivago\Tas\Config::SECRET_KEY                 => 'YOUR SECRET KEY',
+        Trivago\Tas\Config::API_KEY                    => 'YOUR API KEY',
         Trivago\Tas\Config::GET_TRACKING_ID_CALLBACK   => function () {
             return isset($_COOKIE['trv_tid']) ? $_COOKIE['trv_tid'] : null;
         },

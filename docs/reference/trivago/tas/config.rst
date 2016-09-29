@@ -17,11 +17,10 @@ In this chapter you will find all configuration options. The code below summariz
 
     $config = new Config([
         Config::ACCEPT_LANGUAGE            => 'en-GB',
-        Config::ACCESS_ID                  => 'YOUR ACCESS ID',
+        Config::API_KEY                    => 'YOUR API KEY',
         Config::BASE_URL                   => 'https://api.trivago.com/webservice/affiliate',
         Config::GET_TRACKING_ID_CALLBACK   => function () {},
         Config::HTTP_HANDLER               => new \Trivago\Tas\HttpHandler\Curl(),
-        Config::SECRET_KEY                 => 'YOUR SECRET KEY',
         Config::STORE_TRACKING_ID_CALLBACK => function ($trackingId) {},
     ]);
 
@@ -34,15 +33,13 @@ Parameters
 +============================+================+============+
 | ACCEPT_LANGUAGE            | string         | no         |
 +----------------------------+----------------+------------+
-| ACCESS_ID                  | string         | yes        |
+| API_KEY                    | string         | yes        |
 +----------------------------+----------------+------------+
 | BASE_URL                   | string         | no         |
 +----------------------------+----------------+------------+
 | GET_TRACKING_ID_CALLBACK   | callback       | yes        |
 +----------------------------+----------------+------------+
 | HTTP_HANDLER               | HttpHandler    | no         |
-+----------------------------+----------------+------------+
-| SECRET_KEY                 | string         | yes        |
 +----------------------------+----------------+------------+
 | STORE_TRACKING_ID_CALLBACK | callback       | yes        |
 +----------------------------+----------------+------------+
@@ -56,10 +53,10 @@ to the `Accept-Language` HTTP header. If the accept language does not exist a fa
 this will be English).
 
 
-Config::ACCESS_ID
------------------
+Config::API_KEY
+---------------
 
-Your `Access ID`.
+Your `API key` to get access to the webservice.
 
 
 Config::BASE_URL
@@ -81,12 +78,6 @@ Config::HTTP_HANDLER
 
 The default HTTP handler is cURL.
 You can write your own HTTP handler by implementing the HttpHandler interface :code:`\Trivago\Tas\HttpHandler\HttpHandler`.
-
-
-Config::SECRET_KEY
-------------------
-
-Your `Secret Key`.
 
 
 Config::STORE_TRACKING_ID_CALLBACK

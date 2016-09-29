@@ -25,10 +25,9 @@ use Trivago\Tas\HttpHandler\HttpHandler;
 final class Config
 {
     const ACCEPT_LANGUAGE            = 'accept_language';
-    const ACCESS_ID                  = 'access_id';
+    const API_KEY                    = 'api_key';
     const BASE_URL                   = 'base_url';
     const GET_TRACKING_ID_CALLBACK   = 'get_tracking_id_callback';
-    const SECRET_KEY                 = 'secret_key';
     const STORE_TRACKING_ID_CALLBACK = 'store_tracking_id_callback';
     const HTTP_HANDLER               = 'http_handler';
 
@@ -45,12 +44,7 @@ final class Config
     /**
      * @var string
      */
-    private $accessId;
-
-    /**
-     * @var string
-     */
-    private $secretKey;
+    private $apiKey;
 
     /**
      * @var HttpHandler
@@ -71,18 +65,16 @@ final class Config
     {
         $options = array_merge([
             static::ACCEPT_LANGUAGE            => 'en-GB',
-            static::ACCESS_ID                  => null,
+            static::API_KEY                    => null,
             static::BASE_URL                   => 'https://api.trivago.com/webservice/affiliate',
             static::GET_TRACKING_ID_CALLBACK   => null,
-            static::SECRET_KEY                 => null,
             static::STORE_TRACKING_ID_CALLBACK => null,
             static::HTTP_HANDLER               => null,
         ], $options);
 
         $this->baseUrl                 = $options[static::BASE_URL];
         $this->acceptLanguage          = $options[static::ACCEPT_LANGUAGE];
-        $this->accessId                = $options[static::ACCESS_ID];
-        $this->secretKey               = $options[static::SECRET_KEY];
+        $this->apiKey                  = $options[static::API_KEY];
         $this->storeTrackingIdCallback = $options[static::STORE_TRACKING_ID_CALLBACK];
         $this->getTrackingIdCallback   = $options[static::GET_TRACKING_ID_CALLBACK];
         $this->httpHandler             = $options[static::HTTP_HANDLER];
@@ -95,12 +87,8 @@ final class Config
             throw new TasException(static::HTTP_HANDLER . ' must be instance of HttpHandler but instance of ' . get_class($this->httpHandler) . ' was given');
         }
 
-        if (empty($this->accessId)) {
-            throw new TasException(static::ACCESS_ID . ' required and is not supplied in the config');
-        }
-
-        if (empty($this->secretKey)) {
-            throw new TasException(static::SECRET_KEY . ' required and is not supplied in the config');
+        if (empty($this->apiKey)) {
+            throw new TasException(static::API_KEY . ' required and is not supplied in the config');
         }
 
         if (!is_callable($this->getTrackingIdCallback)) {
@@ -131,17 +119,9 @@ final class Config
     /**
      * @return mixed
      */
-    public function getAccessId()
+    public function getApiKey()
     {
-        return $this->accessId;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getSecretKey()
-    {
-        return $this->secretKey;
+        return $this->apiKey;
     }
 
     /**

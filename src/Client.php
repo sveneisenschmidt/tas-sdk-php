@@ -21,16 +21,15 @@ namespace Trivago\Tas;
 use Trivago\Tas\Exception\UnexpectedResponseException;
 use Trivago\Tas\HttpHandler\HttpHandler;
 use Trivago\Tas\HttpHandler\HttpRequest;
-use Trivago\Tas\Request\Authentication\RequestSigner;
 use Trivago\Tas\Request\Request;
 use Trivago\Tas\Response\Response;
 
 class Client
 {
     /**
-     * @var RequestSigner
+     * @var string
      */
-    private $requestSigner;
+    private $apiKey;
 
     /**
      * @var string
@@ -54,7 +53,7 @@ class Client
 
     public function __construct(Config $config)
     {
-        $this->requestSigner     = new RequestSigner($config->getAccessId(), $config->getSecretKey());
+        $this->apiKey            = $config->getApiKey();
         $this->baseUrl           = $config->getBaseUrl();
         $this->acceptLanguage    = $config->getAcceptLanguage();
         $this->httpHandler       = $config->getHttpHandler();
@@ -80,6 +79,7 @@ class Client
         $headers = [
             'Accept-Language: ' . $this->acceptLanguage,
             'Accept: application/vnd.trivago.affiliate.hal+json;version=1',
+            'X-Trv-Api-Key: ' . $this->apiKey,
         ];
 
         if ($this->trackingIdHandler->get() !== '') {
@@ -87,7 +87,7 @@ class Client
         }
 
         $httpRequest = new HttpRequest(
-            $this->requestSigner->signRequest($request),
+            $request,
             $request->getMethod(),
             $headers
         );

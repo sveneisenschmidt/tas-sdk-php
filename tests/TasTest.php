@@ -134,8 +134,7 @@ class TasTest extends \PHPUnit_Framework_TestCase
     private function createTas()
     {
         return new Tas(new Config([
-            Config::ACCESS_ID                  => '1234',
-            Config::SECRET_KEY                 => '5678',
+            Config::API_KEY                    => '1234',
             Config::GET_TRACKING_ID_CALLBACK   => function () {},
             Config::STORE_TRACKING_ID_CALLBACK => function () {},
             Config::HTTP_HANDLER               => $this->httpHandler->reveal(),
