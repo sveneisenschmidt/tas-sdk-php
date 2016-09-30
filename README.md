@@ -26,8 +26,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 $config = new Config([
     Config::BASE_URL                 => 'https://api.trivago.com/webservice/tas',
-    Config::ACCESS_ID                => 'Enter your Access-Id here',
-    Config::SECRET_KEY               => 'Enter your Secret-Key here',
+    Config::API_KEY                  => 'Enter your API Key here',
     Config::HTTP_HANDLER             => new \Trivago\Tas\HttpHandler\Curl(),
     Config::GET_TRACKING_ID_CALLBACK => function () {
         return isset($_COOKIE['trv_tid']) ? $_COOKIE['trv_tid'] : null;

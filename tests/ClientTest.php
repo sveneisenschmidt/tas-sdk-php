@@ -48,8 +48,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $trackingIdStore = new TestTrackingIdStore();
         $config          = new Config([
-            Config::ACCESS_ID                => '1234',
-            Config::SECRET_KEY               => '5678',
+            Config::API_KEY                  => '1234',
             Config::HTTP_HANDLER             => $httpHandler->reveal(),
             Config::GET_TRACKING_ID_CALLBACK => function () use ($trackingIdStore) {
                 return $trackingIdStore->trackingId;
@@ -93,8 +92,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         ;
 
         $config = new Config([
-            Config::ACCESS_ID                  => '1234',
-            Config::SECRET_KEY                 => '5678',
+            Config::API_KEY                    => '1234',
             Config::HTTP_HANDLER               => $httpHandler->reveal(),
             Config::GET_TRACKING_ID_CALLBACK   => function () {},
             Config::STORE_TRACKING_ID_CALLBACK => function ($trackingId) {},

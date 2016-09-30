@@ -36,32 +36,19 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($config->getAcceptLanguage(), 'en-GB');
         $this->assertSame($getTrackingIdCallback, $config->getTrackingIdCallback());
         $this->assertSame($storeTrackingIdCallback, $config->getStoreTrackingIdCallback());
-        $this->assertSame('1234', $config->getAccessId());
-        $this->assertSame('5678', $config->getSecretKey());
+        $this->assertSame('1234', $config->getApiKey());
         $this->assertSame('https://api.trivago.com/webservice/affiliate', $config->getBaseUrl());
         $this->assertInstanceOf(HttpHandler::class, $config->getHttpHandler());
     }
 
     /**
      * @expectedException \Trivago\Tas\Exception\TasException
-     * @expectedExceptionMessage access_id required and is not supplied in the config
+     * @expectedExceptionMessage api_key required and is not supplied in the config
      */
-    public function test_empty_access_id()
+    public function test_empty_api_key()
     {
         $configArray = $this->getValidConfigArray();
-        unset($configArray[Config::ACCESS_ID]);
-
-        new Config($configArray);
-    }
-
-    /**
-     * @expectedException \Trivago\Tas\Exception\TasException
-     * @expectedExceptionMessage secret_key required and is not supplied in the config
-     */
-    public function test_empty_secret_key()
-    {
-        $configArray = $this->getValidConfigArray();
-        unset($configArray[Config::SECRET_KEY]);
+        unset($configArray[Config::API_KEY]);
 
         new Config($configArray);
     }
@@ -132,8 +119,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     private function getValidConfigArray()
     {
         return [
-            Config::ACCESS_ID                  => '1234',
-            Config::SECRET_KEY                 => '5678',
+            Config::API_KEY                    => '1234',
             Config::STORE_TRACKING_ID_CALLBACK => new TrackingIdCallable(),
             Config::GET_TRACKING_ID_CALLBACK   => new TrackingIdCallable(),
         ];

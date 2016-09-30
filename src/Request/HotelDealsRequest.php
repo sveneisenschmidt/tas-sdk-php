@@ -81,6 +81,8 @@ class HotelDealsRequest extends Request
 
     /**
      * @param array $options
+     *
+     * @throws \InvalidArgumentException
      */
     public function __construct($options = [])
     {

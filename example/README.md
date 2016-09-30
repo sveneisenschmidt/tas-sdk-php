@@ -9,7 +9,7 @@ This is an example application.
 Before you can start using our SDK you have to request credentials to
 authenticate against the tAS webservice.
 
-After you received your access id and a secret you can copy
+After you received your API Key you can copy
 `config.php.example` to `config.php` and adjust it accordingly.
 
 ### 2. Start web server
