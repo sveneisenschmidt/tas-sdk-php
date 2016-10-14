@@ -16,11 +16,15 @@
  * limitations under the License.
  */
 
-namespace Trivago\Tas\Response\Tags;
+namespace Trivago\Tas\Request;
 
-class TagGroupType
+class HotelTagsRequest extends Request
 {
-    const AND_TYPE = 'and';
-
-    const OR_TYPE = 'or';
+    /**
+     * @return string
+     */
+    public function getPath()
+    {
+        return '/hotels/tags';
+    }
 }

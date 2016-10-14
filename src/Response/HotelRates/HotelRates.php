@@ -16,12 +16,12 @@
  * limitations under the License.
  */
 
-namespace Trivago\Tas\Response\HotelDeals;
+namespace Trivago\Tas\Response\HotelRates;
 
 use Trivago\Tas\Response\Common\Deal;
 use Trivago\Tas\Response\Response;
 
-class HotelDeals implements \Countable, \Iterator
+class HotelRates implements \Countable, \Iterator
 {
     /**
      * @var Deal[]
@@ -55,8 +55,8 @@ class HotelDeals implements \Countable, \Iterator
         $hotelDeals->pollingFinished = $response->getHttpCode() === 200;
         $hotelDeals->deals           = array_map(function (array $deal) {
             return Deal::fromArray($deal);
-        }, $responseData['deals']);
-        $hotelDeals->searchParams    = $responseData['search_params'];
+        }, $responseData['hotel_rates']);
+        $hotelDeals->searchParams = $responseData['search_params'];
 
         return $hotelDeals;
     }

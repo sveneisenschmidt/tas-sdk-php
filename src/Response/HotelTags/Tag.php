@@ -16,14 +16,19 @@
  * limitations under the License.
  */
 
-namespace Trivago\Tas\Response\Tags;
+namespace Trivago\Tas\Response\HotelTags;
 
 class Tag
 {
     /**
-     * @var int|string
+     * @var string
      */
-    private $tag_id = 0;
+    private $tag_id = '0';
+
+    /**
+     * @var int
+     */
+    private $group_id = 0;
 
     /**
      * @var string
@@ -31,13 +36,15 @@ class Tag
     private $name = '';
 
     /**
-     * @param int|string $tag_id
-     * @param string     $name
+     * @param string $tag_id
+     * @param int    $group_id
+     * @param string $name
      */
-    public function __construct($tag_id, $name)
+    public function __construct($tag_id, $group_id, $name)
     {
-        $this->tag_id = $tag_id;
-        $this->name   = $name;
+        $this->tag_id   = $tag_id;
+        $this->group_id = $group_id;
+        $this->name     = $name;
     }
 
     /**
@@ -46,6 +53,14 @@ class Tag
     public function getTagId()
     {
         return $this->tag_id;
+    }
+
+    /**
+     * @return int
+     */
+    public function getGroupId()
+    {
+        return $this->group_id;
     }
 
     /**

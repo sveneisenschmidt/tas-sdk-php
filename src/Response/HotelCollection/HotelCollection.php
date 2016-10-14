@@ -83,34 +83,47 @@ class HotelCollection implements \Countable, \Iterator
         $hotelCollection->resultInfo      = ResultInfo::fromArray($responseData['result_info']);
 
         if (isset($responseData['_links']['next'])) {
-            preg_match('/offset=([0-9]+)/', $responseData['_links']['next']['href'], $matches);
             $hotelCollection->hasNextPage    = true;
-            $hotelCollection->nextPageOffset = isset($matches[1]) ? (int) $matches[1] : null;
+            $hotelCollection->nextPageOffset = static::extractOffsetFromUrl($responseData['_links']['next']['href']);
         }
 
         if (isset($responseData['_links']['prev'])) {
-            preg_match('/offset=([0-9]+)/', $responseData['_links']['prev']['href'], $matches);
             $hotelCollection->hasPrevPage    = true;
-            $hotelCollection->prevPageOffset = isset($matches[1]) ? (int) $matches[1] : null;
+            $hotelCollection->prevPageOffset = static::extractOffsetFromUrl($responseData['_links']['prev']['href']);
         }
 
         foreach ($responseData['hotels'] as $data) {
+            $hotelDetails = $data['_embedded']['hotel_details'];
+            $hotelRates   = $data['_embedded']['hotel_rates'];
+
             $hotelCollection->hotel[] = new Hotel(
-                $data['id'],
-                $data['name'],
-                $data['category'],
-                $data['superior'],
-                $data['city'],
-                $data['rating_value'],
-                $data['rating_count'],
-                Image::fromArray($data['main_image']),
+                $hotelDetails['id'],
+                $hotelDetails['name'],
+                $hotelDetails['category'],
+                $hotelDetails['superior'],
+                $hotelDetails['city'],
+                $hotelDetails['rating_value'],
+                $hotelDetails['rating_count'],
+                Image::fromArray($hotelDetails['main_image']),
                 array_map(function (array $deal) {
                     return Deal::fromArray($deal);
-                }, $data['deals'])
+                }, $hotelRates)
             );
         }
 
         return $hotelCollection;
+    }
+
+    /**
+     * @param $url
+     *
+     * @return int|null
+     */
+    private static function extractOffsetFromUrl($url)
+    {
+        preg_match('/offset=([0-9]+)/', $url, $matches);
+
+        return isset($matches[1]) ? (int) $matches[1] : null;
     }
 
     /**
@@ -125,8 +138,8 @@ class HotelCollection implements \Countable, \Iterator
     }
 
     /**
-    * @return array
-    */
+     * @return array
+     */
     public function getSearchParams()
     {
         return $this->searchParams;

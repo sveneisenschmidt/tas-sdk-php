@@ -20,7 +20,7 @@ namespace Trivago\Tas\Request;
 
 use DateTime;
 
-class HotelDealsRequest extends Request
+class HotelRatesRequest extends Request
 {
     const ITEM       = 'item';
     const START_DATE = 'start_date';
@@ -133,6 +133,6 @@ class HotelDealsRequest extends Request
      */
     public function getPath()
     {
-        return '/hotels/' . $this->item . '/deals';
+        return '/hotels/' . $this->item . '/rates';
     }
 }

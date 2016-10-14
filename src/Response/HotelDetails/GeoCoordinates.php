@@ -36,8 +36,8 @@ class GeoCoordinates
      */
     public function __construct($latitude, $longitude)
     {
-        $this->latitude  = (float)$latitude;
-        $this->longitude = (float)$longitude;
+        $this->latitude  = (float) $latitude;
+        $this->longitude = (float) $longitude;
     }
 
     /**

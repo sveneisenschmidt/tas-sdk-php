@@ -108,17 +108,17 @@ class HotelDetails
         $data = $response->getContentAsArray();
 
         $hotelDetails                 = new static();
-        $hotelDetails->itemId         = (int)$data['item_id'];
+        $hotelDetails->itemId         = (int) $data['item_id'];
         $hotelDetails->name           = $data['name'];
         $hotelDetails->address        = $data['address'];
         $hotelDetails->zip            = $data['zip'];
         $hotelDetails->city           = $data['city'];
         $hotelDetails->geoCoordinates = GeoCoordinates::fromArray($data['geo_coordinates']);
-        $hotelDetails->category       = (int)$data['category'];
-        $hotelDetails->superior       = (bool)$data['superior'];
+        $hotelDetails->category       = (int) $data['category'];
+        $hotelDetails->superior       = (bool) $data['superior'];
         $hotelDetails->homepage       = $data['homepage'];
-        $hotelDetails->ratingValue    = (float)$data['rating_value'];
-        $hotelDetails->ratingCount    = (int)$data['rating_count'];
+        $hotelDetails->ratingValue    = (float) $data['rating_value'];
+        $hotelDetails->ratingCount    = (int) $data['rating_count'];
         $hotelDetails->description    = $data['description'];
         $hotelDetails->path           = Path::fromArray($data['path']);
         $hotelDetails->mainImage      = Image::fromArray($data['main_image']);
