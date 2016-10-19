@@ -16,18 +16,18 @@
  * limitations under the License.
  */
 
-namespace Trivago\Tas\Response\HotelDeals;
+namespace Trivago\Tas\Response\HotelRates;
 
 use Trivago\Tas\Response\Common\Deal;
 use Trivago\Tas\Response\Common\Price;
 use Trivago\Tas\Response\Common\RateAttribute;
 
-class HotelDealsTest extends \PHPUnit_Framework_TestCase
+class HotelRatesTest extends \PHPUnit_Framework_TestCase
 {
     public function test_empty_hotel_deals_response()
     {
-        $hotelDeals = HotelDeals::fromResponse(
-            include __DIR__ . '/../../_fixtures/hotel_deals_response_202.php'
+        $hotelDeals = HotelRates::fromResponse(
+            include __DIR__ . '/../../_fixtures/hotel_rates_response_202.php'
         );
 
         $this->assertCount(0, $hotelDeals);
@@ -37,11 +37,11 @@ class HotelDealsTest extends \PHPUnit_Framework_TestCase
 
     public function test_finished_hotel_deals_response()
     {
-        $hotelDeals = HotelDeals::fromResponse(
-            include __DIR__ . '/../../_fixtures/hotel_deals_response_200.php'
+        $hotelDeals = HotelRates::fromResponse(
+            include __DIR__ . '/../../_fixtures/hotel_rates_response_200.php'
         );
 
-        $this->assertCount(25, $hotelDeals);
+        $this->assertCount(22, $hotelDeals);
         $this->assertTrue($hotelDeals->pollingFinished());
 
         foreach ($hotelDeals as $deal) {
@@ -50,35 +50,35 @@ class HotelDealsTest extends \PHPUnit_Framework_TestCase
 
         $hotelDealsAsArray = $hotelDeals->toArray();
         $this->assertInternalType('array', $hotelDealsAsArray);
-        $this->assertCount(25, $hotelDealsAsArray);
+        $this->assertCount(22, $hotelDealsAsArray);
 
         $deal = $hotelDealsAsArray[0];
-        $this->assertSame('http://trivago.local:8007/webservice/tas/forward.php?&enc=NDYwODI4YzRlMDA%3DQhEUVBFAVAcOXUENRUNbFkNUE1BJVkIbBxkeRFcUQQZFVRlPXBpGVBZRSVNFFxkMV0tTEFVJQ1EAFzZIExgcOF4AAkJDXRVAVAcXDlZVSUBYF0BHSDcdWFMRT1gQQVUXQR9FDUxDWBJQFVgXCgwEUhs6TAMTQgJSBRYEEx1LS1IQXlkEFhUAG0oAAE1aXQEBQkJREkJHRQIfUEIABxtGS1MRVlkBCEVHT1EZDkw4G0hAEU9eBSkVUw5SUAISVDZEGVwUUwkEAEwQDBRCAENXX1QIEEtaGkIEBzgZUA1AR1kbRlAUBFcEFh0wG0YXCkcGHEV5GhEFVhIERVpfF1k2AAxCHQdAFBtyVRoGOVEfAkRaXxdUHQE5UUtQElBJRVwQTxxIUBVIA1IHdkwKUWtGChAfAwVFRAdcVEMyEyk9fHIuQU9KJihFWlkDBlIGGh5HVRdeWgIGQEdaBQYTHFVZAQBSASVCGAZUBghUfBsRCE8TXHQsSUJ8FRwOVhcGRCQAVVVJFwc%3D', $deal->getBookingLink());
-        $this->assertSame('//ie2.trivago.com/images/partnerlogos/265_mx.png', $deal->getBookingSiteLogo());
-        $this->assertSame('HotelTravel', $deal->getBookingSiteName());
-        $this->assertSame('Superior', $deal->getDescription());
+        $this->assertSame('https://trivago.local:8007/webservice/tas/forward.php?&enc=NDYwODI4YzRlMDA%3DQhEUVBVEVwcOXUENR0NfEkFTF1NJVkIbBxkeQFMXQQZFVRlPWxJAUhZRSVNFFxkMV0tWFUEdUEQRLQJGD1x%2BVV4EAUFLXRJGR1EGCFQNRkNdFVAIcRUGUlVJQVkSQlMHFxsMCEVDWAUCGFECUgUWHSEGVgQCRFpbF0AVBgEeRVAYUVoXUQYAAFUXDRxVXwAGRUJYFlAFRBcOQ0QBAAweRFEQUV4BAUJUG0wZDH4TFkFVSUVPfAITSFpaCQJSLQ5MS1cVVlsGVEURUEYQBEBeDgkHRURbGkBHfhEODAcXEV0UTlRFUwkXWTYADEIdB0AUG3heFx4cRxMFHFdJWHIGFwhIEABSEyxUXgAiG0oVBBxXSVVZByIbHkVREEEbXVRJFgwFAghFWhVEBzI5CG8RVxcCKEN7Q0cEV0Y0UzMDfEQGVABzPwUcUV0HFgQAVBRCUQcUI1BeEwcIRBMtTgQOXVVJNiwFBS1ACQhEURMXKkwSBBwDCg%3D%3D', $deal->getBookingLink());
+        $this->assertSame('https://ie1.trivago.com/images/partnerlogos/626_mx.png', $deal->getBookingSiteLogo());
+        $this->assertSame('Booking.com', $deal->getBookingSiteName());
+        $this->assertSame('Doppel- oder Zweibettzimmer - nicht kostenfrei stornierbar - Jetzt buchen, vor Ort zahlen - kostenfreies WLAN', $deal->getDescription());
 
         $price = $deal->getPrice();
         $this->assertInstanceOf(Price::class, $price);
         $this->assertSame('EUR', $price->getCurrency());
-        $this->assertSame('137€', (string) $price);
+        $this->assertSame('€ 301', (string) $price);
 
         $rateAttributes = $deal->getRateAttributes();
         $this->assertCount(1, $rateAttributes);
         $rateAttribute = $rateAttributes[0];
         $this->assertInstanceOf(RateAttribute::class, $rateAttribute);
         $this->assertFalse($rateAttribute->isPositive());
-        $this->assertSame('Breakfast not included', $rateAttribute->getLabel());
+        $this->assertSame('Frühstück nicht inbegriffen', $rateAttribute->getLabel());
         $this->assertSame('NoRateAttributes', $rateAttribute->getType());
 
         $paramsArray = $hotelDeals->getSearchParams();
-        $this->assertCount(7, $paramsArray);
+        $this->assertCount(4, $paramsArray);
         $this->assertInternalType('array', $paramsArray);
-        $this->assertArrayHasKey('item',$paramsArray);
-        $this->assertArrayHasKey('start_date',$paramsArray);
-        $this->assertArrayHasKey('end_date',$paramsArray);
-        $this->assertArrayHasKey('offset',$paramsArray);
-        $this->assertArrayHasKey('limit',$paramsArray);
-        $this->assertArrayHasKey('room_type',$paramsArray);
+        $this->assertArrayHasKey('item', $paramsArray);
+        $this->assertArrayHasKey('start_date', $paramsArray);
+        $this->assertArrayHasKey('end_date', $paramsArray);
+        $this->assertArrayNotHasKey('offset', $paramsArray);
+        $this->assertArrayNotHasKey('limit', $paramsArray);
+        $this->assertArrayHasKey('room_type', $paramsArray);
     }
 }

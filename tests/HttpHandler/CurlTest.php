@@ -68,7 +68,7 @@ class CurlTest extends \PHPUnit_Framework_TestCase
     {
         $uri = sprintf('http://%s:%d/test?send_cookie=true', WEB_SERVER_HOST, 9999);
 
-        $curl     = new Curl();
+        $curl = new Curl();
         $curl->sendRequest(new HttpRequest($uri, 'GET', []));
     }
 }

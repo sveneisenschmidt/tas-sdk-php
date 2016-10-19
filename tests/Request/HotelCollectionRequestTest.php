@@ -62,7 +62,7 @@ class HotelCollectionRequestTest extends \PHPUnit_Framework_TestCase
             HotelCollectionRequest::LIMIT        => 10,
             HotelCollectionRequest::OFFSET       => 10,
             HotelCollectionRequest::ORDER        => Order::PRICE,
-            HotelCollectionRequest::RATING_CLASS => [3,4,5],
+            HotelCollectionRequest::RATING_CLASS => [3, 4, 5],
             HotelCollectionRequest::HOTEL_NAME   => 'Hyatt',
             HotelCollectionRequest::MAX_PRICE    => 95,
         ]);
@@ -93,7 +93,7 @@ class HotelCollectionRequestTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('max_price', $queryParameters);
         $this->assertSame(95, $queryParameters['max_price']);
         $this->assertArrayHasKey('rating_class', $queryParameters);
-        $this->assertSame([3,4,5], $queryParameters['rating_class']);
+        $this->assertSame([3, 4, 5], $queryParameters['rating_class']);
         $this->assertArrayHasKey('hotel_name', $queryParameters);
         $this->assertSame('Hyatt', $queryParameters['hotel_name']);
     }

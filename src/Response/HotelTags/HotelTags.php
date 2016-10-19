@@ -16,12 +16,17 @@
  * limitations under the License.
  */
 
-namespace Trivago\Tas\Response\Tags;
+namespace Trivago\Tas\Response\HotelTags;
 
 use Trivago\Tas\Response\Response;
 
-class TagGroups implements \Iterator, \Countable
+class HotelTags
 {
+    /**
+     * @var Tag[]
+     */
+    private $tags = [];
+
     /**
      * @var TagGroup[]
      */
@@ -33,7 +38,7 @@ class TagGroups implements \Iterator, \Countable
     }
 
     /**
-     * Returns a filled TagGroups object using a TagsRequest response
+     * Returns a filled TagGroups object using a TagsRequest response.
      *
      * @param Response $response
      *
@@ -43,74 +48,40 @@ class TagGroups implements \Iterator, \Countable
     {
         $data = $response->getContentAsArray();
 
-        $tagGroups            = new static();
-        $tagGroups->tagGroups = array_map(
+        $hotelTags            = new static();
+        $hotelTags->tagGroups = array_map(
             function (array $tagGroupData) {
                 return new TagGroup(
                     $tagGroupData['group_id'],
                     $tagGroupData['type'],
-                    $tagGroupData['name'],
-                    array_map(
-                        function (array $tagData) {
-                            return new Tag($tagData['tag_id'], $tagData['name']);
-                        },
-                        $tagGroupData['tags']
-                    )
+                    $tagGroupData['name']
                 );
             },
             $data['tag_groups']
         );
+        $hotelTags->tags = array_map(
+            function (array $tagData) {
+                return new Tag($tagData['tag_id'], $tagData['group_id'], $tagData['name']);
+            },
+            $data['tags']
+        );
 
-        return $tagGroups;
+        return $hotelTags;
+    }
+
+    /**
+     * @return Tag[]
+     */
+    public function getTags()
+    {
+        return $this->tags;
     }
 
     /**
      * @return TagGroup[]
      */
-    public function toArray()
+    public function getTagGroups()
     {
         return $this->tagGroups;
-    }
-
-    /**
-     * @return TagGroup|false
-     */
-    public function current()
-    {
-        return current($this->tagGroups);
-    }
-
-    public function next()
-    {
-        next($this->tagGroups);
-    }
-
-    /**
-     * @return int|null
-     */
-    public function key()
-    {
-        return key($this->tagGroups);
-    }
-
-    /**
-     * @return bool
-     */
-    public function valid()
-    {
-        return current($this->tagGroups) !== false;
-    }
-
-    public function rewind()
-    {
-        reset($this->tagGroups);
-    }
-
-    /**
-     * @return int
-     */
-    public function count()
-    {
-        return count($this->tagGroups);
     }
 }

@@ -64,13 +64,13 @@ class TasTest extends \PHPUnit_Framework_TestCase
 
         $tas    = $this->createTas();
         $hotels = $tas->getHotelCollection(new HotelCollectionRequest([
-                HotelCollectionRequest::PATH       => 8514,
+                HotelCollectionRequest::PATH       => 31965,
                 HotelCollectionRequest::START_DATE => new \DateTime('+1 days'),
                 HotelCollectionRequest::END_DATE   => new \DateTime('+2 days'),
         ]));
 
         $this->assertInstanceOf(HotelCollection::class, $hotels);
-        $this->assertCount(19, $hotels); // assert that data was written to the HotelCollection object.
+        $this->assertCount(25, $hotels); // assert that data was written to the HotelCollection object.
     }
 
     public function test_get_hotel_details()

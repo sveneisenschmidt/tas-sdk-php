@@ -19,21 +19,21 @@
 namespace Trivago\Tas;
 
 use Trivago\Tas\Request\HotelCollectionRequest;
-use Trivago\Tas\Request\HotelDealsRequest;
 use Trivago\Tas\Request\HotelDetailsRequest;
+use Trivago\Tas\Request\HotelRatesRequest;
+use Trivago\Tas\Request\HotelTagsRequest;
 use Trivago\Tas\Request\LocationsRequest;
-use Trivago\Tas\Request\TagsRequest;
 use Trivago\Tas\Response\HotelCollection\HotelCollection;
-use Trivago\Tas\Response\HotelDeals\HotelDeals;
 use Trivago\Tas\Response\HotelDetails\HotelDetails;
+use Trivago\Tas\Response\HotelRates\HotelRates;
+use Trivago\Tas\Response\HotelTags\HotelTags;
 use Trivago\Tas\Response\Locations\Locations;
 use Trivago\Tas\Response\ProblemException;
-use Trivago\Tas\Response\Tags\TagGroups;
 
 /**
  * @method Locations       getLocations(LocationsRequest $request)
- * @method TagGroups       getTags(TagsRequest $request)
- * @method HotelDeals      getHotelDeals(HotelDealsRequest $request)
+ * @method HotelTags       getHotelTags(HotelTagsRequest $request)
+ * @method HotelRates      getHotelRates(HotelRatesRequest $request)
  * @method HotelDetails    getHotelDetails(HotelDetailsRequest $request)
  * @method HotelCollection getHotelCollection(HotelCollectionRequest $request)
  */
@@ -48,19 +48,19 @@ class Tas
      * @var array
      */
     private static $responseMap = [
-        'getLocations'       => [
+        'getLocations' => [
             'response' => Locations::class,
             'request'  => LocationsRequest::class,
         ],
-        'getTags'            => [
-            'response' => TagGroups::class,
-            'request'  => TagsRequest::class,
+        'getHotelTags' => [
+            'response' => HotelTags::class,
+            'request'  => HotelTagsRequest::class,
         ],
-        'getHotelDeals'      => [
-            'response' => HotelDeals::class,
-            'request'  => HotelDealsRequest::class,
+        'getHotelRates' => [
+            'response' => HotelRates::class,
+            'request'  => HotelRatesRequest::class,
         ],
-        'getHotelDetails'    => [
+        'getHotelDetails' => [
             'response' => HotelDetails::class,
             'request'  => HotelDetailsRequest::class,
         ],

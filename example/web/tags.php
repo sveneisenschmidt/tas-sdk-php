@@ -16,11 +16,48 @@
  * limitations under the License.
  */
 
-$config = require_once __DIR__ . '/../config.php';
-$tas    = new \Trivago\Tas\Tas($config);
+$config    = require_once __DIR__ . '/../config.php';
+$tas       = new \Trivago\Tas\Tas($config);
+$hotelTags = $tas->getHotelTags(new \Trivago\Tas\Request\HotelTagsRequest());
 
-$tagGroups = $tas->getTags(new \Trivago\Tas\Request\TagsRequest());
+?>
 
-echo '<pre>';
-var_dump($tagGroups);
-echo '</pre>';
+<h2>Hotel-Tag-Groups</h2>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Group-ID</th>
+            <th>Name</th>
+            <th>Type</th>
+        </tr>
+    </thead>
+    <tbody>
+    <?php foreach ($hotelTags->getTagGroups() as $tagGroup): ?>
+        <tr>
+            <td><?php echo $tagGroup->getGroupId() ?></td>
+            <td><?php echo $tagGroup->getName() ?></td>
+            <td><?php echo $tagGroup->getType() ?></td>
+        </tr>
+    <?php endforeach; ?>
+    </tbody>
+</table>
+
+<h2>Hotel-Tags</h2>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Tag-ID</th>
+        <th>Group-ID</th>
+        <th>Name</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php foreach ($hotelTags->getTags() as $tag): ?>
+        <tr>
+            <td><?php echo $tag->getTagId() ?></td>
+            <td><?php echo $tag->getGroupId() ?></td>
+            <td><?php echo $tag->getName() ?></td>
+        </tr>
+    <?php endforeach; ?>
+    </tbody>
+</table>

@@ -49,7 +49,7 @@ $_bootstrap_function = function () {
     );
     echo $command . PHP_EOL;
 
-    $output    = [];
+    $output = [];
     exec($command, $output);
     $pid = (int) $output[0];
 

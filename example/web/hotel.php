@@ -15,18 +15,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-use Trivago\Tas\Request\HotelDealsRequest;
 use Trivago\Tas\Request\HotelDetailsRequest;
+use Trivago\Tas\Request\HotelRatesRequest;
 
 $config = require_once __DIR__ . '/../config.php';
 $tas    = new \Trivago\Tas\Tas($config);
 
 $hotelId      = isset($_GET['item']) ? $_GET['item'] : null;
-$dealsRequest = new HotelDealsRequest([
-    HotelDealsRequest::ITEM => $hotelId,
+$dealsRequest = new HotelRatesRequest([
+    HotelRatesRequest::ITEM => $hotelId,
 ]);
 
-$hotelDeals   = $tas->getHotelDeals($dealsRequest);
+$hotelDeals   = $tas->getHotelRates($dealsRequest);
 $hotelDetails = $tas->getHotelDetails(new HotelDetailsRequest($hotelId));
 
 ?>

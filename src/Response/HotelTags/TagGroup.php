@@ -16,10 +16,13 @@
  * limitations under the License.
  */
 
-namespace Trivago\Tas\Response\Tags;
+namespace Trivago\Tas\Response\HotelTags;
 
-class TagGroup implements \Iterator, \Countable
+class TagGroup
 {
+    const AND_TYPE = 'and';
+    const OR_TYPE  = 'or';
+
     /**
      * @var int
      */
@@ -36,22 +39,15 @@ class TagGroup implements \Iterator, \Countable
     private $name = '';
 
     /**
-     * @var Tag[]
-     */
-    private $tags = [];
-
-    /**
      * @param int    $group_id
      * @param string $type
      * @param string $name
-     * @param Tag[]  $tags
      */
-    public function __construct($group_id, $type, $name, array $tags)
+    public function __construct($group_id, $type, $name)
     {
-        $this->group_id = (int)$group_id;
+        $this->group_id = (int) $group_id;
         $this->type     = $type;
         $this->name     = $name;
-        $this->tags     = $tags;
     }
 
     /**
@@ -76,63 +72,5 @@ class TagGroup implements \Iterator, \Countable
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * @return Tag[]
-     */
-    public function getTags()
-    {
-        return $this->tags;
-    }
-
-    /**
-     * @return Tag[]
-     */
-    public function toArray()
-    {
-        return $this->tags;
-    }
-
-    /**
-     * @return Tag|false
-     */
-    public function current()
-    {
-        return current($this->tags);
-    }
-
-    public function next()
-    {
-        next($this->tags);
-    }
-
-    /**
-     * @return int|null
-     */
-    public function key()
-    {
-        return key($this->tags);
-    }
-
-    /**
-     * @return bool
-     */
-    public function valid()
-    {
-        return current($this->tags) !== false;
-    }
-
-    public function rewind()
-    {
-        reset($this->tags);
-    }
-
-    /**
-     * @return int
-     */
-    public function count()
-    {
-        return count($this->tags);
     }
 }

@@ -21,21 +21,21 @@ namespace Trivago\Tas\Request;
 use DateTime;
 use Trivago\Tas\Request\Common\RoomType;
 
-class HotelDealsRequestTest extends \PHPUnit_Framework_TestCase
+class HotelRatesRequestTest extends \PHPUnit_Framework_TestCase
 {
     public function test_full_request()
     {
-        $request = new HotelDealsRequest([
-            HotelDealsRequest::ITEM       => 5555,
-            HotelDealsRequest::START_DATE => new DateTime('+1 day'),
-            HotelDealsRequest::END_DATE   => new DateTime('+2 days'),
-            HotelDealsRequest::CURRENCY   => 'EUR',
-            HotelDealsRequest::LIMIT      => 25,
-            HotelDealsRequest::OFFSET     => 0,
-            HotelDealsRequest::ROOM_TYPE  => RoomType::DOUBLE_ROOM,
+        $request = new HotelRatesRequest([
+            HotelRatesRequest::ITEM       => 5555,
+            HotelRatesRequest::START_DATE => new DateTime('+1 day'),
+            HotelRatesRequest::END_DATE   => new DateTime('+2 days'),
+            HotelRatesRequest::CURRENCY   => 'EUR',
+            HotelRatesRequest::LIMIT      => 25,
+            HotelRatesRequest::OFFSET     => 0,
+            HotelRatesRequest::ROOM_TYPE  => RoomType::DOUBLE_ROOM,
         ]);
 
-        $this->assertSame('/hotels/5555/deals', $request->getPath());
+        $this->assertSame('/hotels/5555/rates', $request->getPath());
         $parameters = $request->getQueryParameters();
         $this->assertSame((new DateTime('+1 day'))->format(DateTime::ATOM), $parameters['start_date']);
         $this->assertSame((new DateTime('+2 days'))->format(DateTime::ATOM), $parameters['end_date']);
@@ -47,13 +47,13 @@ class HotelDealsRequestTest extends \PHPUnit_Framework_TestCase
 
     public function test_request_without_optional_parameters()
     {
-        $request = new HotelDealsRequest([
-            HotelDealsRequest::ITEM       => 5555,
-            HotelDealsRequest::START_DATE => new DateTime('+1 day'),
-            HotelDealsRequest::END_DATE   => new DateTime('+2 days'),
+        $request = new HotelRatesRequest([
+            HotelRatesRequest::ITEM       => 5555,
+            HotelRatesRequest::START_DATE => new DateTime('+1 day'),
+            HotelRatesRequest::END_DATE   => new DateTime('+2 days'),
         ]);
 
-        $this->assertSame('/hotels/5555/deals', $request->getPath());
+        $this->assertSame('/hotels/5555/rates', $request->getPath());
         $parameters = $request->getQueryParameters();
         $this->assertSame((new DateTime('+1 day'))->format(DateTime::ATOM), $parameters['start_date']);
         $this->assertSame((new DateTime('+2 days'))->format(DateTime::ATOM), $parameters['end_date']);
@@ -65,15 +65,15 @@ class HotelDealsRequestTest extends \PHPUnit_Framework_TestCase
 
     public function test_request_without_pagination()
     {
-        $request = new HotelDealsRequest([
-            HotelDealsRequest::ITEM       => 5555,
-            HotelDealsRequest::START_DATE => new DateTime('+1 day'),
-            HotelDealsRequest::END_DATE   => new DateTime('+2 days'),
-            HotelDealsRequest::CURRENCY   => 'EUR',
-            HotelDealsRequest::ROOM_TYPE  => RoomType::SINGLE_ROOM,
+        $request = new HotelRatesRequest([
+            HotelRatesRequest::ITEM       => 5555,
+            HotelRatesRequest::START_DATE => new DateTime('+1 day'),
+            HotelRatesRequest::END_DATE   => new DateTime('+2 days'),
+            HotelRatesRequest::CURRENCY   => 'EUR',
+            HotelRatesRequest::ROOM_TYPE  => RoomType::SINGLE_ROOM,
         ]);
 
-        $this->assertSame('/hotels/5555/deals', $request->getPath());
+        $this->assertSame('/hotels/5555/rates', $request->getPath());
         $parameters = $request->getQueryParameters();
         $this->assertSame((new DateTime('+1 day'))->format(DateTime::ATOM), $parameters['start_date']);
         $this->assertSame((new DateTime('+2 days'))->format(DateTime::ATOM), $parameters['end_date']);
@@ -88,6 +88,6 @@ class HotelDealsRequestTest extends \PHPUnit_Framework_TestCase
      */
     public function test_request_without_item()
     {
-        new HotelDealsRequest([]);
+        new HotelRatesRequest([]);
     }
 }

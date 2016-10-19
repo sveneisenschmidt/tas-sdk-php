@@ -50,8 +50,8 @@ class ResultInfo
         $resultInfo = new static();
 
         $price                = $data['price'];
-        $resultInfo->minPrice = (int)$price['min'];
-        $resultInfo->maxPrice = (int)$price['max'];
+        $resultInfo->minPrice = (int) $price['min'];
+        $resultInfo->maxPrice = (int) $price['max'];
         $resultInfo->currency = $price['currency'];
 
         return $resultInfo;
