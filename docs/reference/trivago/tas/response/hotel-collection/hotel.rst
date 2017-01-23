@@ -114,3 +114,12 @@ getBestDeal()
     public function Deal getBestDeal()
 
 Returns the best (cheapest) deal.
+
+getPoi()
+========
+
+.. code-block:: php
+
+    public function Poi getPoi()
+
+Returns hotel specific date for the poi.

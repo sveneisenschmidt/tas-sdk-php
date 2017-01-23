@@ -68,7 +68,23 @@ class Hotel
      */
     private $deals;
 
-    public function __construct($id, $name, $category, $superior, $city, $ratingValue, $ratingCount, Image $mainImage, array $deals)
+    /**
+     * @var Poi
+     */
+    private $poi;
+
+    public function __construct(
+        $id,
+        $name,
+        $category,
+        $superior,
+        $city,
+        $ratingValue,
+        $ratingCount,
+        Image $mainImage,
+        array $deals,
+        Poi $poi = null
+    )
     {
         $this->id          = (int) $id;
         $this->name        = $name;
@@ -79,6 +95,7 @@ class Hotel
         $this->ratingCount = (float) $ratingCount;
         $this->mainImage   = $mainImage;
         $this->deals       = $deals;
+        $this->poi         = $poi;
     }
 
     /**
@@ -166,5 +183,13 @@ class Hotel
     public function getBestDeal()
     {
         return isset($this->deals[0]) ? $this->deals[0] : null;
+    }
+
+    /**
+     * @return Poi|null
+     */
+    public function getPoi()
+    {
+        return $this->poi;
     }
 }

@@ -22,13 +22,14 @@ use DateTime;
 
 class HotelRatesRequest extends Request
 {
-    const ITEM       = 'item';
-    const START_DATE = 'start_date';
-    const END_DATE   = 'end_date';
-    const ROOM_TYPE  = 'room_type';
-    const CURRENCY   = 'currency';
-    const LIMIT      = 'limit';
-    const OFFSET     = 'offset';
+    const ITEM           = 'item';
+    const START_DATE     = 'start_date';
+    const END_DATE       = 'end_date';
+    const ROOM_TYPE      = 'room_type';
+    const CURRENCY       = 'currency';
+    const LIMIT          = 'limit';
+    const OFFSET         = 'offset';
+    const DISTANCE_LIMIT = 'distance_limit';
 
     /**
      * @var int
@@ -70,13 +71,19 @@ class HotelRatesRequest extends Request
     private $roomType;
 
     /**
+     * int|null
+     */
+    private $distanceLimit;
+
+    /**
      * @var array
      */
     private $optionalParameterMap = [
-        'currency' => 'currency',
-        'limit'    => 'limit',
-        'offset'   => 'offset',
-        'roomType' => 'room_type',
+        'currency'      => 'currency',
+        'limit'         => 'limit',
+        'offset'        => 'offset',
+        'roomType'      => 'room_type',
+        'distanceLimit' => 'distance_limit',
     ];
 
     /**
@@ -87,22 +94,24 @@ class HotelRatesRequest extends Request
     public function __construct($options = [])
     {
         $options = array_merge([
-            static::ITEM       => null,
-            static::START_DATE => new DateTime('+1 day'),
-            static::END_DATE   => new DateTime('+2 days'),
-            static::CURRENCY   => null,
-            static::LIMIT      => null,
-            static::OFFSET     => null,
-            static::ROOM_TYPE  => null,
+            static::ITEM           => null,
+            static::START_DATE     => new DateTime('+1 day'),
+            static::END_DATE       => new DateTime('+2 days'),
+            static::CURRENCY       => null,
+            static::LIMIT          => null,
+            static::OFFSET         => null,
+            static::ROOM_TYPE      => null,
+            static::DISTANCE_LIMIT => null,
         ], $options);
 
-        $this->item      = $options[static::ITEM];
-        $this->startDate = $options[static::START_DATE];
-        $this->endDate   = $options[static::END_DATE];
-        $this->currency  = $options[static::CURRENCY];
-        $this->limit     = $options[static::LIMIT];
-        $this->offset    = $options[static::OFFSET];
-        $this->roomType  = $options[static::ROOM_TYPE];
+        $this->item          = $options[static::ITEM];
+        $this->startDate     = $options[static::START_DATE];
+        $this->endDate       = $options[static::END_DATE];
+        $this->currency      = $options[static::CURRENCY];
+        $this->limit         = $options[static::LIMIT];
+        $this->offset        = $options[static::OFFSET];
+        $this->roomType      = $options[static::ROOM_TYPE];
+        $this->distanceLimit = $options[static::DISTANCE_LIMIT];
 
         if (empty($this->item)) {
             throw new \InvalidArgumentException('Cannot create HotelDealsRequest without an item.');
