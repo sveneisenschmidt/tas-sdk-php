@@ -18,6 +18,7 @@
 
 namespace Trivago\Tas\Response\HotelDetails;
 
+use Trivago\Tas\Response\Common\GeoCoordinates;
 use Trivago\Tas\Response\Common\Image;
 
 class HotelDetailsTest extends \PHPUnit_Framework_TestCase

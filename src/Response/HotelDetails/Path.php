@@ -18,6 +18,8 @@
 
 namespace Trivago\Tas\Response\HotelDetails;
 
+use Trivago\Tas\Response\Common\GeoCoordinates;
+
 class Path
 {
     /**
