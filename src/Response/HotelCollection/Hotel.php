@@ -177,12 +177,21 @@ class Hotel
     {
         return count($this->deals) > 0;
     }
+
     /**
      * @return Deal|null
      */
     public function getBestDeal()
     {
         return isset($this->deals[0]) ? $this->deals[0] : null;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasPoi()
+    {
+        return $this->poi !== null;
     }
 
     /**
