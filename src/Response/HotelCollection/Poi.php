@@ -10,7 +10,6 @@ namespace Trivago\Tas\Response\HotelCollection;
 
 class Poi
 {
-
     /**
      * @var int
      */

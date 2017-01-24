@@ -122,4 +122,4 @@ getPoi()
 
     public function Poi getPoi()
 
-Returns hotel specific date for the poi.
+Returns hotel specific Point of Interest.

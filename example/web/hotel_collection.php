@@ -63,7 +63,7 @@ $hotelCollection = $tas->getHotelCollection($request);
                 <th>Rate Attributes</th>
                 <th>Deal</th>
                 <?php if (isset($_GET['radius']) && isset($_GET['item'])): ?>
-                    <th>POI</th>
+                    <th>Point of Interest</th>
                 <?php endif ?>
             </tr>
         </thead>

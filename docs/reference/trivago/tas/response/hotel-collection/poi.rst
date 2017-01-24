@@ -9,7 +9,7 @@ getId()
 
     public function int getId()
 
-Returns the poi id.
+Returns the Point of Interest id.
 
 getDistance()
 =============
@@ -18,7 +18,7 @@ getDistance()
 
     public function int getDistance()
 
-Returns the distance to the poi in meters.
+Returns the distance to the Point of Interest in meters.
 
 
 getName()
@@ -28,7 +28,7 @@ getName()
 
     public function string getName()
 
-Returns the name of the poi
+Returns the name of the Point of Interest.
 
 
 getText()
@@ -38,4 +38,4 @@ getText()
 
     public function string getText()
 
-Returns a ready to use and translated text with locale specific length unit with distance to the poi
+Returns a ready to use and translated text with locale specific length unit with distance to the Point of Interest.
