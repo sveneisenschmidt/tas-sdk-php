@@ -45,7 +45,8 @@ final class DistanceConverter
         return $meters / 1609.344;
     }
 
-    public static function meterToNauticMile($meters) {
+    public static function meterToNauticMile($meters)
+    {
         return $meters / 1853.184;
     }
 
