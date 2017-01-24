@@ -20,17 +20,17 @@ use Trivago\Tas\Request\HotelCollectionRequest;
 $config = require_once __DIR__ . '/../config.php';
 $tas    = new \Trivago\Tas\Tas($config);
 
-$path          = isset($_GET['path']) ? $_GET['path'] : null;
-$item          = isset($_GET['item']) ? $_GET['item'] : null;
-$offset        = isset($_GET['offset']) ? $_GET['offset'] : 0;
-$distanceLimit = isset($_GET['distance_limit']) ? $_GET['distance_limit'] : null;
+$path   = isset($_GET['path']) ? $_GET['path'] : null;
+$item   = isset($_GET['item']) ? $_GET['item'] : null;
+$offset = isset($_GET['offset']) ? $_GET['offset'] : 0;
+$radius = isset($_GET['radius']) ? $_GET['radius'] : null;
 
 $request = new HotelCollectionRequest([
-    HotelCollectionRequest::PATH           => $path,
-    HotelCollectionRequest::ITEM           => $item,
-    HotelCollectionRequest::LIMIT          => 25,
-    HotelCollectionRequest::OFFSET         => $offset,
-    HotelCollectionRequest::DISTANCE_LIMIT => $distanceLimit,
+    HotelCollectionRequest::PATH   => $path,
+    HotelCollectionRequest::ITEM   => $item,
+    HotelCollectionRequest::LIMIT  => 25,
+    HotelCollectionRequest::OFFSET => $offset,
+    HotelCollectionRequest::RADIUS => $radius,
 ]);
 
 $hotelCollection = $tas->getHotelCollection($request);
@@ -47,11 +47,11 @@ $hotelCollection = $tas->getHotelCollection($request);
 <body>
 
     <?php if ($hotelCollection->hasPrevPage()): ?>
-        <a href="<?php echo "hotel_collection.php?path={$path}&item={$item}&offset={$hotelCollection->getPrevPageOffset()}&distance_limit={$distanceLimit}" ?>">Prev</a>
+        <a href="<?php echo "hotel_collection.php?path={$path}&item={$item}&offset={$hotelCollection->getPrevPageOffset()}&radius={$radius}" ?>">Prev</a>
     <?php endif;
 
     if ($hotelCollection->hasNextPage()): ?>
-        <a href="<?php echo "hotel_collection.php?path={$path}&item={$item}&offset={$hotelCollection->getNextPageOffset()}&distance_limit={$distanceLimit}" ?>">Next</a>
+        <a href="<?php echo "hotel_collection.php?path={$path}&item={$item}&offset={$hotelCollection->getNextPageOffset()}&radius={$radius}" ?>">Next</a>
     <?php endif ?>
 
     <table border="1">
@@ -62,7 +62,7 @@ $hotelCollection = $tas->getHotelCollection($request);
                 <th>Booking Site</th>
                 <th>Rate Attributes</th>
                 <th>Deal</th>
-                <?php if (isset($_GET['distance_limit']) && isset($_GET['item'])): ?>
+                <?php if (isset($_GET['radius']) && isset($_GET['item'])): ?>
                     <th>POI</th>
                 <?php endif ?>
             </tr>

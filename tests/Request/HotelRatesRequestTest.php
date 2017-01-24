@@ -33,6 +33,7 @@ class HotelRatesRequestTest extends \PHPUnit_Framework_TestCase
             HotelRatesRequest::LIMIT      => 25,
             HotelRatesRequest::OFFSET     => 0,
             HotelRatesRequest::ROOM_TYPE  => RoomType::DOUBLE_ROOM,
+            HotelRatesRequest::RADIUS     => 31337,
         ]);
 
         $this->assertSame('/hotels/5555/rates', $request->getPath());
@@ -43,6 +44,7 @@ class HotelRatesRequestTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(7, $parameters['room_type']);
         $this->assertSame(25, $parameters['limit']);
         $this->assertSame(0, $parameters['offset']);
+        $this->assertSame(31337, $parameters['radius']);
     }
 
     public function test_request_without_optional_parameters()
