@@ -1,5 +1,5 @@
 ====================================================
-Trivago\\Tas\\Response\\HotelDetails\\GeoCoordinates
+Trivago\\Tas\\Response\\Common\\GeoCoordinates
 ====================================================
 
 getLatitude()
