@@ -29,7 +29,7 @@ Then you can start the build in PHP server with the following command.
 php -S 0.0.0.0:8080 -t ./web
 ```
 
-You can now open the example in your browser: [https://localhost:8080](https://localhost:8080).
+You can now open the example in your browser: [http://localhost:8080](http://localhost:8080).
 
 #### 2.2 Docker
 
