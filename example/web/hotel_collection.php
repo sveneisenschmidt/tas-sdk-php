@@ -62,7 +62,7 @@ $hotelCollection = $tas->getHotelCollection($request);
                 <th>Booking Site</th>
                 <th>Rate Attributes</th>
                 <th>Deal</th>
-                <?php if (isset($_GET['radius']) && isset($_GET['item'])): ?>
+                <?php if (count($hotelCollection) > 0 && $hotelCollection->toArray()[0]->getPoi() !== null): ?>
                     <th>Point of Interest</th>
                 <?php endif ?>
             </tr>
