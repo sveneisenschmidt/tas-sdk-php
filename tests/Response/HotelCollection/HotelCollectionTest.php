@@ -37,7 +37,7 @@ class HotelCollectionTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(25, $hotels->getNextPageOffset());
 
         $paramsArray = $hotels->getSearchParams();
-        $this->assertCount(9, $paramsArray);
+        $this->assertCount(10, $paramsArray);
         $this->assertInternalType('array', $paramsArray);
         $this->assertArrayHasKey('path', $paramsArray);
         $this->assertArrayHasKey('start_date', $paramsArray);
@@ -53,9 +53,9 @@ class HotelCollectionTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayNotHasKey('max_price', $paramsArray);
 
         $resultInfo = $hotels->getResultInfo();
-        $this->assertSame(35, $resultInfo->getMinPrice());
-        $this->assertSame(2203, $resultInfo->getMaxPrice());
-        $this->assertSame('EUR', $resultInfo->getCurrency());
+        $this->assertSame(38, $resultInfo->getMinPrice());
+        $this->assertSame(127, $resultInfo->getMaxPrice());
+        $this->assertSame('GBP', $resultInfo->getCurrency());
 
         foreach ($hotels as $hotel) {
             $this->assertInstanceOf(Hotel::class, $hotel);
@@ -67,21 +67,23 @@ class HotelCollectionTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(range(0, 24), array_keys($hotelsArray));
 
         $hotel = $hotelsArray[0];
-        $this->assertSame(6812, $hotel->getId());
-        $this->assertSame('Majestic Hotel & Spa Barcelona GL', $hotel->getName());
-        $this->assertSame(5, $hotel->getCategory());
+        $this->assertSame(9864, $hotel->getId());
+        $this->assertSame('Mercure Hotel Berlin Tempelhof Airport', $hotel->getName());
+        $this->assertSame(4, $hotel->getCategory());
         $this->assertSame(false, $hotel->isSuperior());
-        $this->assertSame('Barcelona', $hotel->getCity());
-        $this->assertSame(89.44, $hotel->getRatingValue());
-        $this->assertSame(4077.0, $hotel->getRatingCount());
+        $this->assertSame('Berlin', $hotel->getCity());
+        $this->assertSame(80.53, $hotel->getRatingValue());
+        $this->assertSame(3361.0, $hotel->getRatingCount());
         $this->assertSame(true, $hotel->hasDeals());
+        $this->assertSame(true, $hotel->hasPoi());
+        $this->assertInstanceOf(Poi::class, $hotel->getPoi());
 
         $image = $hotel->getMainImage();
         $this->assertInstanceOf(Image::class, $image);
-        $this->assertSame('https://imgec.trivago.com/itemimages/68/12/6812_v8_m.jpeg', $image->getMedium());
-        $this->assertSame('https://imgec.trivago.com/itemimages/68/12/6812_v8_m.jpeg', (string) $image);
-        $this->assertSame('https://imgec.trivago.com/gtximages/itemimages/68/12/6812_v8_y.jpeg', $image->getExtraLarge());
-        $this->assertSame('https://imgec.trivago.com/gtximages/itemimages/68/12/6812_v8_y@2x.jpeg', $image->getRetina());
+        $this->assertSame('https://imgec.trivago.com/itemimages/98/64/9864_v7_m.jpeg', $image->getMedium());
+        $this->assertSame('https://imgec.trivago.com/itemimages/98/64/9864_v7_m.jpeg', (string) $image);
+        $this->assertSame('https://imgec.trivago.com/gtximages/itemimages/98/64/9864_v7_y.jpeg', $image->getExtraLarge());
+        $this->assertSame('https://imgec.trivago.com/gtximages/itemimages/98/64/9864_v7_y@2x.jpeg', $image->getRetina());
 
         foreach ($hotel->getDeals() as $deal) {
             $this->assertInstanceOf(Deal::class, $deal);

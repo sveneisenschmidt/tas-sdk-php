@@ -23,12 +23,14 @@ $tas    = new \Trivago\Tas\Tas($config);
 $path   = isset($_GET['path']) ? $_GET['path'] : null;
 $item   = isset($_GET['item']) ? $_GET['item'] : null;
 $offset = isset($_GET['offset']) ? $_GET['offset'] : 0;
+$radius = isset($_GET['radius']) ? $_GET['radius'] : null;
 
 $request = new HotelCollectionRequest([
     HotelCollectionRequest::PATH   => $path,
     HotelCollectionRequest::ITEM   => $item,
     HotelCollectionRequest::LIMIT  => 25,
     HotelCollectionRequest::OFFSET => $offset,
+    HotelCollectionRequest::RADIUS => $radius,
 ]);
 
 $hotelCollection = $tas->getHotelCollection($request);
@@ -45,11 +47,11 @@ $hotelCollection = $tas->getHotelCollection($request);
 <body>
 
     <?php if ($hotelCollection->hasPrevPage()): ?>
-        <a href="<?php echo "hotel_collection.php?path={$path}&item={$item}&offset={$hotelCollection->getPrevPageOffset()}" ?>">Prev</a>
+        <a href="<?php echo "hotel_collection.php?path={$path}&item={$item}&offset={$hotelCollection->getPrevPageOffset()}&radius={$radius}" ?>">Prev</a>
     <?php endif;
 
     if ($hotelCollection->hasNextPage()): ?>
-        <a href="<?php echo "hotel_collection.php?path={$path}&item={$item}&offset={$hotelCollection->getNextPageOffset()}" ?>">Next</a>
+        <a href="<?php echo "hotel_collection.php?path={$path}&item={$item}&offset={$hotelCollection->getNextPageOffset()}&radius={$radius}" ?>">Next</a>
     <?php endif ?>
 
     <table border="1">
@@ -60,6 +62,9 @@ $hotelCollection = $tas->getHotelCollection($request);
                 <th>Booking Site</th>
                 <th>Rate Attributes</th>
                 <th>Deal</th>
+                <?php if (count($hotelCollection) > 0 && $hotelCollection->toArray()[0]->getPoi() !== null): ?>
+                    <th>Point of Interest</th>
+                <?php endif ?>
             </tr>
         </thead>
 
@@ -98,6 +103,11 @@ $hotelCollection = $tas->getHotelCollection($request);
                         </td>
                     <?php else: ?>
                         <td colspan="3">No Best Deal</td>
+                    <?php endif;
+                    if ($hotel->hasPoi()): ?>
+                        <td>
+                            <span title="<?php echo \Trivago\Tas\Component\Util\DistanceConverter::meterToKilometer($hotel->getPoi()->getDistance()) ?> km"><?php echo $hotel->getPoi()->getText() ?></span>
+                        </td>
                     <?php endif ?>
                 </tr>
 

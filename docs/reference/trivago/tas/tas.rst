@@ -23,19 +23,20 @@ Searching for prices takes some time. Therefore the returned result might not be
     use Trivago\Tas\Request\HotelCollectionRequest;
 
     $request = new HotelCollectionRequest([
-        HotelCollectionRequest::PATH         => 38714,
-        HotelCollectionRequest::ITEM         => 5678,
-        HotelCollectionRequest::START_DATE   => new DateTime('+1 day'),
-        HotelCollectionRequest::END_DATE     => new DateTime('+2 days'),
-        HotelCollectionRequest::ROOM_TYPE    => RoomType::DOUBLE_ROOM,
-        HotelCollectionRequest::CURRENCY     => 'EUR',
-        HotelCollectionRequest::CATEGORY     => [3,4,5],
-        HotelCollectionRequest::LIMIT        => 10,
-        HotelCollectionRequest::OFFSET       => 0,
-        HotelCollectionRequest::ORDER        => Order::PRICE,
-        HotelCollectionRequest::RATING_CLASS => [3,4,5],
-        HotelCollectionRequest::HOTEL_NAME   => 'Hyatt',
-        HotelCollectionRequest::MAX_PRICE    => 225,
+        HotelCollectionRequest::PATH           => 38714,
+        HotelCollectionRequest::ITEM           => 5678,
+        HotelCollectionRequest::START_DATE     => new DateTime('+1 day'),
+        HotelCollectionRequest::END_DATE       => new DateTime('+2 days'),
+        HotelCollectionRequest::ROOM_TYPE      => RoomType::DOUBLE_ROOM,
+        HotelCollectionRequest::CURRENCY       => 'EUR',
+        HotelCollectionRequest::CATEGORY       => [3,4,5],
+        HotelCollectionRequest::LIMIT          => 10,
+        HotelCollectionRequest::OFFSET         => 0,
+        HotelCollectionRequest::ORDER          => Order::PRICE,
+        HotelCollectionRequest::RATING_CLASS   => [3,4,5],
+        HotelCollectionRequest::HOTEL_NAME     => 'Hyatt',
+        HotelCollectionRequest::MAX_PRICE      => 225,
+        HotelCollectionRequest::RADIUS         => 10000
  ]);
 
     $hotels = $tas->getHotelCollection($request);
@@ -77,6 +78,8 @@ The request must be an instance of :code:`Trivago\Tas\Request\HotelCollectionReq
 | RATING_CLASS | array     | null    | no         | Hotel rating based on customers' ratings and reviews [1-5].                                    |
 +--------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
 | MAX_PRICE    | int       | null    | no         | Omits hotels from the collection which are above the max price.                                |
++--------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
+| RADIUS       | int       | null    | no         | Search radius in meters.                                                                       |
 +--------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
 
 

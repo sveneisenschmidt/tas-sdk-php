@@ -35,6 +35,7 @@ class HotelCollectionRequest extends Request
     const RATING_CLASS = 'rating_class';
     const HOTEL_NAME   = 'hotel_name';
     const MAX_PRICE    = 'max_price';
+    const RADIUS       = 'radius';
 
     /**
      * @var int|null
@@ -57,11 +58,23 @@ class HotelCollectionRequest extends Request
     private $endDate;
 
     /**
+     * @see \Trivago\Tas\Request\Common\RoomType
+     *
+     * @var int|null
+     */
+    private $roomType;
+
+    /**
      * @link https://en.wikipedia.org/wiki/ISO_4217
      *
      * @var null|string
      */
     private $currency;
+
+    /**
+     * @var array|null
+     */
+    private $category;
 
     /**
      * @var int|null
@@ -74,28 +87,11 @@ class HotelCollectionRequest extends Request
     private $offset;
 
     /**
-     * @var int|null
-     */
-    private $maxPrice;
-
-    /**
      * @see \Trivago\Tas\Request\Common\Order
      *
      * @var null|string
      */
     private $order;
-
-    /**
-     * @var array|null
-     */
-    private $category;
-
-    /**
-     * @see \Trivago\Tas\Request\Common\RoomType
-     *
-     * @var int|null
-     */
-    private $roomType;
 
     /**
      * @var array|null
@@ -108,20 +104,31 @@ class HotelCollectionRequest extends Request
     private $hotelName;
 
     /**
+     * @var int|null
+     */
+    private $maxPrice;
+
+    /**
+     * @var int|null
+     */
+    private $radius;
+
+    /**
      * @var array
      */
     private $optionalParameterMap = [
-        'item'        => 'item',
         'path'        => 'path',
+        'item'        => 'item',
+        'roomType'    => 'room_type',
         'currency'    => 'currency',
+        'category'    => 'category',
         'limit'       => 'limit',
         'offset'      => 'offset',
         'order'       => 'order',
-        'category'    => 'category',
-        'roomType'    => 'room_type',
         'ratingClass' => 'rating_class',
         'hotelName'   => 'hotel_name',
         'maxPrice'    => 'max_price',
+        'radius'      => 'radius',
     ];
 
     /**
@@ -131,21 +138,24 @@ class HotelCollectionRequest extends Request
      */
     public function __construct($options = [])
     {
-        $options = array_merge([
-            static::PATH         => null,
-            static::ITEM         => null,
-            static::START_DATE   => new DateTime('+1 day'),
-            static::END_DATE     => new DateTime('+2 days'),
-            static::ROOM_TYPE    => null,
-            static::CURRENCY     => null,
-            static::CATEGORY     => null,
-            static::LIMIT        => null,
-            static::OFFSET       => null,
-            static::ORDER        => null,
-            static::RATING_CLASS => null,
-            static::HOTEL_NAME   => null,
-            static::MAX_PRICE    => null,
-        ], $options);
+        $options = array_merge(
+            [
+                static::PATH         => null,
+                static::ITEM         => null,
+                static::START_DATE   => new DateTime('+1 day'),
+                static::END_DATE     => new DateTime('+2 days'),
+                static::ROOM_TYPE    => null,
+                static::CURRENCY     => null,
+                static::CATEGORY     => null,
+                static::LIMIT        => null,
+                static::OFFSET       => null,
+                static::ORDER        => null,
+                static::RATING_CLASS => null,
+                static::HOTEL_NAME   => null,
+                static::MAX_PRICE    => null,
+                static::RADIUS       => null,
+            ], $options
+        );
 
         $this->path        = $options[static::PATH];
         $this->item        = $options[static::ITEM];
@@ -160,6 +170,7 @@ class HotelCollectionRequest extends Request
         $this->ratingClass = $options[static::RATING_CLASS];
         $this->hotelName   = $options[static::HOTEL_NAME];
         $this->maxPrice    = $options[static::MAX_PRICE];
+        $this->radius      = $options[static::RADIUS];
 
         if (empty($this->item) && empty($this->path)) {
             throw new InvalidRequestException('Item ID and path ID are empty. At least one of these is required.');

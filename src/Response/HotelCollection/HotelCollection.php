@@ -107,7 +107,8 @@ class HotelCollection implements \Countable, \Iterator
                 Image::fromArray($hotelDetails['main_image']),
                 array_map(function (array $deal) {
                     return Deal::fromArray($deal);
-                }, $hotelRates)
+                }, $hotelRates),
+                isset($data['_embedded']['poi']) ? Poi::fromArray($data['_embedded']['poi']) : null
             );
         }
 
