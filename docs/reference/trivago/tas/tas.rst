@@ -226,7 +226,7 @@ A :code:`Trivago\Tas\Response\Locations\Location` instance can be a hotel, an at
 
 
 getTags()
-==============
+=========
 
 .. code-block:: php
 
@@ -262,3 +262,41 @@ Response
 --------
 
 The method returns an object of type :code:`Trivago\Tas\Response\Tags\TagGroups`. You can use :code:`foreach` to iterate over the result.
+
+
+getPois()
+=========
+
+.. code-block:: php
+
+    public function Pois getPois(PoisRequest $request)
+
+
+This method will return all pois (Points of Interest) for the given path.
+
+.. code-block:: php
+
+    use Trivago\Tas\Request\PoisRequest;
+
+    $request = new PoisRequest(555);
+    $pois    = $tas->getPois($request);
+
+    foreach ($pois as $poi) {
+        // ...
+    }
+
+Request
+-------
+
+The request must be an instance of :code:`Trivago\Tas\Request\PoisRequest`. It has no parameters.
+
++------------+-----------+---------+------------+-----------------------------------------------------------+
+| Parameter  | Type      | Default | Required?  | Description                                               |
++============+===========+=========+============+===========================================================+
+| PATH       | int       | none    | yes        | The path ID.                                              |
++------------+-----------+---------+------------+-----------------------------------------------------------+
+
+Response
+--------
+
+The method returns an object of type :code:`Trivago\Tas\Response\Pois\Pois`. You can use :code:`foreach` to iterate over the result.
