@@ -1,8 +1,8 @@
-============================================
+==================================
 Trivago\\Tas\\Response\\Pois\\Pois
-============================================
+==================================
 
-A collection of pois. You can use :code:`foreach` to iterate over all pois or use :code:`toArray()` to retreive all pois as an array.
+A collection of pois. You can use :code:`foreach` to iterate over all pois or use :code:`toArray()` to retrieve all pois as an array.
 
 
 count()

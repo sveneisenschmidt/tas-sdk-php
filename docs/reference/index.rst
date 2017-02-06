@@ -28,4 +28,8 @@ On this page you will find the trivago Affiliate Suite SDK for PHP reference.
     trivago/tas/response/tags/tag
     trivago/tas/response/pois/pois
     trivago/tas/response/pois/poi
+    trivago/tas/response/top-options/top-options
+    trivago/tas/response/top-options/top-option
+    trivago/tas/response/top-options/tag
+    trivago/tas/response/top-options/rate-attribute
 

@@ -2,7 +2,7 @@
 Trivago\\Tas\\Response\\Locations\\Locations
 ============================================
 
-The Locations is a collection of locations. You can use :code:`foreach` to iterate over all locations or use :code:`toArray()` to retreive all locations as an array.
+The Locations is a collection of locations. You can use :code:`foreach` to iterate over all locations or use :code:`toArray()` to retrieve all locations as an array.
 
 
 count()
