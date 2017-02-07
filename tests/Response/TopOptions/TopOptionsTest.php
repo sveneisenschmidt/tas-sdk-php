@@ -34,8 +34,7 @@ class TopOptionsTest extends \PHPUnit_Framework_TestCase
             include __DIR__ . '/../../_fixtures/top_options_response_200.php'
         );
 
-        foreach ($topOptions as $topOption)
-        {
+        foreach ($topOptions as $topOption) {
             $this->assertInstanceOf(TopOption::class, $topOption);
         }
     }

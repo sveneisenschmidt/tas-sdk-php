@@ -63,35 +63,40 @@ class TopOption
     /**
      * @return int
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
     /**
      * @return string
      */
-    public function getType() {
+    public function getType()
+    {
         return $this->type;
     }
 
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
 
     /**
      * @return Tag[]
      */
-    public function getTags() {
+    public function getTags()
+    {
         return $this->tags;
     }
 
     /**
      * @return RateAttribute[]
      */
-    public function getRateAttributes() {
+    public function getRateAttributes()
+    {
         return $this->rateAttributes;
     }
 }

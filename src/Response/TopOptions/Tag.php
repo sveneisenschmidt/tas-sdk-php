@@ -45,5 +45,4 @@ class Tag
     {
         return (string) $this->id;
     }
-
 }
