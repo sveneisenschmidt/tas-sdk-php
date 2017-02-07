@@ -80,7 +80,6 @@ class Client
             'Accept-Language: ' . $this->acceptLanguage,
             'Accept: application/vnd.trivago.affiliate.hal+json;version=1',
             'X-Trv-Api-Key: ' . $this->apiKey,
-            'XDEBUG_SESSION_START: XDEBUG'
         ];
 
         if ($this->trackingIdHandler->get() !== '') {

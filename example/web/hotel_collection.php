@@ -24,7 +24,7 @@ $path     = isset($_GET['path']) ? $_GET['path'] : null;
 $item     = isset($_GET['item']) ? $_GET['item'] : null;
 $itemList = isset($_GET['item_list']) ? $_GET['item_list'] : null;
 $offset   = isset($_GET['offset']) ? $_GET['offset'] : 0;
-$radius = isset($_GET['radius']) ? $_GET['radius'] : null;
+$radius   = isset($_GET['radius']) ? $_GET['radius'] : null;
 
 $request = new HotelCollectionRequest([
     HotelCollectionRequest::PATH      => $path,
