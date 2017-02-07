@@ -59,7 +59,8 @@ function highlight_search_term($name)
     <form method="get">
         <label for="search-term">Search Term</label>
         <input type="search" name="query" id="search-term" placeholder="Radisson" value="<?php echo htmlentities($searchTerm) ?>" required>
-        <button type="submit">Search</button>
+        <button type="submit">Search</button> or
+        <button type="submit" onclick="document.getElementById('search-term').setAttribute('value', 'Radisson')">Search with example term</button>
     </form>
 
     <?php if (count($locations)): ?>
@@ -80,7 +81,7 @@ function highlight_search_term($name)
                     </li>
                 <?php endforeach ?>
             </ul>
-            <input type="submit" value="Search">
+            <input type="submit" value="Search selected items">
         </form>
     <?php endif ?>
 
