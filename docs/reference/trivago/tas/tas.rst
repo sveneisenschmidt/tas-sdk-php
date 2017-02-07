@@ -256,10 +256,6 @@ Request
 
 The request must be an instance of :code:`Trivago\Tas\Request\TagRequest`. It has no parameters.
 
-+------------+-----------+---------+------------+-----------------------------------------------------------+
-| Parameter  | Type      | Default | Required?  | Description                                               |
-+============+===========+=========+============+===========================================================+
-
 
 Response
 --------
@@ -298,6 +294,7 @@ The request must be an instance of :code:`Trivago\Tas\Request\PoisRequest`. It h
 +============+===========+=========+============+===========================================================+
 | PATH       | int       | none    | yes        | The path ID.                                              |
 +------------+-----------+---------+------------+-----------------------------------------------------------+
+
 
 Response
 --------
