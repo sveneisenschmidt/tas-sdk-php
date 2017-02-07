@@ -139,11 +139,9 @@ class HotelCollectionRequest extends Request
         'offset'        => 'offset',
         'order'         => 'order',
         'category'      => 'category',
-        'roomType'      => 'room_type',
         'ratingClass'   => 'rating_class',
         'hotelName'     => 'hotel_name',
         'maxPrice'      => 'max_price',
-        'category'      => 'category',
         'radius'        => 'radius',
     ];
 
