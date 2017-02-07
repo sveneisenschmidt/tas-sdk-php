@@ -29,6 +29,7 @@ class HotelRatesRequest extends Request
     const CURRENCY   = 'currency';
     const LIMIT      = 'limit';
     const OFFSET     = 'offset';
+    const RADIUS     = 'radius';
 
     /**
      * @var int
@@ -70,6 +71,11 @@ class HotelRatesRequest extends Request
     private $roomType;
 
     /**
+     * int|null
+     */
+    private $radius;
+
+    /**
      * @var array
      */
     private $optionalParameterMap = [
@@ -77,6 +83,7 @@ class HotelRatesRequest extends Request
         'limit'    => 'limit',
         'offset'   => 'offset',
         'roomType' => 'room_type',
+        'radius'   => 'radius',
     ];
 
     /**
@@ -86,15 +93,18 @@ class HotelRatesRequest extends Request
      */
     public function __construct($options = [])
     {
-        $options = array_merge([
-            static::ITEM       => null,
-            static::START_DATE => new DateTime('+1 day'),
-            static::END_DATE   => new DateTime('+2 days'),
-            static::CURRENCY   => null,
-            static::LIMIT      => null,
-            static::OFFSET     => null,
-            static::ROOM_TYPE  => null,
-        ], $options);
+        $options = array_merge(
+            [
+                static::ITEM       => null,
+                static::START_DATE => new DateTime('+1 day'),
+                static::END_DATE   => new DateTime('+2 days'),
+                static::CURRENCY   => null,
+                static::LIMIT      => null,
+                static::OFFSET     => null,
+                static::ROOM_TYPE  => null,
+                static::RADIUS     => null,
+            ], $options
+        );
 
         $this->item      = $options[static::ITEM];
         $this->startDate = $options[static::START_DATE];
@@ -103,6 +113,7 @@ class HotelRatesRequest extends Request
         $this->limit     = $options[static::LIMIT];
         $this->offset    = $options[static::OFFSET];
         $this->roomType  = $options[static::ROOM_TYPE];
+        $this->radius    = $options[static::RADIUS];
 
         if (empty($this->item)) {
             throw new \InvalidArgumentException('Cannot create HotelDealsRequest without an item.');

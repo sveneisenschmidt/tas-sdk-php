@@ -16,11 +16,11 @@
  * limitations under the License.
  */
 
-namespace Trivago\Tas\Response\HotelDetails;
+namespace Trivago\Tas\Response\Pois;
 
 use Trivago\Tas\Response\Common\GeoCoordinates;
 
-class Path
+class Poi
 {
     /**
      * @var int
@@ -37,29 +37,11 @@ class Path
      */
     private $geoCoordinates;
 
-    /**
-     * @param int            $id
-     * @param string         $name
-     * @param GeoCoordinates $geoCoordinates
-     */
-    public function __construct($id, $name, GeoCoordinates $geoCoordinates)
+    public function __construct($id, $name, GeoCoordinates $coordinates)
     {
-        $this->geoCoordinates = $geoCoordinates;
         $this->id             = (int) $id;
         $this->name           = $name;
-    }
-
-    public static function fromArray(array $data)
-    {
-        return new static($data['id'], $data['name'], GeoCoordinates::fromArray($data['geo_coordinates']));
-    }
-
-    /**
-     * @return GeoCoordinates
-     */
-    public function getGeoCoordinates()
-    {
-        return $this->geoCoordinates;
+        $this->geoCoordinates = $coordinates;
     }
 
     /**
@@ -76,5 +58,13 @@ class Path
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * @return GeoCoordinates
+     */
+    public function getGeoCoordinates()
+    {
+        return $this->geoCoordinates;
     }
 }

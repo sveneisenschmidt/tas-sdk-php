@@ -25,38 +25,46 @@ class HotelRatesRequestTest extends \PHPUnit_Framework_TestCase
 {
     public function test_full_request()
     {
+        $startDate = new DateTime('+1 day');
+        $endDate   = new DateTime('+2 days');
+
         $request = new HotelRatesRequest([
             HotelRatesRequest::ITEM       => 5555,
-            HotelRatesRequest::START_DATE => new DateTime('+1 day'),
-            HotelRatesRequest::END_DATE   => new DateTime('+2 days'),
+            HotelRatesRequest::START_DATE => $startDate,
+            HotelRatesRequest::END_DATE   => $endDate,
             HotelRatesRequest::CURRENCY   => 'EUR',
             HotelRatesRequest::LIMIT      => 25,
             HotelRatesRequest::OFFSET     => 0,
             HotelRatesRequest::ROOM_TYPE  => RoomType::DOUBLE_ROOM,
+            HotelRatesRequest::RADIUS     => 31337,
         ]);
 
         $this->assertSame('/hotels/5555/rates', $request->getPath());
         $parameters = $request->getQueryParameters();
-        $this->assertSame((new DateTime('+1 day'))->format(DateTime::ATOM), $parameters['start_date']);
-        $this->assertSame((new DateTime('+2 days'))->format(DateTime::ATOM), $parameters['end_date']);
+        $this->assertSame($startDate->format(DateTime::ATOM), $parameters['start_date']);
+        $this->assertSame($endDate->format(DateTime::ATOM), $parameters['end_date']);
         $this->assertSame('EUR', $parameters['currency']);
         $this->assertSame(7, $parameters['room_type']);
         $this->assertSame(25, $parameters['limit']);
         $this->assertSame(0, $parameters['offset']);
+        $this->assertSame(31337, $parameters['radius']);
     }
 
     public function test_request_without_optional_parameters()
     {
+        $startDate = new DateTime('+1 day');
+        $endDate   = new DateTime('+2 days');
+
         $request = new HotelRatesRequest([
             HotelRatesRequest::ITEM       => 5555,
-            HotelRatesRequest::START_DATE => new DateTime('+1 day'),
-            HotelRatesRequest::END_DATE   => new DateTime('+2 days'),
+            HotelRatesRequest::START_DATE => $startDate,
+            HotelRatesRequest::END_DATE   => $endDate,
         ]);
 
         $this->assertSame('/hotels/5555/rates', $request->getPath());
         $parameters = $request->getQueryParameters();
-        $this->assertSame((new DateTime('+1 day'))->format(DateTime::ATOM), $parameters['start_date']);
-        $this->assertSame((new DateTime('+2 days'))->format(DateTime::ATOM), $parameters['end_date']);
+        $this->assertSame($startDate->format(DateTime::ATOM), $parameters['start_date']);
+        $this->assertSame($endDate->format(DateTime::ATOM), $parameters['end_date']);
         $this->assertArrayNotHasKey('currency', $parameters);
         $this->assertArrayNotHasKey('room_type', $parameters);
         $this->assertArrayNotHasKey('limit', $parameters);
@@ -65,18 +73,21 @@ class HotelRatesRequestTest extends \PHPUnit_Framework_TestCase
 
     public function test_request_without_pagination()
     {
+        $startDate = new DateTime('+1 day');
+        $endDate   = new DateTime('+2 days');
+
         $request = new HotelRatesRequest([
             HotelRatesRequest::ITEM       => 5555,
-            HotelRatesRequest::START_DATE => new DateTime('+1 day'),
-            HotelRatesRequest::END_DATE   => new DateTime('+2 days'),
+            HotelRatesRequest::START_DATE => $startDate,
+            HotelRatesRequest::END_DATE   => $endDate,
             HotelRatesRequest::CURRENCY   => 'EUR',
             HotelRatesRequest::ROOM_TYPE  => RoomType::SINGLE_ROOM,
         ]);
 
         $this->assertSame('/hotels/5555/rates', $request->getPath());
         $parameters = $request->getQueryParameters();
-        $this->assertSame((new DateTime('+1 day'))->format(DateTime::ATOM), $parameters['start_date']);
-        $this->assertSame((new DateTime('+2 days'))->format(DateTime::ATOM), $parameters['end_date']);
+        $this->assertSame($startDate->format(DateTime::ATOM), $parameters['start_date']);
+        $this->assertSame($endDate->format(DateTime::ATOM), $parameters['end_date']);
         $this->assertSame('EUR', $parameters['currency']);
         $this->assertSame(1, $parameters['room_type']);
         $this->assertArrayNotHasKey('limit', $parameters);
