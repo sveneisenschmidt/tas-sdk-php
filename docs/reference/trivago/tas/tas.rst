@@ -25,6 +25,7 @@ Searching for prices takes some time. Therefore the returned result might not be
     $request = new HotelCollectionRequest([
         HotelCollectionRequest::PATH           => 38714,
         HotelCollectionRequest::ITEM           => 5678,
+        HotelCollectionRequest::ITEM_LIST      => null,
         HotelCollectionRequest::START_DATE     => new DateTime('+1 day'),
         HotelCollectionRequest::END_DATE       => new DateTime('+2 days'),
         HotelCollectionRequest::ROOM_TYPE      => RoomType::DOUBLE_ROOM,
@@ -56,6 +57,8 @@ The request must be an instance of :code:`Trivago\Tas\Request\HotelCollectionReq
 | PATH         | int       | null    | if no item | The path ID.                                                                                   |
 +--------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
 | ITEM         | int       | null    | if no path | The item ID.                                                                                   |
++--------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
+| ITEM_LIST    | array     | null    | if no path and item | List of item ID's to search for.                                                      |
 +--------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
 | START_DATE   | DateTime  | Date    | no         | The check in date. Must be a date today or in the future.                                      |
 +--------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
