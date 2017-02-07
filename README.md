@@ -62,7 +62,7 @@ To execute unit tests run the `test` command using composer.
 composer test
 ```
 
-With `test-quick` unit tets are executed without generating coverage.
+With `test-quick` unit tests are executed without generating coverage.
 
 ```
 composer test-quick
