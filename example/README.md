@@ -34,6 +34,7 @@ You can now open the **default example** in your browser: [http://localhost:8080
 ##### More Examples
 
 - Multi Item Search: [http://localhost:8080/index_multi.php](http://localhost:8080/index_multi.php) 
+- Reference Search: [http://localhost:8080/index_reference.php](http://localhost:8080/index_reference.php) 
 
 #### 2.2 Docker
 
