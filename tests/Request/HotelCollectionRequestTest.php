@@ -25,7 +25,7 @@ class HotelCollectionRequestTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @expectedException \Trivago\Tas\Request\InvalidRequestException
-     * @expectedExceptionMessage Item ID and path ID are empty. At least one of these is required.
+     * @expectedExceptionMessage Item ID, Item ID List and path ID are empty. At least one of these is required.
      */
     public function test_request_without_item_and_path()
     {
@@ -44,6 +44,18 @@ class HotelCollectionRequestTest extends \PHPUnit_Framework_TestCase
         new HotelCollectionRequest([
             HotelCollectionRequest::ITEM => 5678,
         ]);
+    }
+
+    public function test_item_list()
+    {
+        $request = new HotelCollectionRequest([
+            HotelCollectionRequest::ITEM_LIST => [81823,1542729],
+        ]);
+
+        $queryParameters = $request->getQueryParameters();
+
+        $this->assertArrayHasKey('item_list', $queryParameters);
+        $this->assertSame([81823,1542729], $queryParameters['item_list']);
     }
 
     public function test_full_request()

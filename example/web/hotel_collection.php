@@ -20,15 +20,17 @@ use Trivago\Tas\Request\HotelCollectionRequest;
 $config = require_once __DIR__ . '/../config.php';
 $tas    = new \Trivago\Tas\Tas($config);
 
-$path   = isset($_GET['path']) ? $_GET['path'] : null;
-$item   = isset($_GET['item']) ? $_GET['item'] : null;
-$offset = isset($_GET['offset']) ? $_GET['offset'] : 0;
+$path     = isset($_GET['path']) ? $_GET['path'] : null;
+$item     = isset($_GET['item']) ? $_GET['item'] : null;
+$itemList = isset($_GET['item_list']) ? $_GET['item_list'] : null;
+$offset   = isset($_GET['offset']) ? $_GET['offset'] : 0;
 
 $request = new HotelCollectionRequest([
-    HotelCollectionRequest::PATH   => $path,
-    HotelCollectionRequest::ITEM   => $item,
-    HotelCollectionRequest::LIMIT  => 25,
-    HotelCollectionRequest::OFFSET => $offset,
+    HotelCollectionRequest::PATH      => $path,
+    HotelCollectionRequest::ITEM      => $item,
+    HotelCollectionRequest::ITEM_LIST => $itemList,
+    HotelCollectionRequest::LIMIT     => 25,
+    HotelCollectionRequest::OFFSET    => $offset,
 ]);
 
 $hotelCollection = $tas->getHotelCollection($request);

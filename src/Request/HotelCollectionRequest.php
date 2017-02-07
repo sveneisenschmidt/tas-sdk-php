@@ -24,6 +24,7 @@ class HotelCollectionRequest extends Request
 {
     const PATH         = 'path';
     const ITEM         = 'item';
+    const ITEM_LIST    = 'item_list';
     const START_DATE   = 'start_date';
     const END_DATE     = 'end_date';
     const ROOM_TYPE    = 'room_type';
@@ -45,6 +46,11 @@ class HotelCollectionRequest extends Request
      * @var int|null
      */
     private $item;
+
+    /**
+     * @var int[]|null
+     */
+    private $itemList;
 
     /**
      * @var DateTime
@@ -112,6 +118,7 @@ class HotelCollectionRequest extends Request
      */
     private $optionalParameterMap = [
         'item'        => 'item',
+        'itemList'    => 'item_list',
         'path'        => 'path',
         'currency'    => 'currency',
         'limit'       => 'limit',
@@ -134,6 +141,7 @@ class HotelCollectionRequest extends Request
         $options = array_merge([
             static::PATH         => null,
             static::ITEM         => null,
+            static::ITEM_LIST    => null,
             static::START_DATE   => new DateTime('+1 day'),
             static::END_DATE     => new DateTime('+2 days'),
             static::ROOM_TYPE    => null,
@@ -149,6 +157,7 @@ class HotelCollectionRequest extends Request
 
         $this->path        = $options[static::PATH];
         $this->item        = $options[static::ITEM];
+        $this->itemList    = $options[static::ITEM_LIST];
         $this->startDate   = $options[static::START_DATE];
         $this->endDate     = $options[static::END_DATE];
         $this->roomType    = $options[static::ROOM_TYPE];
@@ -161,8 +170,8 @@ class HotelCollectionRequest extends Request
         $this->hotelName   = $options[static::HOTEL_NAME];
         $this->maxPrice    = $options[static::MAX_PRICE];
 
-        if (empty($this->item) && empty($this->path)) {
-            throw new InvalidRequestException('Item ID and path ID are empty. At least one of these is required.');
+        if (empty($this->item) && empty($this->path) && empty($this->itemList)) {
+            throw new InvalidRequestException('Item ID, Item ID List and path ID are empty. At least one of these is required.');
         }
     }
 
