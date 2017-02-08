@@ -24,6 +24,8 @@ $path   = isset($_GET['path']) ? $_GET['path'] : null;
 $item   = isset($_GET['item']) ? $_GET['item'] : null;
 $offset = isset($_GET['offset']) ? $_GET['offset'] : 0;
 $radius = isset($_GET['radius']) ? $_GET['radius'] : null;
+$geoLatitude  = isset($_GET['latitude']) ?  $_GET['latitude'] : null;
+$geoLongitude = isset($_GET['longitude']) ? $_GET['longitude'] : null;
 
 $request = new HotelCollectionRequest([
     HotelCollectionRequest::PATH   => $path,
@@ -31,10 +33,11 @@ $request = new HotelCollectionRequest([
     HotelCollectionRequest::LIMIT  => 25,
     HotelCollectionRequest::OFFSET => $offset,
     HotelCollectionRequest::RADIUS => $radius,
+    HotelCollectionRequest::GEO_LATITUDE  => (float) $geoLatitude,
+    HotelCollectionRequest::GEO_LONGITUDE => (float) $geoLongitude,
 ]);
 
 $hotelCollection = $tas->getHotelCollection($request);
-
 ?>
 
 <!doctype html>

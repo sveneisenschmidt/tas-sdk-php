@@ -23,15 +23,6 @@ use Trivago\Tas\Request\Common\RoomType;
 
 class HotelCollectionRequestTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @expectedException \Trivago\Tas\Request\InvalidRequestException
-     * @expectedExceptionMessage Item ID and path ID are empty. At least one of these is required.
-     */
-    public function test_request_without_item_and_path()
-    {
-        new HotelCollectionRequest([]);
-    }
-
     public function test_path_only()
     {
         new HotelCollectionRequest([
@@ -66,11 +57,13 @@ class HotelCollectionRequestTest extends \PHPUnit_Framework_TestCase
             HotelCollectionRequest::HOTEL_NAME   => 'Hyatt',
             HotelCollectionRequest::MAX_PRICE    => 95,
             HotelCollectionRequest::RADIUS       => 31337,
+            HotelCollectionRequest::GEO_LATITUDE => 12.12,
+            HotelCollectionRequest::GEO_LONGITUDE => 13.13
         ]);
 
         $queryParameters = $request->getQueryParameters();
 
-        $this->assertCount(14, $queryParameters);
+        $this->assertCount(15, $queryParameters);
         $this->assertArrayHasKey('path', $queryParameters);
         $this->assertSame(1234, $queryParameters['path']);
         $this->assertArrayHasKey('item', $queryParameters);
@@ -99,5 +92,7 @@ class HotelCollectionRequestTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('Hyatt', $queryParameters['hotel_name']);
         $this->assertArrayHasKey('radius', $queryParameters);
         $this->assertSame(31337, $queryParameters['radius']);
+        $this->assertArrayHasKey('geo', $queryParameters);
+        $this->assertSame('12.12,13.13', $queryParameters['geo']);
     }
 }

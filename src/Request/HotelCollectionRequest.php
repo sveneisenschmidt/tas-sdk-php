@@ -22,20 +22,22 @@ use DateTime;
 
 class HotelCollectionRequest extends Request
 {
-    const PATH         = 'path';
-    const ITEM         = 'item';
-    const START_DATE   = 'start_date';
-    const END_DATE     = 'end_date';
-    const ROOM_TYPE    = 'room_type';
-    const CURRENCY     = 'currency';
-    const CATEGORY     = 'category';
-    const LIMIT        = 'limit';
-    const OFFSET       = 'offset';
-    const ORDER        = 'order';
-    const RATING_CLASS = 'rating_class';
-    const HOTEL_NAME   = 'hotel_name';
-    const MAX_PRICE    = 'max_price';
-    const RADIUS       = 'radius';
+    const PATH          = 'path';
+    const ITEM          = 'item';
+    const START_DATE    = 'start_date';
+    const END_DATE      = 'end_date';
+    const ROOM_TYPE     = 'room_type';
+    const CURRENCY      = 'currency';
+    const CATEGORY      = 'category';
+    const LIMIT         = 'limit';
+    const OFFSET        = 'offset';
+    const ORDER         = 'order';
+    const RATING_CLASS  = 'rating_class';
+    const HOTEL_NAME    = 'hotel_name';
+    const MAX_PRICE     = 'max_price';
+    const RADIUS        = 'radius';
+    const GEO_LATITUDE  = 'geo_latitude';
+    const GEO_LONGITUDE = 'geo_longitude';
 
     /**
      * @var int|null
@@ -114,6 +116,16 @@ class HotelCollectionRequest extends Request
     private $radius;
 
     /**
+     * @var float|null
+     */
+    private $geoLatitude;
+
+    /**
+     * @var float|null
+     */
+    private $geoLongitude;
+
+    /**
      * @var array
      */
     private $optionalParameterMap = [
@@ -140,41 +152,41 @@ class HotelCollectionRequest extends Request
     {
         $options = array_merge(
             [
-                static::PATH         => null,
-                static::ITEM         => null,
-                static::START_DATE   => new DateTime('+1 day'),
-                static::END_DATE     => new DateTime('+2 days'),
-                static::ROOM_TYPE    => null,
-                static::CURRENCY     => null,
-                static::CATEGORY     => null,
-                static::LIMIT        => null,
-                static::OFFSET       => null,
-                static::ORDER        => null,
-                static::RATING_CLASS => null,
-                static::HOTEL_NAME   => null,
-                static::MAX_PRICE    => null,
-                static::RADIUS       => null,
+                static::PATH          => null,
+                static::ITEM          => null,
+                static::START_DATE    => new DateTime('+1 day'),
+                static::END_DATE      => new DateTime('+2 days'),
+                static::ROOM_TYPE     => null,
+                static::CURRENCY      => null,
+                static::CATEGORY      => null,
+                static::LIMIT         => null,
+                static::OFFSET        => null,
+                static::ORDER         => null,
+                static::RATING_CLASS  => null,
+                static::HOTEL_NAME    => null,
+                static::MAX_PRICE     => null,
+                static::RADIUS        => null,
+                static::GEO_LATITUDE  => null,
+                static::GEO_LONGITUDE => null,
             ], $options
         );
 
-        $this->path        = $options[static::PATH];
-        $this->item        = $options[static::ITEM];
-        $this->startDate   = $options[static::START_DATE];
-        $this->endDate     = $options[static::END_DATE];
-        $this->roomType    = $options[static::ROOM_TYPE];
-        $this->currency    = $options[static::CURRENCY];
-        $this->category    = $options[static::CATEGORY];
-        $this->limit       = $options[static::LIMIT];
-        $this->offset      = $options[static::OFFSET];
-        $this->order       = $options[static::ORDER];
-        $this->ratingClass = $options[static::RATING_CLASS];
-        $this->hotelName   = $options[static::HOTEL_NAME];
-        $this->maxPrice    = $options[static::MAX_PRICE];
-        $this->radius      = $options[static::RADIUS];
-
-        if (empty($this->item) && empty($this->path)) {
-            throw new InvalidRequestException('Item ID and path ID are empty. At least one of these is required.');
-        }
+        $this->path         = $options[static::PATH];
+        $this->item         = $options[static::ITEM];
+        $this->startDate    = $options[static::START_DATE];
+        $this->endDate      = $options[static::END_DATE];
+        $this->roomType     = $options[static::ROOM_TYPE];
+        $this->currency     = $options[static::CURRENCY];
+        $this->category     = $options[static::CATEGORY];
+        $this->limit        = $options[static::LIMIT];
+        $this->offset       = $options[static::OFFSET];
+        $this->order        = $options[static::ORDER];
+        $this->ratingClass  = $options[static::RATING_CLASS];
+        $this->hotelName    = $options[static::HOTEL_NAME];
+        $this->maxPrice     = $options[static::MAX_PRICE];
+        $this->radius       = $options[static::RADIUS];
+        $this->geoLatitude  = $options[static::GEO_LATITUDE];
+        $this->geoLongitude = $options[static::GEO_LONGITUDE];
     }
 
     /**
@@ -186,6 +198,10 @@ class HotelCollectionRequest extends Request
             'start_date' => $this->startDate->format(DateTime::ATOM),
             'end_date'   => $this->endDate->format(DateTime::ATOM),
         ];
+
+        if ($this->geoLatitude !== null && $this->geoLongitude !== null) {
+            $parameters['geo'] = sprintf('%s,%s', $this->geoLatitude, $this->geoLongitude);
+        }
 
         foreach ($this->optionalParameterMap as $propertyKey => $queryParameterKey) {
             if (isset($this->$propertyKey)) {
