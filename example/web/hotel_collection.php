@@ -20,17 +20,31 @@ use Trivago\Tas\Request\HotelCollectionRequest;
 $config = require_once __DIR__ . '/../config.php';
 $tas    = new \Trivago\Tas\Tas($config);
 
-$path   = isset($_GET['path']) ? $_GET['path'] : null;
-$item   = isset($_GET['item']) ? $_GET['item'] : null;
-$offset = isset($_GET['offset']) ? $_GET['offset'] : 0;
-$radius = isset($_GET['radius']) ? $_GET['radius'] : null;
+$path          = isset($_GET['path']) ? $_GET['path'] : null;
+$item          = isset($_GET['item']) ? $_GET['item'] : null;
+$itemList      = isset($_GET['item_list']) ? $_GET['item_list'] : null;
+$referenceList = isset($_GET['reference_list']) ? $_GET['reference_list'] : null;
+$offset        = isset($_GET['offset']) ? $_GET['offset'] : 0;
+$radius        = isset($_GET['radius']) ? $_GET['radius'] : null;
+
+// Format reference list if we have one
+if ($referenceList) {
+    $referenceListParts = explode(',', $referenceList);
+    $referenceList      = array_map(
+        function ($id) {
+            return trim($id);
+        }, $referenceListParts
+    );
+}
 
 $request = new HotelCollectionRequest([
-    HotelCollectionRequest::PATH   => $path,
-    HotelCollectionRequest::ITEM   => $item,
-    HotelCollectionRequest::LIMIT  => 25,
-    HotelCollectionRequest::OFFSET => $offset,
-    HotelCollectionRequest::RADIUS => $radius,
+    HotelCollectionRequest::PATH           => $path,
+    HotelCollectionRequest::ITEM           => $item,
+    HotelCollectionRequest::ITEM_LIST      => $itemList,
+    HotelCollectionRequest::REFERENCE_LIST => $referenceList,
+    HotelCollectionRequest::LIMIT          => 25,
+    HotelCollectionRequest::OFFSET         => $offset,
+    HotelCollectionRequest::RADIUS         => $radius,
 ]);
 
 $hotelCollection = $tas->getHotelCollection($request);

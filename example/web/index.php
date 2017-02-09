@@ -92,6 +92,11 @@ function create_link_from_location(\Trivago\Tas\Response\Locations\Location $loc
         <label for="search-term">Search Term</label>
         <input type="search" name="query" id="search-term" placeholder="Berlin" value="<?php echo htmlentities($searchTerm) ?>" required>
         <button type="submit">Search</button>
+        or
+        <button type="submit"
+                onclick="document.getElementById('search-term').setAttribute('value', 'Berlin')">
+            Search with example term
+        </button>
     </form>
 
     <?php if (count($locations)): ?>
