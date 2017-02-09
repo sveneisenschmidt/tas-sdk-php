@@ -292,7 +292,7 @@ This method will return all pois (Points of Interest) for the given path.
 Request
 -------
 
-The request must be an instance of :code:`Trivago\Tas\Request\PoisRequest`. It has no parameters.
+The request must be an instance of :code:`Trivago\Tas\Request\PoisRequest`.
 
 +------------+-----------+---------+------------+-----------------------------------------------------------+
 | Parameter  | Type      | Default | Required?  | Description                                               |
@@ -305,3 +305,39 @@ Response
 --------
 
 The method returns an object of type :code:`Trivago\Tas\Response\Pois\Pois`. You can use :code:`foreach` to iterate over the result.
+
+
+getTopOptions()
+===============
+
+.. code-block:: php
+
+    public function TopOptions getTopOptions(TopOptionsRequest $request)
+
+
+This method will return all available top options (tags or rate-attributes).
+
+.. code-block:: php
+
+    use Trivago\Tas\Request\TopOptionsRequest;
+
+    $request    = new TopOptionsRequest();
+    $topOptions = $tas->getTopOptions($request);
+
+    foreach ($topOptions as $topOption) {
+        // ...
+    }
+
+Request
+-------
+
+The request must be an instance of :code:`Trivago\Tas\Request\TopOptionsRequest`. It has no parameters.
+
++------------+-----------+---------+------------+-----------------------------------------------------------+
+| Parameter  | Type      | Default | Required?  | Description                                               |
++============+===========+=========+============+===========================================================+
+
+Response
+--------
+
+The method returns an object of type :code:`Trivago\Tas\Response\TopOptions\TopOptions`. You can use :code:`foreach` to iterate over the result.

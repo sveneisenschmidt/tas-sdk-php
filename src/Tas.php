@@ -24,6 +24,7 @@ use Trivago\Tas\Request\HotelRatesRequest;
 use Trivago\Tas\Request\HotelTagsRequest;
 use Trivago\Tas\Request\LocationsRequest;
 use Trivago\Tas\Request\PoisRequest;
+use Trivago\Tas\Request\TopOptionsRequest;
 use Trivago\Tas\Response\HotelCollection\HotelCollection;
 use Trivago\Tas\Response\HotelDetails\HotelDetails;
 use Trivago\Tas\Response\HotelRates\HotelRates;
@@ -31,6 +32,7 @@ use Trivago\Tas\Response\HotelTags\HotelTags;
 use Trivago\Tas\Response\Locations\Locations;
 use Trivago\Tas\Response\Pois\Pois;
 use Trivago\Tas\Response\ProblemException;
+use Trivago\Tas\Response\TopOptions\TopOptions;
 
 /**
  * @method Locations       getLocations(LocationsRequest $request)
@@ -39,6 +41,7 @@ use Trivago\Tas\Response\ProblemException;
  * @method HotelDetails    getHotelDetails(HotelDetailsRequest $request)
  * @method HotelCollection getHotelCollection(HotelCollectionRequest $request)
  * @method Pois            getPois(PoisRequest $request)
+ * @method TopOptions      getTopOptions(TopOptionsRequest $request)
  */
 class Tas
 {
@@ -74,6 +77,10 @@ class Tas
         'getPois' => [
             'response' => Pois::class,
             'request'  => PoisRequest::class
+        ],
+        'getTopOptions' => [
+            'response' => TopOptions::class,
+            'request'  => TopOptionsRequest::class
         ],
     ];
 
