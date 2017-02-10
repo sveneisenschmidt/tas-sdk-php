@@ -20,12 +20,24 @@ use Trivago\Tas\Request\HotelCollectionRequest;
 $config = require_once __DIR__ . '/../config.php';
 $tas    = new \Trivago\Tas\Tas($config);
 
-$path   = isset($_GET['path']) ? $_GET['path'] : null;
-$item   = isset($_GET['item']) ? $_GET['item'] : null;
-$offset = isset($_GET['offset']) ? $_GET['offset'] : 0;
-$radius = isset($_GET['radius']) ? $_GET['radius'] : null;
-$geoLatitude  = isset($_GET['latitude']) ?  $_GET['latitude'] : null;
-$geoLongitude = isset($_GET['longitude']) ? $_GET['longitude'] : null;
+$path          = isset($_GET['path']) ? $_GET['path'] : null;
+$item          = isset($_GET['item']) ? $_GET['item'] : null;
+$offset        = isset($_GET['offset']) ? $_GET['offset'] : 0;
+$radius        = isset($_GET['radius']) ? $_GET['radius'] : null;
+$geoLatitude   = isset($_GET['latitude']) ?  $_GET['latitude'] : null;
+$geoLongitude  = isset($_GET['longitude']) ? $_GET['longitude'] : null;
+$itemList      = isset($_GET['item_list']) ? $_GET['item_list'] : null;
+$referenceList = isset($_GET['reference_list']) ? $_GET['reference_list'] : null;
+
+// Format reference list if we have one
+if ($referenceList) {
+    $referenceListParts = explode(',', $referenceList);
+    $referenceList      = array_map(
+        function ($id) {
+            return trim($id);
+        }, $referenceListParts
+    );
+}
 
 $request = new HotelCollectionRequest([
     HotelCollectionRequest::PATH   => $path,
@@ -35,6 +47,8 @@ $request = new HotelCollectionRequest([
     HotelCollectionRequest::RADIUS => $radius,
     HotelCollectionRequest::GEO_LATITUDE  => (float) $geoLatitude,
     HotelCollectionRequest::GEO_LONGITUDE => (float) $geoLongitude,
+    HotelCollectionRequest::ITEM_LIST      => $itemList,
+    HotelCollectionRequest::REFERENCE_LIST => $referenceList,
 ]);
 
 $hotelCollection = $tas->getHotelCollection($request);

@@ -37,6 +37,30 @@ class HotelCollectionRequestTest extends \PHPUnit_Framework_TestCase
         ]);
     }
 
+    public function test_item_list()
+    {
+        $request = new HotelCollectionRequest([
+            HotelCollectionRequest::ITEM_LIST => [81823,1542729],
+        ]);
+
+        $queryParameters = $request->getQueryParameters();
+
+        $this->assertArrayHasKey('item_list', $queryParameters);
+        $this->assertSame([81823,1542729], $queryParameters['item_list']);
+    }
+
+    public function test_reference_list()
+    {
+        $request = new HotelCollectionRequest([
+            HotelCollectionRequest::REFERENCE_LIST => [172310, 228410, 291431],
+        ]);
+
+        $queryParameters = $request->getQueryParameters();
+
+        $this->assertArrayHasKey('reference_list', $queryParameters);
+        $this->assertSame([172310, 228410, 291431], $queryParameters['reference_list']);
+    }
+
     public function test_full_request()
     {
         $startDate = new \DateTime('2015-08-08');

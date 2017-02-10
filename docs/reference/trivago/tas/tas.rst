@@ -23,22 +23,24 @@ Searching for prices takes some time. Therefore the returned result might not be
     use Trivago\Tas\Request\HotelCollectionRequest;
 
     $request = new HotelCollectionRequest([
-        HotelCollectionRequest::PATH          => 38714,
-        HotelCollectionRequest::ITEM          => 5678,
-        HotelCollectionRequest::START_DATE    => new DateTime('+1 day'),
-        HotelCollectionRequest::END_DATE      => new DateTime('+2 days'),
-        HotelCollectionRequest::ROOM_TYPE     => RoomType::DOUBLE_ROOM,
-        HotelCollectionRequest::CURRENCY      => 'EUR',
-        HotelCollectionRequest::CATEGORY      => [3,4,5],
-        HotelCollectionRequest::LIMIT         => 10,
-        HotelCollectionRequest::OFFSET        => 0,
-        HotelCollectionRequest::ORDER         => Order::PRICE,
-        HotelCollectionRequest::RATING_CLASS  => [3,4,5],
-        HotelCollectionRequest::HOTEL_NAME    => 'Hyatt',
-        HotelCollectionRequest::MAX_PRICE     => 225,
-        HotelCollectionRequest::RADIUS        => 10000,
-        HotelCollectionRequest::GEO_LATITUDE  => 52.521400,
-        HotelCollectionRequest::GEO_LONGITUDE => 13.413400
+        HotelCollectionRequest::PATH           => 38714,
+        HotelCollectionRequest::ITEM           => 5678,
+        HotelCollectionRequest::ITEM_LIST      => null,
+        HotelCollectionRequest::REFERENCE_LIST => null,
+        HotelCollectionRequest::START_DATE     => new DateTime('+1 day'),
+        HotelCollectionRequest::END_DATE       => new DateTime('+2 days'),
+        HotelCollectionRequest::ROOM_TYPE      => RoomType::DOUBLE_ROOM,
+        HotelCollectionRequest::CURRENCY       => 'EUR',
+        HotelCollectionRequest::CATEGORY       => [3,4,5],
+        HotelCollectionRequest::LIMIT          => 10,
+        HotelCollectionRequest::OFFSET         => 0,
+        HotelCollectionRequest::ORDER          => Order::PRICE,
+        HotelCollectionRequest::RATING_CLASS   => [3,4,5],
+        HotelCollectionRequest::HOTEL_NAME     => 'Hyatt',
+        HotelCollectionRequest::MAX_PRICE      => 225,
+        HotelCollectionRequest::RADIUS         => 10000,
+        HotelCollectionRequest::GEO_LATITUDE   => 52.521400,
+        HotelCollectionRequest::GEO_LONGITUDE  => 13.413400
     ]);
 
     $hotels = $tas->getHotelCollection($request);
@@ -52,41 +54,45 @@ Request
 
 The request must be an instance of :code:`Trivago\Tas\Request\HotelCollectionRequest`.
 
-+---------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
-| Parameter     | Type      | Default | Required?  | Description                                                                                    |
-+===============+===========+=========+============+================================================================================================+
-| PATH          | int       | null    | no         | The path ID. Can be omitted if you are doing a geo-search using longitude and latitude.        |
-+---------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
-| ITEM          | int       | null    | no         | The item ID. Can be omitted if you are doing a geo-search using longitude and latitude.        |
-+---------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
-| START_DATE    | DateTime  | Date    | no         | The check in date. Must be a date today or in the future.                                      |
-+---------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
-| END_DATE      | DateTime  | Date    | no         | The check out date. Must be a date after the check in date.                                    |
-+---------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
-| CURRENCY      | string    | null    | no         | The ISO-4217 currency code.                                                                    |
-+---------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
-| LIMIT         | int       | null    | no         | The limit must be a value greater equals 0.                                                    |
-+---------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
-| OFFSET        | int       | null    | no         | The offset is a multiple of limit.                                                             |
-+---------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
-| ORDER         | string    | null    | no         | Possible sorting options are: relevance, price, category, distance, overall_liking, basename   |
-+---------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
-| CATEGORY      | array     | null    | no         | Hotel categories/star rating [0-5].                                                            |
-+---------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
-| ROOM_TYPE     | int       | null    | no         | Type/size of the room. Possible options: 1 = single-room, 7 = double-room.                     |
-+---------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
-| HOTEL_NAME    | string    | null    | no         | The hotel name. This will search for a hotel with the given name in the area defined by `path`.|
-+---------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
-| RATING_CLASS  | array     | null    | no         | Hotel rating based on customers' ratings and reviews [1-5].                                    |
-+---------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
-| MAX_PRICE     | int       | null    | no         | Omits hotels from the collection which are above the max price.                                |
-+---------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
-| RADIUS        | int       | null    | no         | Search radius in meters.                                                                       |
-+---------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
-| GEO_LATITUDE  | float     | null    | no         | The latitude center coordinate for a geo search.                                               |
-+---------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
-| GEO_LONGITUDE | float     | null    | no         | The longitude center coordinate for a geo search.                                              |
-+---------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
++----------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
+| Parameter      | Type      | Default | Required?  | Description                                                                                    |
++================+===========+=========+============+================================================================================================+
+| PATH           | int       | null    | no         | The path ID. Can be omitted if you are doing a geo-search using longitude and latitude.        |
++----------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
+| ITEM           | int       | null    | no         | The item ID. Can be omitted if you are doing a geo-search using longitude and latitude.        |
++----------------+-----------+---------+------------+-------------------------------------------------------------------------------------------------+
+| ITEM_LIST      | array     | null    | no         | List of item ID's to search for.                                                                |
++----------------+-----------+---------+------------+-------------------------------------------------------------------------------------------------+
+| REFERENCE_LIST | array     | null    | no         | List of reference ID's to search for.                                                           |
++----------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
+| START_DATE     | DateTime  | Date    | no         | The check in date. Must be a date today or in the future.                                      |
++----------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
+| END_DATE       | DateTime  | Date    | no         | The check out date. Must be a date after the check in date.                                    |
++----------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
+| CURRENCY       | string    | null    | no         | The ISO-4217 currency code.                                                                    |
++----------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
+| LIMIT          | int       | null    | no         | The limit must be a value greater equals 0.                                                    |
++----------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
+| OFFSET         | int       | null    | no         | The offset is a multiple of limit.                                                             |
++----------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
+| ORDER          | string    | null    | no         | Possible sorting options are: relevance, price, category, distance, overall_liking, basename   |
++----------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
+| CATEGORY       | array     | null    | no         | Hotel categories/star rating [0-5].                                                            |
++----------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
+| ROOM_TYPE      | int       | null    | no         | Type/size of the room. Possible options: 1 = single-room, 7 = double-room.                     |
++----------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
+| HOTEL_NAME     | string    | null    | no         | The hotel name. This will search for a hotel with the given name in the area defined by `path`.|
++----------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
+| RATING_CLASS   | array     | null    | no         | Hotel rating based on customers' ratings and reviews [1-5].                                    |
++----------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
+| MAX_PRICE      | int       | null    | no         | Omits hotels from the collection which are above the max price.                                |
++----------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
+| RADIUS         | int       | null    | no         | Search radius in meters.                                                                       |
++----------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
+| GEO_LATITUDE   | float     | null    | no         | The latitude center coordinate for a geo search.                                               |
++----------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
+| GEO_LONGITUDE  | float     | null    | no         | The longitude center coordinate for a geo search.                                              |
++----------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
 
 Response
 --------
@@ -258,10 +264,6 @@ Request
 
 The request must be an instance of :code:`Trivago\Tas\Request\TagRequest`. It has no parameters.
 
-+------------+-----------+---------+------------+-----------------------------------------------------------+
-| Parameter  | Type      | Default | Required?  | Description                                               |
-+============+===========+=========+============+===========================================================+
-
 
 Response
 --------
@@ -293,7 +295,7 @@ This method will return all pois (Points of Interest) for the given path.
 Request
 -------
 
-The request must be an instance of :code:`Trivago\Tas\Request\PoisRequest`. It has no parameters.
+The request must be an instance of :code:`Trivago\Tas\Request\PoisRequest`.
 
 +------------+-----------+---------+------------+-----------------------------------------------------------+
 | Parameter  | Type      | Default | Required?  | Description                                               |
@@ -301,7 +303,44 @@ The request must be an instance of :code:`Trivago\Tas\Request\PoisRequest`. It h
 | PATH       | int       | none    | yes        | The path ID.                                              |
 +------------+-----------+---------+------------+-----------------------------------------------------------+
 
+
 Response
 --------
 
 The method returns an object of type :code:`Trivago\Tas\Response\Pois\Pois`. You can use :code:`foreach` to iterate over the result.
+
+
+getTopOptions()
+===============
+
+.. code-block:: php
+
+    public function TopOptions getTopOptions(TopOptionsRequest $request)
+
+
+This method will return all available top options (tags or rate-attributes).
+
+.. code-block:: php
+
+    use Trivago\Tas\Request\TopOptionsRequest;
+
+    $request    = new TopOptionsRequest();
+    $topOptions = $tas->getTopOptions($request);
+
+    foreach ($topOptions as $topOption) {
+        // ...
+    }
+
+Request
+-------
+
+The request must be an instance of :code:`Trivago\Tas\Request\TopOptionsRequest`. It has no parameters.
+
++------------+-----------+---------+------------+-----------------------------------------------------------+
+| Parameter  | Type      | Default | Required?  | Description                                               |
++============+===========+=========+============+===========================================================+
+
+Response
+--------
+
+The method returns an object of type :code:`Trivago\Tas\Response\TopOptions\TopOptions`. You can use :code:`foreach` to iterate over the result.

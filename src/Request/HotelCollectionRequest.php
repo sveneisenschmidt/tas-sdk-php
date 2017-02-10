@@ -22,22 +22,24 @@ use DateTime;
 
 class HotelCollectionRequest extends Request
 {
-    const PATH          = 'path';
-    const ITEM          = 'item';
-    const START_DATE    = 'start_date';
-    const END_DATE      = 'end_date';
-    const ROOM_TYPE     = 'room_type';
-    const CURRENCY      = 'currency';
-    const CATEGORY      = 'category';
-    const LIMIT         = 'limit';
-    const OFFSET        = 'offset';
-    const ORDER         = 'order';
-    const RATING_CLASS  = 'rating_class';
-    const HOTEL_NAME    = 'hotel_name';
-    const MAX_PRICE     = 'max_price';
-    const RADIUS        = 'radius';
-    const GEO_LATITUDE  = 'geo_latitude';
-    const GEO_LONGITUDE = 'geo_longitude';
+    const PATH           = 'path';
+    const ITEM           = 'item';
+    const ITEM_LIST      = 'item_list';
+    const REFERENCE_LIST = 'reference_list';
+    const START_DATE     = 'start_date';
+    const END_DATE       = 'end_date';
+    const ROOM_TYPE      = 'room_type';
+    const CURRENCY       = 'currency';
+    const CATEGORY       = 'category';
+    const LIMIT          = 'limit';
+    const OFFSET         = 'offset';
+    const ORDER          = 'order';
+    const RATING_CLASS   = 'rating_class';
+    const HOTEL_NAME     = 'hotel_name';
+    const MAX_PRICE      = 'max_price';
+    const RADIUS         = 'radius';
+    const GEO_LATITUDE   = 'geo_latitude';
+    const GEO_LONGITUDE  = 'geo_longitude';
 
     /**
      * @var int|null
@@ -48,6 +50,16 @@ class HotelCollectionRequest extends Request
      * @var int|null
      */
     private $item;
+
+    /**
+     * @var int[]|null
+     */
+    private $itemList;
+
+    /**
+     * @var string[]|null
+     */
+    protected $referenceList;
 
     /**
      * @var DateTime
@@ -129,18 +141,20 @@ class HotelCollectionRequest extends Request
      * @var array
      */
     private $optionalParameterMap = [
-        'path'        => 'path',
-        'item'        => 'item',
-        'roomType'    => 'room_type',
-        'currency'    => 'currency',
-        'category'    => 'category',
-        'limit'       => 'limit',
-        'offset'      => 'offset',
-        'order'       => 'order',
-        'ratingClass' => 'rating_class',
-        'hotelName'   => 'hotel_name',
-        'maxPrice'    => 'max_price',
-        'radius'      => 'radius',
+        'path'          => 'path',
+        'item'          => 'item',
+        'itemList'      => 'item_list',
+        'referenceList' => 'reference_list',
+        'roomType'      => 'room_type',
+        'currency'      => 'currency',
+        'limit'         => 'limit',
+        'offset'        => 'offset',
+        'order'         => 'order',
+        'category'      => 'category',
+        'ratingClass'   => 'rating_class',
+        'hotelName'     => 'hotel_name',
+        'maxPrice'      => 'max_price',
+        'radius'        => 'radius',
     ];
 
     /**
@@ -150,43 +164,45 @@ class HotelCollectionRequest extends Request
      */
     public function __construct($options = [])
     {
-        $options = array_merge(
-            [
-                static::PATH          => null,
-                static::ITEM          => null,
-                static::START_DATE    => new DateTime('+1 day'),
-                static::END_DATE      => new DateTime('+2 days'),
-                static::ROOM_TYPE     => null,
-                static::CURRENCY      => null,
-                static::CATEGORY      => null,
-                static::LIMIT         => null,
-                static::OFFSET        => null,
-                static::ORDER         => null,
-                static::RATING_CLASS  => null,
-                static::HOTEL_NAME    => null,
-                static::MAX_PRICE     => null,
-                static::RADIUS        => null,
-                static::GEO_LATITUDE  => null,
-                static::GEO_LONGITUDE => null,
-            ], $options
-        );
+        $options = array_merge([
+            static::PATH           => null,
+            static::ITEM           => null,
+            static::ITEM_LIST      => null,
+            static::REFERENCE_LIST => null,
+            static::START_DATE     => new DateTime('+1 day'),
+            static::END_DATE       => new DateTime('+2 days'),
+            static::ROOM_TYPE      => null,
+            static::CURRENCY       => null,
+            static::CATEGORY       => null,
+            static::LIMIT          => null,
+            static::OFFSET         => null,
+            static::ORDER          => null,
+            static::RATING_CLASS   => null,
+            static::HOTEL_NAME     => null,
+            static::MAX_PRICE      => null,
+            static::RADIUS         => null,
+            static::GEO_LATITUDE   => null,
+            static::GEO_LONGITUDE  => null,
+        ], $options);
 
-        $this->path         = $options[static::PATH];
-        $this->item         = $options[static::ITEM];
-        $this->startDate    = $options[static::START_DATE];
-        $this->endDate      = $options[static::END_DATE];
-        $this->roomType     = $options[static::ROOM_TYPE];
-        $this->currency     = $options[static::CURRENCY];
-        $this->category     = $options[static::CATEGORY];
-        $this->limit        = $options[static::LIMIT];
-        $this->offset       = $options[static::OFFSET];
-        $this->order        = $options[static::ORDER];
-        $this->ratingClass  = $options[static::RATING_CLASS];
-        $this->hotelName    = $options[static::HOTEL_NAME];
-        $this->maxPrice     = $options[static::MAX_PRICE];
-        $this->radius       = $options[static::RADIUS];
-        $this->geoLatitude  = $options[static::GEO_LATITUDE];
-        $this->geoLongitude = $options[static::GEO_LONGITUDE];
+        $this->path          = $options[static::PATH];
+        $this->item          = $options[static::ITEM];
+        $this->itemList      = $options[static::ITEM_LIST];
+        $this->referenceList = $options[static::REFERENCE_LIST];
+        $this->startDate     = $options[static::START_DATE];
+        $this->endDate       = $options[static::END_DATE];
+        $this->roomType      = $options[static::ROOM_TYPE];
+        $this->currency      = $options[static::CURRENCY];
+        $this->category      = $options[static::CATEGORY];
+        $this->limit         = $options[static::LIMIT];
+        $this->offset        = $options[static::OFFSET];
+        $this->order         = $options[static::ORDER];
+        $this->ratingClass   = $options[static::RATING_CLASS];
+        $this->hotelName     = $options[static::HOTEL_NAME];
+        $this->maxPrice      = $options[static::MAX_PRICE];
+        $this->radius        = $options[static::RADIUS];
+        $this->geoLatitude   = $options[static::GEO_LATITUDE];
+        $this->geoLongitude  = $options[static::GEO_LONGITUDE];
     }
 
     /**

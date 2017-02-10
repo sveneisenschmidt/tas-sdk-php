@@ -36,9 +36,9 @@ Installing manually (if needed)
 -------------------------------
 
 First `download the trivago affiliate SDK for PHP <https://github.com/trivago/tas-sdk-php/releases>`_ and
-unzip the file whereever you like in your project.
+unzip the file wherever you like in your project.
 
-Afterwards include the autoloader provided in the SDK at the top of your script.
+Afterwards include the auto-loader provided in the SDK at the top of your script.
 
 .. code-block:: php
 
