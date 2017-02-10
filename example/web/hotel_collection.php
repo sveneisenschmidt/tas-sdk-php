@@ -22,10 +22,12 @@ $tas    = new \Trivago\Tas\Tas($config);
 
 $path          = isset($_GET['path']) ? $_GET['path'] : null;
 $item          = isset($_GET['item']) ? $_GET['item'] : null;
-$itemList      = isset($_GET['item_list']) ? $_GET['item_list'] : null;
-$referenceList = isset($_GET['reference_list']) ? $_GET['reference_list'] : null;
 $offset        = isset($_GET['offset']) ? $_GET['offset'] : 0;
 $radius        = isset($_GET['radius']) ? $_GET['radius'] : null;
+$geoLatitude   = isset($_GET['latitude']) ?  $_GET['latitude'] : null;
+$geoLongitude  = isset($_GET['longitude']) ? $_GET['longitude'] : null;
+$itemList      = isset($_GET['item_list']) ? $_GET['item_list'] : null;
+$referenceList = isset($_GET['reference_list']) ? $_GET['reference_list'] : null;
 
 // Format reference list if we have one
 if ($referenceList) {
@@ -38,17 +40,18 @@ if ($referenceList) {
 }
 
 $request = new HotelCollectionRequest([
-    HotelCollectionRequest::PATH           => $path,
-    HotelCollectionRequest::ITEM           => $item,
+    HotelCollectionRequest::PATH   => $path,
+    HotelCollectionRequest::ITEM   => $item,
+    HotelCollectionRequest::LIMIT  => 25,
+    HotelCollectionRequest::OFFSET => $offset,
+    HotelCollectionRequest::RADIUS => $radius,
+    HotelCollectionRequest::GEO_LATITUDE  => (float) $geoLatitude,
+    HotelCollectionRequest::GEO_LONGITUDE => (float) $geoLongitude,
     HotelCollectionRequest::ITEM_LIST      => $itemList,
     HotelCollectionRequest::REFERENCE_LIST => $referenceList,
-    HotelCollectionRequest::LIMIT          => 25,
-    HotelCollectionRequest::OFFSET         => $offset,
-    HotelCollectionRequest::RADIUS         => $radius,
 ]);
 
 $hotelCollection = $tas->getHotelCollection($request);
-
 ?>
 
 <!doctype html>

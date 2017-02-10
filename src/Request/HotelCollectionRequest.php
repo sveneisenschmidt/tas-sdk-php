@@ -38,6 +38,8 @@ class HotelCollectionRequest extends Request
     const HOTEL_NAME     = 'hotel_name';
     const MAX_PRICE      = 'max_price';
     const RADIUS         = 'radius';
+    const GEO_LATITUDE   = 'geo_latitude';
+    const GEO_LONGITUDE  = 'geo_longitude';
 
     /**
      * @var int|null
@@ -126,6 +128,16 @@ class HotelCollectionRequest extends Request
     private $radius;
 
     /**
+     * @var float|null
+     */
+    private $geoLatitude;
+
+    /**
+     * @var float|null
+     */
+    private $geoLongitude;
+
+    /**
      * @var array
      */
     private $optionalParameterMap = [
@@ -169,6 +181,8 @@ class HotelCollectionRequest extends Request
             static::HOTEL_NAME     => null,
             static::MAX_PRICE      => null,
             static::RADIUS         => null,
+            static::GEO_LATITUDE   => null,
+            static::GEO_LONGITUDE  => null,
         ], $options);
 
         $this->path          = $options[static::PATH];
@@ -187,10 +201,8 @@ class HotelCollectionRequest extends Request
         $this->hotelName     = $options[static::HOTEL_NAME];
         $this->maxPrice      = $options[static::MAX_PRICE];
         $this->radius        = $options[static::RADIUS];
-
-        if (empty($this->item) && empty($this->path) && empty($this->itemList) && empty($this->referenceList)) {
-            throw new InvalidRequestException('Item ID, Item ID list, Reference ID list and path ID are empty. At least one of these is required.');
-        }
+        $this->geoLatitude   = $options[static::GEO_LATITUDE];
+        $this->geoLongitude  = $options[static::GEO_LONGITUDE];
     }
 
     /**
@@ -202,6 +214,10 @@ class HotelCollectionRequest extends Request
             'start_date' => $this->startDate->format(DateTime::ATOM),
             'end_date'   => $this->endDate->format(DateTime::ATOM),
         ];
+
+        if ($this->geoLatitude !== null && $this->geoLongitude !== null) {
+            $parameters['geo'] = sprintf('%s,%s', $this->geoLatitude, $this->geoLongitude);
+        }
 
         foreach ($this->optionalParameterMap as $propertyKey => $queryParameterKey) {
             if (isset($this->$propertyKey)) {
