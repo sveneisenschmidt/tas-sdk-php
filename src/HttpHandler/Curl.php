@@ -66,7 +66,7 @@ class Curl implements HttpHandler
     protected function setCurlOptions($ch)
     {
         curl_setopt($ch, CURLOPT_ENCODING, 'gzip,deflate,sdch');
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
     }
 
     /**
