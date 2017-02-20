@@ -100,6 +100,11 @@ class HotelDetails
      */
     private $galleryImages = [];
 
+    /**
+     * @var Tag[]
+     */
+    private $tags = [];
+
     private function __construct()
     {
         // intentionally left empty. use named constructor to create new instances.
@@ -126,6 +131,9 @@ class HotelDetails
         $hotelDetails->mainImage      = Image::fromArray($data['main_image']);
         foreach ($data['gallery'] as $imageData) {
             $hotelDetails->galleryImages[] = Image::fromArray($imageData);
+        }
+        foreach ($data['_embedded']['hotel_tags']['tags'] as $tagData) {
+            $hotelDetails->tags[] = Tag::fromArray($tagData);
         }
 
         return $hotelDetails;
@@ -265,5 +273,13 @@ class HotelDetails
     public function getZip()
     {
         return $this->zip;
+    }
+
+    /**
+     * @return Tag[]
+     */
+    public function getTags()
+    {
+        return $this->tags;
     }
 }

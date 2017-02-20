@@ -83,7 +83,7 @@ class TasTest extends \PHPUnit_Framework_TestCase
         $hotelDetails = $tas->getHotelDetails(new HotelDetailsRequest(1622543));
 
         $this->assertInstanceOf(HotelDetails::class, $hotelDetails);
-        $this->assertSame('Best Western Premier Moa Berlin', $hotelDetails->getName());
+        $this->assertSame('Mercure Hotel MOA Berlin', $hotelDetails->getName());
     }
 
     /**

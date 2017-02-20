@@ -60,9 +60,9 @@ class HotelCollectionTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($resultInfo->hasPath());
         $this->assertInstanceOf(Path::class, $resultInfo->getPath());
 
-        foreach ($hotels as $hotel) {
-            $this->assertInstanceOf(Hotel::class, $hotel);
-        }
+        $this->assertContainsOnlyInstancesOf(Hotel::class, $hotels);
+
+        $this->assertContainsOnlyInstancesOf(Tag::class, $hotels->getTags());
 
         $hotelsArray = $hotels->toArray();
         $this->assertInternalType('array', $hotelsArray);
@@ -88,9 +88,7 @@ class HotelCollectionTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('https://imgec.trivago.com/gtximages/itemimages/13/45/1345518_v7_y.jpeg', $image->getExtraLarge());
         $this->assertSame('https://imgec.trivago.com/gtximages/itemimages/13/45/1345518_v7_y@2x.jpeg', $image->getRetina());
 
-        foreach ($hotel->getDeals() as $deal) {
-            $this->assertInstanceOf(Deal::class, $deal);
-        }
+        $this->assertContainsOnlyInstancesOf(Deal::class, $hotel->getDeals());
 
         $bestDeal = $hotel->getBestDeal();
         $this->assertInstanceOf(Deal::class, $bestDeal);

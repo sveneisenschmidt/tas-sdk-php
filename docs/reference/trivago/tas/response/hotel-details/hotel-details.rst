@@ -170,3 +170,13 @@ isSuperior()
     public function bool isSuperior()
 
 If the hotel is a superior hotel then :code:`true` else :code:`false` is returned.
+
+
+getTags()
+=========
+
+.. code-block:: php
+
+    public function array getTags()
+
+Returns the tags applying to this hotel.

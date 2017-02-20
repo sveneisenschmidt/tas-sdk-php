@@ -5,12 +5,12 @@ Trivago\\Tas\\Response\\Tags\\Tag
 A tag describes additional item information. Tags can be applied to a hotelsearch to get filtered results
 
 
-getTagId()
-==========
+getId()
+=======
 
 .. code-block:: php
 
-    public function string getTagId()
+    public function string getId()
 
 The ID of a tag.
 

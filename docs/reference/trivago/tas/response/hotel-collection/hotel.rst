@@ -115,6 +115,7 @@ getBestDeal()
 
 Returns the best (cheapest) deal.
 
+
 getPoi()
 ========
 

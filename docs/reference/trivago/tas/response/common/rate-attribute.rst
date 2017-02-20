@@ -9,12 +9,14 @@ getType()
 
     public function string getType()
 
+
 getLabel()
 ==========
 
 .. code-block:: php
 
     public function string getLabel()
+
 
 isPositive()
 ============

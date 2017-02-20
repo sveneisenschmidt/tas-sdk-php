@@ -24,6 +24,7 @@ getSearchParams()
 
 Returns the search parameters applied to the collection search.
 
+
 getResultInfo()
 ===============
 
@@ -32,6 +33,16 @@ getResultInfo()
     public function ResultInfo getResultInfo()
 
 Returns information about the resulting HotelCollection.
+
+
+getTags()
+=========
+
+.. code-block:: php
+
+    public function array getTags()
+
+Returns all available tags for the collection search.
 
 
 getNextPageOffset()
