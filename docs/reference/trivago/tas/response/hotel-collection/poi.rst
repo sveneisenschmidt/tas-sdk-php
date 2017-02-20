@@ -11,6 +11,7 @@ getId()
 
 Returns the Point of Interest id.
 
+
 getDistance()
 =============
 

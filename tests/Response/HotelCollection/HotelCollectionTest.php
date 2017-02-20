@@ -57,9 +57,9 @@ class HotelCollectionTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(127, $resultInfo->getMaxPrice());
         $this->assertSame('GBP', $resultInfo->getCurrency());
 
-        foreach ($hotels as $hotel) {
-            $this->assertInstanceOf(Hotel::class, $hotel);
-        }
+        $this->assertContainsOnlyInstancesOf(Hotel::class, $hotels);
+
+        $this->assertContainsOnlyInstancesOf(Tag::class, $hotels->getTags());
 
         $hotelsArray = $hotels->toArray();
         $this->assertInternalType('array', $hotelsArray);
@@ -70,12 +70,12 @@ class HotelCollectionTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(9864, $hotel->getId());
         $this->assertSame('Mercure Hotel Berlin Tempelhof Airport', $hotel->getName());
         $this->assertSame(4, $hotel->getCategory());
-        $this->assertSame(false, $hotel->isSuperior());
+        $this->assertFalse($hotel->isSuperior());
         $this->assertSame('Berlin', $hotel->getCity());
         $this->assertSame(80.53, $hotel->getRatingValue());
         $this->assertSame(3361.0, $hotel->getRatingCount());
-        $this->assertSame(true, $hotel->hasDeals());
-        $this->assertSame(true, $hotel->hasPoi());
+        $this->assertTrue($hotel->hasDeals());
+        $this->assertTrue($hotel->hasPoi());
         $this->assertInstanceOf(Poi::class, $hotel->getPoi());
 
         $image = $hotel->getMainImage();
@@ -85,9 +85,7 @@ class HotelCollectionTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('https://imgec.trivago.com/gtximages/itemimages/98/64/9864_v7_y.jpeg', $image->getExtraLarge());
         $this->assertSame('https://imgec.trivago.com/gtximages/itemimages/98/64/9864_v7_y@2x.jpeg', $image->getRetina());
 
-        foreach ($hotel->getDeals() as $deal) {
-            $this->assertInstanceOf(Deal::class, $deal);
-        }
+        $this->assertContainsOnlyInstancesOf(Deal::class, $hotel->getDeals());
 
         $bestDeal = $hotel->getBestDeal();
         $this->assertInstanceOf(Deal::class, $bestDeal);

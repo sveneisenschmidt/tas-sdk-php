@@ -54,7 +54,7 @@ $hotelTags = $tas->getHotelTags(new \Trivago\Tas\Request\HotelTagsRequest());
     <tbody>
     <?php foreach ($hotelTags->getTags() as $tag): ?>
         <tr>
-            <td><?php echo $tag->getTagId() ?></td>
+            <td><?php echo $tag->getId() ?></td>
             <td><?php echo $tag->getGroupId() ?></td>
             <td><?php echo $tag->getName() ?></td>
         </tr>

@@ -39,7 +39,7 @@ class HotelTagsTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('Hotelkette', $tagGroup->getName());
 
         $tag = $tags[0];
-        $this->assertSame('1_33', $tag->getTagId());
+        $this->assertSame('1_33', $tag->getId());
         $this->assertSame(1, $tag->getGroupId());
         $this->assertSame('Austria Trend', $tag->getName());
     }

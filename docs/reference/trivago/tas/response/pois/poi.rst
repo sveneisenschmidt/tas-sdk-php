@@ -11,6 +11,7 @@ getId()
 
 The ID of the poi.
 
+
 getName()
 =========
 
@@ -19,6 +20,7 @@ getName()
     public function string getName()
 
 The name of the poi.
+
 
 getGeoCoordinates()
 ===================
