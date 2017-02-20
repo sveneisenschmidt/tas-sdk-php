@@ -14,13 +14,13 @@ On this page you will find the trivago Affiliate Suite SDK for PHP reference.
     trivago/tas/response/common/price
     trivago/tas/response/common/rate-attribute
     trivago/tas/response/common/geo-coordinates
+    trivago/tas/response/common/path
     trivago/tas/response/hotel-collection/hotel
     trivago/tas/response/hotel-collection/poi
     trivago/tas/response/hotel-collection/result-info
     trivago/tas/response/hotel-collection/hotel-collection
     trivago/tas/response/hotel-deals/hotel-deals
     trivago/tas/response/hotel-details/hotel-details
-    trivago/tas/response/hotel-details/path
     trivago/tas/response/locations/location
     trivago/tas/response/locations/locations
     trivago/tas/response/tags/tag-groups

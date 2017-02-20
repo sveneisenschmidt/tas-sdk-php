@@ -20,6 +20,7 @@ namespace Trivago\Tas\Response\HotelDetails;
 
 use Trivago\Tas\Response\Common\GeoCoordinates;
 use Trivago\Tas\Response\Common\Image;
+use Trivago\Tas\Response\Common\Path;
 use Trivago\Tas\Response\Response;
 
 class HotelDetails

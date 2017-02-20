@@ -69,6 +69,10 @@ $hotelCollection = $tas->getHotelCollection($request);
 
     if ($hotelCollection->hasNextPage()): ?>
         <a href="<?php echo "hotel_collection.php?path={$path}&item={$item}&offset={$hotelCollection->getNextPageOffset()}&radius={$radius}" ?>">Next</a>
+    <?php endif;
+
+    if ($hotelCollection->getResultInfo()->hasPath()): ?>
+        <h1>Hotels in <?php echo $hotelCollection->getResultInfo()->getPath()->getName() ?></h1>
     <?php endif ?>
 
     <table border="1">

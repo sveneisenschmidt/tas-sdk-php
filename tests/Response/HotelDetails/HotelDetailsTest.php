@@ -20,6 +20,7 @@ namespace Trivago\Tas\Response\HotelDetails;
 
 use Trivago\Tas\Response\Common\GeoCoordinates;
 use Trivago\Tas\Response\Common\Image;
+use Trivago\Tas\Response\Common\Path;
 
 class HotelDetailsTest extends \PHPUnit_Framework_TestCase
 {
@@ -33,14 +34,14 @@ class HotelDetailsTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(4, $hotelDetails->getCategory());
         $this->assertSame('Berlin', $hotelDetails->getCity());
         $this->assertSame('Located in Tiergarten, Best Western Premier Hotel Moa Berlin is a perfect starting point from which to explore Berlin. The property features a wide range of facilities to make your stay a pleasant experience. Safety deposit boxes, restaurant, room service, bicycle rental, elevator are on the list of things guests can enjoy. Each guestroom is elegantly furnished and equipped with handy amenities. Enjoy the hotel\'s recreational facilities, including fitness center, before retiring to your room for a well-deserved rest. Discover all Berlin has to offer by making Best Western Premier Hotel Moa Berlin your base.', $hotelDetails->getDescription());
-        $this->assertSame(true, $hotelDetails->hasDescription());
+        $this->assertTrue($hotelDetails->hasDescription());
         $this->assertSame('http://www.trivago.co.uk:8007/webservice/affiliate/forward.php?&enc=NDYwODI4YzRlMDA%3DRA0CDB5DR1ETUgMHQ0dPSwIVUTgdVFQdAAxAAlwQQQhDXwECVBNQEUATBwwIQUNdBR8VRApSAAZGQFwXRUdTAgkMAFIGCFERBFVaB0VEBFdaYlNTZ0Jdd0cDBUdCFQJOFQdeRBEeGg0VDkxCXXdWBldbZR4OVQIDHHFENF4OGwRTBBpDVVkaBlcTDQwKAFAdFhcbTx8PDAgfVF4dHA4OGwhFSgtUUxEfC0YETBNXXgQVRjQATRIEWUkcWUQZHk9TFwZEWl0GB0FUHU8SXFQMSUJ8FRwOVhcGRCsAUlEYF1R2PUdSKw5fVwETDkY1DkUCUlRe', $hotelDetails->getHomepage());
-        $this->assertSame(true, $hotelDetails->hasHomepage());
+        $this->assertTrue($hotelDetails->hasHomepage());
         $this->assertSame(1622543, $hotelDetails->getItemId());
         $this->assertSame('Best Western Premier Moa Berlin', $hotelDetails->getName());
         $this->assertSame(4352, $hotelDetails->getRatingCount());
         $this->assertSame(86.18, $hotelDetails->getRatingValue());
-        $this->assertSame(false, $hotelDetails->isSuperior());
+        $this->assertFalse($hotelDetails->isSuperior());
         $this->assertSame('10559', $hotelDetails->getZip());
 
         foreach ($hotelDetails->getGalleryImages() as $galleryImage) {

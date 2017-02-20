@@ -16,9 +16,7 @@
  * limitations under the License.
  */
 
-namespace Trivago\Tas\Response\HotelDetails;
-
-use Trivago\Tas\Response\Common\GeoCoordinates;
+namespace Trivago\Tas\Response\Common;
 
 class Path
 {

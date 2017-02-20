@@ -30,3 +30,23 @@ getCurrency()
     public function string getCurrency()
 
 Returns the currency of the min and max prices.
+
+
+hasPath()
+=========
+
+.. code-block:: php
+
+    public function bool hasPath()
+
+Returns true when the result info has a path block.
+
+
+getPath()
+=========
+
+.. code-block:: php
+
+    public function Path getPath()
+
+Returns the path of the result info. Returns null when no path is there.
