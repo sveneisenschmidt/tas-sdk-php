@@ -20,14 +20,14 @@ use Trivago\Tas\Request\HotelCollectionRequest;
 $config = require_once __DIR__ . '/../config.php';
 $tas    = new \Trivago\Tas\Tas($config);
 
-$path          = isset($_GET['path']) ? $_GET['path'] : null;
-$item          = isset($_GET['item']) ? $_GET['item'] : null;
-$offset        = isset($_GET['offset']) ? $_GET['offset'] : 0;
-$radius        = isset($_GET['radius']) ? $_GET['radius'] : null;
-$geoLatitude   = isset($_GET['latitude']) ?  $_GET['latitude'] : null;
-$geoLongitude  = isset($_GET['longitude']) ? $_GET['longitude'] : null;
-$itemList      = isset($_GET['item_list']) ? $_GET['item_list'] : null;
-$referenceList = isset($_GET['reference_list']) ? $_GET['reference_list'] : null;
+$path          = !empty($_GET['path']) ? $_GET['path'] : null;
+$item          = !empty($_GET['item']) ? $_GET['item'] : null;
+$offset        = !empty($_GET['offset']) ? $_GET['offset'] : 0;
+$radius        = !empty($_GET['radius']) ? $_GET['radius'] : null;
+$geoLatitude   = !empty($_GET['latitude']) ?  $_GET['latitude'] : null;
+$geoLongitude  = !empty($_GET['longitude']) ? $_GET['longitude'] : null;
+$itemList      = !empty($_GET['item_list']) ? $_GET['item_list'] : null;
+$referenceList = !empty($_GET['reference_list']) ? $_GET['reference_list'] : null;
 
 // Format reference list if we have one
 if ($referenceList) {
@@ -69,6 +69,10 @@ $hotelCollection = $tas->getHotelCollection($request);
 
     if ($hotelCollection->hasNextPage()): ?>
         <a href="<?php echo "hotel_collection.php?path={$path}&item={$item}&offset={$hotelCollection->getNextPageOffset()}&radius={$radius}" ?>">Next</a>
+    <?php endif;
+
+    if ($hotelCollection->getResultInfo()->hasPath()): ?>
+        <h1>Hotels in <?php echo $hotelCollection->getResultInfo()->getPath()->getName() ?></h1>
     <?php endif ?>
 
     <table border="1">

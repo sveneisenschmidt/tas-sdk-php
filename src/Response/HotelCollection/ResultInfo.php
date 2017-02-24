@@ -18,6 +18,8 @@
 
 namespace Trivago\Tas\Response\HotelCollection;
 
+use Trivago\Tas\Response\Common\Path;
+
 class ResultInfo
 {
     /**
@@ -34,6 +36,11 @@ class ResultInfo
      * @var string
      */
     private $currency;
+
+    /**
+     * @var Path|null
+     */
+    private $path;
 
     private function __construct()
     {
@@ -53,6 +60,10 @@ class ResultInfo
         $resultInfo->minPrice = (int) $price['min'];
         $resultInfo->maxPrice = (int) $price['max'];
         $resultInfo->currency = $price['currency'];
+
+        if (isset($data['path'])) {
+            $resultInfo->path = Path::fromArray($data['path']);
+        }
 
         return $resultInfo;
     }
@@ -80,4 +91,18 @@ class ResultInfo
     {
         return $this->currency;
     }
+
+    public function hasPath()
+    {
+        return $this->path !== null;
+    }
+
+    /**
+     * @return Path|null
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
+
 }

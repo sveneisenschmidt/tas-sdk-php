@@ -19,7 +19,7 @@
 $config = require_once __DIR__ . '/../config.php';
 $tas    = new \Trivago\Tas\Tas($config);
 
-$searchTerm = isset($_GET['query']) ? $_GET['query'] : '';
+$searchTerm = !empty($_GET['query']) ? $_GET['query'] : '';
 
 $locations = [];
 if (!empty($searchTerm)) {

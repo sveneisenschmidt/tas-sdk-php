@@ -11,6 +11,7 @@ getId()
 
 The ID of the top option.
 
+
 getType()
 =========
 
@@ -19,6 +20,7 @@ getType()
     public function string getType()
 
 The type of the top option. Possible values are `and` and `or`.
+
 
 getName()
 =========
@@ -29,6 +31,7 @@ getName()
 
 The name of the top option.
 
+
 getTags()
 =========
 
@@ -37,6 +40,7 @@ getTags()
     public function Tag[] getTags()
 
 The hotel tags that need to be set to apply this top option. Array may be empty.
+
 
 getRateAttributes()
 ===================

@@ -29,6 +29,7 @@ Returns the type of the tag group. This can be one of this values:
 When using an and tag to filter records, then a record needs to have all given tags to be displayed.
 When using an or tag to filter records, then a records needs to have either one or another given tag to be displayed.
 
+
 getName()
 =========
 
@@ -37,6 +38,7 @@ getName()
     public function string getName()
 
 Returns the name of the tag group.
+
 
 toArray()
 =========

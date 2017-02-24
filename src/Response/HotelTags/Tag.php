@@ -48,9 +48,9 @@ class Tag
     }
 
     /**
-     * @return int|string
+     * @return string
      */
-    public function getTagId()
+    public function getId()
     {
         return $this->tag_id;
     }

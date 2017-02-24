@@ -40,6 +40,11 @@ class HotelCollection implements \Countable, \Iterator
     private $resultInfo;
 
     /**
+     * @var Tag[]
+     */
+    private $tags = [];
+
+    /**
      * @var bool
      */
     private $pollingFinished = false;
@@ -112,6 +117,10 @@ class HotelCollection implements \Countable, \Iterator
             );
         }
 
+        foreach ($responseData['_embedded']['hotel_tags']['tags'] as $data) {
+            $hotelCollection->tags[] = Tag::fromArray($data);
+        }
+
         return $hotelCollection;
     }
 
@@ -152,6 +161,14 @@ class HotelCollection implements \Countable, \Iterator
     public function getResultInfo()
     {
         return $this->resultInfo;
+    }
+
+    /**
+     * @return Tag[]
+     */
+    public function getTags()
+    {
+        return $this->tags;
     }
 
     /**
