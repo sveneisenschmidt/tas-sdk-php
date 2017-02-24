@@ -21,7 +21,7 @@ use Trivago\Tas\Request\HotelRatesRequest;
 $config = require_once __DIR__ . '/../config.php';
 $tas    = new \Trivago\Tas\Tas($config);
 
-$hotelId      = isset($_GET['item']) ? $_GET['item'] : null;
+$hotelId      = !empty($_GET['item']) ? $_GET['item'] : null;
 $dealsRequest = new HotelRatesRequest([
     HotelRatesRequest::ITEM => $hotelId,
 ]);
