@@ -45,6 +45,10 @@ class Reviews implements \Countable, \Iterator
 
         $rawReviews = [];
         foreach ($data['reviews'] as $review) {
+            // Skip the review if something is wrong with the config.
+            if (!isset($configs[$review['partner_id']])) {
+                continue;
+            }
             $review['config'] = $configs[$review['partner_id']];
             $rawReviews[] = Review::fromArray($review);
         }
