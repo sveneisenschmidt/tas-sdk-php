@@ -56,6 +56,14 @@ class Reviews implements \Countable, \Iterator
     }
 
     /**
+     * @return Review[]
+     */
+    public function toArray()
+    {
+        return $this->reviews;
+    }
+
+    /**
      * @return Review|false
      */
     public function current()

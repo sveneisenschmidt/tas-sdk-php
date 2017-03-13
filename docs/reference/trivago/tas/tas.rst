@@ -60,10 +60,10 @@ The request must be an instance of :code:`Trivago\Tas\Request\HotelCollectionReq
 | PATH           | int       | null    | no         | The path ID. Can be omitted if you are doing a geo-search using longitude and latitude.        |
 +----------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
 | ITEM           | int       | null    | no         | The item ID. Can be omitted if you are doing a geo-search using longitude and latitude.        |
-+----------------+-----------+---------+------------+-------------------------------------------------------------------------------------------------+
-| ITEM_LIST      | array     | null    | no         | List of item ID's to search for.                                                                |
-+----------------+-----------+---------+------------+-------------------------------------------------------------------------------------------------+
-| REFERENCE_LIST | array     | null    | no         | List of reference ID's to search for.                                                           |
++----------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
+| ITEM_LIST      | array     | null    | no         | List of item ID's to search for.                                                               |
++----------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
+| REFERENCE_LIST | array     | null    | no         | List of reference ID's to search for.                                                          |
 +----------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
 | START_DATE     | DateTime  | Date    | no         | The check in date. Must be a date today or in the future.                                      |
 +----------------+-----------+---------+------------+------------------------------------------------------------------------------------------------+
@@ -336,11 +336,41 @@ Request
 
 The request must be an instance of :code:`Trivago\Tas\Request\TopOptionsRequest`. It has no parameters.
 
-+------------+-----------+---------+------------+-----------------------------------------------------------+
-| Parameter  | Type      | Default | Required?  | Description                                               |
-+============+===========+=========+============+===========================================================+
 
 Response
 --------
 
 The method returns an object of type :code:`Trivago\Tas\Response\TopOptions\TopOptions`. You can use :code:`foreach` to iterate over the result.
+
+
+getHotelReviews()
+=================
+
+.. code-block:: php
+
+    public function Reviews getHotelReviews(HotelReviewsRequest $request)
+
+This method will return all reviews stored for the hotel.
+
+.. code-block:: php
+
+    use Trivago\Tas\Request\HotelReviewsRequest;
+
+    $request = new HotelReviewsRequest(5555);
+    $reviews = $tas->getHotelReviews($request);
+
+    foreach ($reviews as $review) {
+        // ...
+    }
+
+Request
+-------
+
+The request must be an instance of :code:`Trivago\Tas\Request\HotelReviewsRequest`. The request contains only the item ID as parameter.
+
++------------+-----------+---------+------------+-------------------------+
+| Parameter  | Type      | Default | Required?  | Description             |
++============+===========+=========+============+=========================+
+| ITEM       | int       | none    | yes        | The item ID.            |
++------------+-----------+---------+------------+-------------------------+
+
