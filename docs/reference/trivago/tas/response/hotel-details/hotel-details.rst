@@ -132,6 +132,16 @@ getRatingValue()
 The rating value is a float number from 0 to 100. Higher values indicates a better hotel rating.
 
 
+getRatingDetails()
+==================
+
+.. code-block:: php
+
+    public function RatingDetails getRatingDetails()
+
+Returns the hotel’s rating details containing aspects.
+
+
 getZip()
 ========
 

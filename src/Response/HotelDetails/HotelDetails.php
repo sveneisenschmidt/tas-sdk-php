@@ -21,6 +21,7 @@ namespace Trivago\Tas\Response\HotelDetails;
 use Trivago\Tas\Response\Common\GeoCoordinates;
 use Trivago\Tas\Response\Common\Image;
 use Trivago\Tas\Response\Common\Path;
+use Trivago\Tas\Response\HotelDetails\RatingDetails;
 use Trivago\Tas\Response\Response;
 
 class HotelDetails
@@ -79,6 +80,11 @@ class HotelDetails
      * @var int
      */
     private $ratingCount;
+    
+    /**
+     * @var RatingDetails
+     */
+    private $ratingDetails;
 
     /**
      * @var string|null
@@ -129,6 +135,7 @@ class HotelDetails
         $hotelDetails->description    = $data['description'];
         $hotelDetails->path           = Path::fromArray($data['path']);
         $hotelDetails->mainImage      = Image::fromArray($data['main_image']);
+        $hotelDetails->ratingDetails  = RatingDetails::fromArray($data['rating_details']);
         foreach ($data['gallery'] as $imageData) {
             $hotelDetails->galleryImages[] = Image::fromArray($imageData);
         }
@@ -281,5 +288,13 @@ class HotelDetails
     public function getTags()
     {
         return $this->tags;
+    }
+    
+    /**
+     * @return RatingDetails
+     */
+    public function getRatingDetails()
+    {
+        return $this->ratingDetails;
     }
 }
